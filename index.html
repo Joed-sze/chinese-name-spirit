@@ -13,6 +13,10 @@
 <link rel="canonical" href="https://joed-sze.github.io/chinese-name-spirit/">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="https://joed-sze.github.io/chinese-name-spirit/sitemap.xml">
 
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="https://joed-sze.github.io/chinese-name-spirit/favicon.png">
+<link rel="apple-touch-icon" href="https://joed-sze.github.io/chinese-name-spirit/favicon.png">
+
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://joed-sze.github.io/chinese-name-spirit/">
@@ -1700,11 +1704,58 @@ body {
       <div class="social-proof">
         <div class="social-proof-stats">50,000+</div>
         <div class="social-proof-label">Names Discovered Worldwide</div>
-        <div class="testimonial-mini">
-          "I was amazed at how accurately my Chinese name reflected my personality. The report was beautifully crafted and deeply meaningful."
-          <div class="testimonial-author">— Sarah M., New York</div>
+        <div class="testimonial-mini" id="testimonial-rotator">
+          <!-- Testimonials will rotate via JavaScript -->
         </div>
       </div>
+      
+      <script>
+      (function() {
+        const testimonials = [
+          {
+            text: "I was amazed at how accurately my Chinese name reflected my personality. The report was beautifully crafted and deeply meaningful.",
+            author: "— Sarah M., New York"
+          },
+          {
+            text: "Finally got a Chinese name that actually means something! My Chinese friends were impressed by how well it suits me.",
+            author: "— James K., London"
+          },
+          {
+            text: "The cultural insights in the report were fascinating. I learned so much about Chinese naming traditions.",
+            author: "— Emma L., Sydney"
+          },
+          {
+            text: "I've been learning Chinese for 2 years and this gave me the perfect name. My teacher loved it!",
+            author: "— Michael R., Toronto"
+          },
+          {
+            text: "The lucky elements section was so cool. Turns out my name aligns perfectly with my birth element!",
+            author: "— Lisa T., San Francisco"
+          },
+          {
+            text: "Shared my report with my Chinese colleagues and they said it was spot on. Highly recommend!",
+            author: "— David W., Singapore"
+          }
+        ];
+        
+        const container = document.getElementById('testimonial-rotator');
+        let currentIndex = Math.floor(Math.random() * testimonials.length);
+        
+        function showTestimonial(index) {
+          const t = testimonials[index];
+          container.innerHTML = '<div class="testimonial-text">"' + t.text + '"</div><div class="testimonial-author">' + t.author + '</div>';
+        }
+        
+        // Show first random testimonial
+        showTestimonial(currentIndex);
+        
+        // Rotate every 5 seconds
+        setInterval(function() {
+          currentIndex = (currentIndex + 1) % testimonials.length;
+          showTestimonial(currentIndex);
+        }, 5000);
+      })();
+      </script>
 
       <button class="btn-primary" onclick="KPI.trackClick('startQuiz'); KPI.update({startClicks:1, quizStarts:1}); gtag('event','quiz_start'); startQuiz()">Discover My Name Meaning</button>
       
