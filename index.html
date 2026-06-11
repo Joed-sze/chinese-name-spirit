@@ -4768,17 +4768,20 @@ function submitQuiz() {
   
   // Check if already paid (payment expires after 24 hours)
   const payTime = localStorage.getItem('nameQuizPayTime');
-  const isPaid = localStorage.getItem('nameQuizPaid') === 'true' && payTime && (Date.now() - parseInt(payTime)) < 86400000;
+  const orderId = localStorage.getItem('nameQuizOrderId');
+  const hasValidOrder = orderId && !orderId.startsWith('direct-');
+  const isPaid = localStorage.getItem('nameQuizPaid') === 'true' && payTime && (Date.now() - parseInt(payTime)) < 86400000 && hasValidOrder;
   
   if (isPaid) {
     lastResultName = currentResult.name.name;
     showResult(currentResult);
     showPage('page-result');
   } else {
-    // Clear old payment status if expired
+    // Clear old payment status if expired or invalid
     localStorage.removeItem('nameQuizPaid');
     localStorage.removeItem('nameQuizPayMethod');
     localStorage.removeItem('nameQuizPayTime');
+    localStorage.removeItem('nameQuizOrderId');
     KPI.update({quizCompletions:1});
     gtag('event','quiz_complete');
     
@@ -5115,12 +5118,63 @@ function renderPayPalButton(price) {
         // Payment successful
         console.log('Payment successful:', orderData);
         
-        // Verify payment status
-        const transaction = orderData.purchase_units[0].payments.captures[0];
-        if (transaction.status === 'COMPLETED') {
-          onPaymentSuccess('paypal');
-        } else {
-          alert('Payment status: ' + transaction.status + '. Please contact support.');
+        // Security verification
+        try {
+          const purchaseUnit = orderData.purchase_units[0];
+          const transaction = purchaseUnit.payments.captures[0];
+          
+          // 1. Verify payment status
+          if (transaction.status !== 'COMPLETED') {
+            alert('Payment not completed. Status: ' + transaction.status);
+            return;
+          }
+          
+          // 2. Verify amount matches selected plan
+          const expectedAmount = price || '1.99';
+          const actualAmount = transaction.amount.value;
+          if (actualAmount !== expectedAmount) {
+            console.error('Amount mismatch! Expected: ' + expectedAmount + ', Got: ' + actualAmount);
+            alert('Payment amount verification failed. Please contact support.');
+            return;
+          }
+          
+          // 3. Verify currency
+          if (transaction.amount.currency_code !== 'USD') {
+            console.error('Currency mismatch! Expected USD, Got: ' + transaction.amount.currency_code);
+            alert('Payment currency verification failed.');
+            return;
+          }
+          
+          // 4. Check if this order was already processed (prevent replay)
+          const processedOrders = JSON.parse(localStorage.getItem('processedPayPalOrders') || '[]');
+          if (processedOrders.includes(orderData.id)) {
+            console.error('Order already processed: ' + orderData.id);
+            alert('This order has already been processed.');
+            return;
+          }
+          
+          // 5. Store processed order ID
+          processedOrders.push(orderData.id);
+          localStorage.setItem('processedPayPalOrders', JSON.stringify(processedOrders));
+          
+          // 6. Log transaction details for manual verification if needed
+          const transactionLog = {
+            orderId: orderData.id,
+            transactionId: transaction.id,
+            amount: actualAmount,
+            currency: transaction.amount.currency_code,
+            plan: window.selectedPlan || 'standard',
+            timestamp: new Date().toISOString(),
+            payerEmail: orderData.payer?.email_address || 'unknown'
+          };
+          console.log('Transaction verified:', transactionLog);
+          
+          // All verifications passed - unlock content
+          onPaymentSuccess('paypal', orderData.id);
+          
+        } catch (err) {
+          console.error('Payment verification error:', err);
+          alert('Payment verification failed. Please contact support with your PayPal receipt.');
         }
       });
     },
@@ -5141,10 +5195,31 @@ function renderPayPalButton(price) {
   button.render('#paypal-button-container');
 }
 
-function onPaymentSuccess(method) {
+// Payment verification token - prevents direct function calls
+let _paymentVerified = false;
+let _lastVerifiedOrderId = null;
+
+function onPaymentSuccess(method, orderId) {
+  // Security: Only allow calls with valid order ID from PayPal callback
+  if (method === 'paypal' && !orderId) {
+    console.error('Direct call to onPaymentSuccess blocked. Order ID required.');
+    return;
+  }
+  
+  // Prevent replay attacks
+  if (orderId && orderId === _lastVerifiedOrderId) {
+    console.error('Duplicate order ID detected: ' + orderId);
+    return;
+  }
+  
+  if (orderId) {
+    _lastVerifiedOrderId = orderId;
+  }
+  
   localStorage.setItem('nameQuizPaid', 'true');
   localStorage.setItem('nameQuizPayTime', Date.now().toString());
   localStorage.setItem('nameQuizPlan', selectedPlan || 'basic');
+  localStorage.setItem('nameQuizOrderId', orderId || 'direct-' + Date.now());
   
   // Track payment success
   const planPrices = { standard: 1.99, premium: 3.99 };
