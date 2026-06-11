@@ -5057,9 +5057,16 @@ document.getElementById('currentNameInput').addEventListener('input', function(e
 });
 
 // ============ PAYMENT ============
-function renderPayPalButton() {
+let paypalButtonInstance = null;
+
+function renderPayPalButton(price) {
   const container = document.getElementById('paypal-button-container');
-  if (container.children.length > 0) return;
+  
+  // Close existing PayPal button if any
+  if (paypalButtonInstance) {
+    paypalButtonInstance.close();
+    paypalButtonInstance = null;
+  }
   
   // Check if PayPal SDK is loaded
   if (typeof paypal === 'undefined') {
@@ -5068,7 +5075,7 @@ function renderPayPalButton() {
   }
   
   // Use PayPal JS SDK to render button
-  paypal.Buttons({
+  const button = paypal.Buttons({
     // Set button style
     style: {
       layout: 'vertical',
@@ -5080,16 +5087,16 @@ function renderPayPalButton() {
     
     // Create order - use selected plan price
     createOrder: function(data, actions) {
-      const planPrices = { standard: '1.99', premium: '3.99' };
       const planNames = { standard: 'Standard', premium: 'Premium' };
-        const currentPlan = window.selectedPlan || 'standard';
-      const price = planPrices[currentPlan];
+      const currentPlan = window.selectedPlan || 'standard';
+      // Use passed price or fallback to default
+      const finalPrice = price || '1.99';
       const planName = planNames[currentPlan];
       
       return actions.order.create({
         purchase_units: [{
           amount: {
-            value: price,
+            value: finalPrice,
             currency_code: 'USD'
           },
           description: 'Chinese Name Spirit - ' + planName + ' Package',
@@ -5128,7 +5135,10 @@ function renderPayPalButton() {
       console.error('PayPal error:', err);
       alert('Payment error occurred. Please try again or contact support.');
     }
-  }).render('#paypal-button-container');
+  });
+  
+  paypalButtonInstance = button;
+  button.render('#paypal-button-container');
 }
 
 function onPaymentSuccess(method) {
@@ -5184,8 +5194,6 @@ function selectPlan(plan) {
   
   // Update PayPal amount based on plan
   const prices = { standard: '1.99', premium: '3.99' };
-  const container = document.getElementById('paypal-button-container');
-  container.innerHTML = ''; // Clear existing button
   renderPayPalButton(prices[plan]);
 }
 
@@ -5618,7 +5626,9 @@ async function downloadPDF() {
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
     if (mutation.target.id === 'page-payment' && mutation.target.classList.contains('active')) {
-      renderPayPalButton();
+      const prices = { standard: '1.99', premium: '3.99' };
+      const currentPlan = window.selectedPlan || 'standard';
+      renderPayPalButton(prices[currentPlan]);
     }
   });
 });
