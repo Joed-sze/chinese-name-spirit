@@ -1586,6 +1586,1371 @@ body {
   .trust-badges { gap: 12px; }
   .value-highlights { padding: 0; }
 }
+
+/* ===== Name Generation Animation ===== */
+.generation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(45, 55, 72, 0.95), rgba(26, 32, 44, 0.98));
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.generation-container {
+  text-align: center;
+  max-width: 400px;
+  padding: 40px;
+}
+
+.generation-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  margin-bottom: 40px;
+  color: #D4A574;
+}
+
+.generation-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.generation-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: stepAppear 0.6s ease forwards;
+}
+
+.generation-step:nth-child(1) { animation-delay: 0.3s; }
+.generation-step:nth-child(2) { animation-delay: 1.2s; }
+.generation-step:nth-child(3) { animation-delay: 2.1s; }
+.generation-step:nth-child(4) { animation-delay: 3.0s; }
+
+.generation-step-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C41E3A, #8B4513);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.generation-step-text {
+  text-align: left;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.generation-step-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 4px;
+}
+
+.generation-progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.generation-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #C41E3A, #D4A574);
+  border-radius: 2px;
+  width: 0%;
+  animation: progressFill 3.5s ease forwards;
+}
+
+.generation-reveal {
+  opacity: 0;
+  transform: scale(0.8);
+  animation: revealName 0.8s ease 3.8s forwards;
+}
+
+.generation-reveal-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 64px;
+  color: #D4A574;
+  margin-bottom: 16px;
+  text-shadow: 0 0 30px rgba(212, 165, 116, 0.3);
+}
+
+.generation-reveal-pinyin {
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 8px;
+}
+
+.generation-reveal-meaning {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+@keyframes stepAppear {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes progressFill {
+  0% { width: 0%; }
+  25% { width: 25%; }
+  50% { width: 50%; }
+  75% { width: 75%; }
+  100% { width: 100%; }
+}
+
+@keyframes revealName {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== Enhanced Preview Page ===== */
+.preview-name-reveal {
+  background: linear-gradient(135deg, rgba(196, 30, 58, 0.08), rgba(139, 69, 19, 0.08));
+  border: 2px solid rgba(212, 165, 116, 0.4);
+  border-radius: 20px;
+  padding: 32px 24px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.preview-name-reveal .name-display {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 56px;
+  color: var(--primary);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.preview-name-reveal .pinyin-display {
+  font-size: 22px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.preview-name-reveal .meaning-display {
+  font-size: 15px;
+  color: var(--text-light);
+  line-height: 1.6;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.preview-name-reveal .meaning-highlight {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ===== COMPATIBILITY SCORE - Priority #1 ===== */
+.compatibility-score-section {
+  background: linear-gradient(135deg, rgba(196, 30, 58, 0.06), rgba(139, 69, 19, 0.06));
+  border: 2px solid rgba(212, 165, 116, 0.4);
+  border-radius: 20px;
+  padding: 28px 24px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.compatibility-score-label {
+  font-size: 13px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.compatibility-score-circle {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 16px;
+}
+
+.compatibility-score-circle svg {
+  transform: rotate(-90deg);
+  width: 140px;
+  height: 140px;
+}
+
+.compatibility-score-circle-bg {
+  fill: none;
+  stroke: rgba(212, 165, 116, 0.2);
+  stroke-width: 8;
+}
+
+.compatibility-score-circle-fill {
+  fill: none;
+  stroke: url(#scoreGradient);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 377;
+  stroke-dashoffset: 377;
+  transition: stroke-dashoffset 1.5s ease-out;
+}
+
+.compatibility-score-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: 'Playfair Display', serif;
+}
+
+.compatibility-score-rating {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.compatibility-score-traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.compatibility-trait {
+  background: rgba(196, 30, 58, 0.08);
+  color: var(--primary);
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.compatibility-score-cta {
+  font-size: 13px;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.compatibility-score-cta a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ===== CERTIFICATE PREVIEW - Priority #2 ===== */
+.certificate-preview-section {
+  background: linear-gradient(135deg, #faf8f5, #f5f0e8);
+  border: 2px solid rgba(212, 165, 116, 0.4);
+  border-radius: 20px;
+  padding: 24px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.certificate-preview-title {
+  font-size: 14px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.certificate-preview-card {
+  background: linear-gradient(135deg, #fffbf5, #fff8f0);
+  border: 2px solid rgba(196, 30, 58, 0.15);
+  border-radius: 12px;
+  padding: 24px 20px;
+  max-width: 260px;
+  margin: 0 auto 16px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(139, 69, 19, 0.08);
+}
+
+.certificate-preview-seal {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #C41E3A, #8B4513);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+  opacity: 0.3;
+}
+
+.certificate-preview-header {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(212, 165, 116, 0.3);
+  padding-bottom: 8px;
+}
+
+.certificate-preview-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 42px;
+  color: var(--primary);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.certificate-preview-pinyin {
+  font-size: 16px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.certificate-preview-meaning-label {
+  font-size: 11px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.certificate-preview-meaning {
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.certificate-preview-date {
+  font-size: 11px;
+  color: var(--text-light);
+  border-top: 1px solid rgba(212, 165, 116, 0.3);
+  padding-top: 8px;
+}
+
+.certificate-preview-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #C41E3A, #8B4513);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+/* ===== ANCIENT IDENTITY - Priority #3 ===== */
+.ancient-identity-card-premium {
+  background: linear-gradient(135deg, #f5f0e8, #faf8f5);
+  border: 2px solid rgba(212, 165, 116, 0.5);
+  border-radius: 20px;
+  padding: 28px 24px;
+  margin: 20px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ancient-identity-card-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #C41E3A, #D4A574, #8B4513);
+}
+
+.ancient-identity-premium-title {
+  font-size: 14px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.ancient-identity-premium-role {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 32px;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.ancient-identity-premium-match {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.ancient-identity-premium-traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.ancient-identity-premium-trait {
+  background: rgba(196, 30, 58, 0.08);
+  color: var(--primary);
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ancient-identity-premium-story {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.8;
+  font-style: italic;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.preview-teaser-section {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(245,240,232,0.95));
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(212, 165, 116, 0.3);
+  text-align: left;
+}
+
+.preview-teaser-title {
+  font-size: 14px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.preview-teaser-content {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.preview-teaser-content .teaser-highlight {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.preview-teaser-content .teaser-locked {
+  color: var(--text-light);
+  font-style: italic;
+  border-bottom: 1px dashed var(--secondary);
+  padding-bottom: 2px;
+}
+
+.preview-teaser-content .teaser-blur {
+  filter: blur(3px);
+  opacity: 0.5;
+  user-select: none;
+}
+
+.preview-report-modules {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.preview-report-module {
+  background: rgba(139, 69, 19, 0.06);
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.preview-report-module.revealed {
+  background: rgba(196, 30, 58, 0.08);
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.preview-report-module.revealed::before {
+  content: '✓';
+  color: #2F855A;
+  font-weight: bold;
+}
+
+.preview-report-module.locked {
+  background: rgba(139, 69, 19, 0.03);
+  color: rgba(109, 76, 65, 0.4);
+}
+
+.preview-report-module.locked::before {
+  content: '🔒';
+  font-size: 10px;
+}
+
+.preview-urgency {
+  background: linear-gradient(135deg, rgba(196, 30, 58, 0.1), rgba(196, 30, 58, 0.05));
+  border: 1px solid rgba(196, 30, 58, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.preview-urgency-text {
+  font-size: 14px;
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.preview-urgency-sub {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* ===== User Cases Carousel ===== */
+.user-cases-section {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.user-cases-title {
+  font-size: 14px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.user-cases-carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 0 12px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.user-cases-carousel::-webkit-scrollbar { display: none; }
+
+.user-case-card {
+  min-width: 260px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(245,240,232,0.95));
+  border: 1px solid rgba(212, 165, 116, 0.3);
+  border-radius: 16px;
+  padding: 20px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+.user-case-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.user-case-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C41E3A, #8B4513);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.user-case-info {
+  flex: 1;
+}
+
+.user-case-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.user-case-origin {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.user-case-chinese-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28px;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.user-case-pinyin {
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.user-case-quote {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.user-case-stars {
+  color: #D4A574;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+/* ===== Share Section ===== */
+.share-section {
+  background: linear-gradient(135deg, rgba(196, 30, 58, 0.06), rgba(139, 69, 19, 0.06));
+  border: 1px solid rgba(212, 165, 116, 0.3);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 24px 0;
+  text-align: center;
+}
+
+.share-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.share-subtitle {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 24px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  color: white;
+}
+
+.share-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.share-btn-twitter { background: #1DA1F2; }
+.share-btn-facebook { background: #1877F2; }
+.share-btn-whatsapp { background: #25D366; }
+.share-btn-copy { background: var(--primary); }
+.share-btn-wechat { background: #07C160; }
+
+.share-result-text {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* ===== FOMO Timer ===== */
+.fomo-banner {
+  background: linear-gradient(90deg, #C41E3A, #8B4513);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.fomo-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  animation: fomoShine 3s infinite;
+}
+
+@keyframes fomoShine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.fomo-text {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.fomo-timer {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+}
+
+.fomo-sub {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+.fomo-viewers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.fomo-viewer-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ADE80;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ===== Live Notification ===== */
+.live-notification {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: white;
+  border-radius: 12px;
+  padding: 14px 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 999;
+  transform: translateX(-120%);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 320px;
+  border: 1px solid rgba(212, 165, 116, 0.3);
+}
+
+.live-notification.show {
+  transform: translateX(0);
+}
+
+.live-notification-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C41E3A, #8B4513);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.live-notification-text {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.live-notification-text strong {
+  color: var(--primary);
+}
+
+.live-notification-time {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+/* ===== #2 AI NAME STORY PREVIEW ===== */
+.story-preview-section {
+  background: linear-gradient(135deg, rgba(196, 30, 58, 0.05), rgba(139, 69, 19, 0.05));
+  border: 1px solid rgba(212, 165, 116, 0.3);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.story-preview-title {
+  font-size: 14px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.story-preview-content {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.story-preview-content .story-visible {
+  color: var(--text);
+}
+
+.story-preview-content .story-blur {
+  filter: blur(4px);
+  opacity: 0.6;
+  user-select: none;
+}
+
+.story-preview-btn {
+  background: linear-gradient(135deg, #C41E3A, #8B4513);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.story-preview-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
+}
+
+/* ===== #3 CHINESE PEOPLE'S VIEW OF YOU ===== */
+.traits-section {
+  background: white;
+  border: 1px solid rgba(212, 165, 116, 0.3);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.traits-title {
+  font-size: 14px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.traits-subtitle {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.traits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.trait-card {
+  background: linear-gradient(135deg, rgba(196, 30, 58, 0.08), rgba(139, 69, 19, 0.08));
+  border: 1px solid rgba(212, 165, 116, 0.3);
+  border-radius: 12px;
+  padding: 16px 12px;
+  text-align: center;
+}
+
+.trait-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.trait-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.trait-desc {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.traits-locked {
+  background: rgba(139, 69, 19, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 12px;
+}
+
+.traits-locked-text {
+  font-size: 13px;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* ===== #4 CALLIGRAPHY SIGNATURE ===== */
+.calligraphy-section {
+  background: linear-gradient(135deg, #f5f0e8, #faf8f5);
+  border: 2px solid rgba(212, 165, 116, 0.4);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.calligraphy-title {
+  font-size: 14px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.calligraphy-styles {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.calligraphy-style {
+  background: white;
+  border: 1px solid rgba(212, 165, 116, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.calligraphy-style-name {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.calligraphy-char {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 36px;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.calligraphy-locked {
+  filter: blur(3px);
+  opacity: 0.5;
+}
+
+/* ===== #5 NAME MATCH SCORE ===== */
+.match-score-section {
+  background: linear-gradient(135deg, rgba(196, 30, 58, 0.08), rgba(139, 69, 19, 0.08));
+  border: 1px solid rgba(212, 165, 116, 0.3);
+  border-radius: 16px;
+  padding: 24px 20px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.match-score-title {
+  font-size: 14px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.match-score-display {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.match-score-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: conic-gradient(#C41E3A 0% 95%, rgba(212, 165, 116, 0.2) 95% 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  position: relative;
+}
+
+.match-score-circle::before {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: white;
+  border-radius: 50%;
+}
+
+.match-score-number {
+  position: relative;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.match-score-label {
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.match-score-stars {
+  color: #D4A574;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.match-score-detail {
+  font-size: 12px;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* ===== #6 ANCIENT IDENTITY ===== */
+.ancient-identity-section {
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.08), rgba(196, 30, 58, 0.05));
+  border: 1px solid rgba(212, 165, 116, 0.3);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.ancient-identity-title {
+  font-size: 14px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.ancient-identity-subtitle {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.ancient-identity-card {
+  background: white;
+  border: 2px solid rgba(212, 165, 116, 0.4);
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.ancient-identity-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.ancient-identity-role {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.ancient-identity-desc {
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.ancient-identity-locked {
+  filter: blur(4px);
+  opacity: 0.6;
+}
+
+/* ===== #7 NAME POPULARITY RANKING ===== */
+.popularity-section {
+  background: white;
+  border: 1px solid rgba(212, 165, 116, 0.3);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.popularity-title {
+  font-size: 14px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.popularity-rank {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #C41E3A, #8B4513);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.popularity-rank-number {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.popularity-desc {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.popularity-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  height: 60px;
+  margin-bottom: 12px;
+}
+
+.popularity-bar {
+  width: 24px;
+  background: rgba(212, 165, 116, 0.3);
+  border-radius: 4px 4px 0 0;
+}
+
+.popularity-bar.active {
+  background: linear-gradient(180deg, #C41E3A, #8B4513);
+}
+
+.popularity-bar:nth-child(1) { height: 30%; }
+.popularity-bar:nth-child(2) { height: 45%; }
+.popularity-bar:nth-child(3) { height: 60%; }
+.popularity-bar:nth-child(4) { height: 85%; }
+.popularity-bar:nth-child(5) { height: 40%; }
+
+/* ===== #8 SHARE TO UNLOCK ===== */
+.share-unlock-section {
+  background: linear-gradient(135deg, rgba(196, 30, 58, 0.08), rgba(139, 69, 19, 0.08));
+  border: 2px dashed rgba(212, 165, 116, 0.5);
+  border-radius: 16px;
+  padding: 24px 20px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.share-unlock-title {
+  font-size: 16px;
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.share-unlock-subtitle {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.share-unlock-reward {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(212, 165, 116, 0.3);
+}
+
+.share-unlock-reward-title {
+  font-size: 13px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.share-unlock-reward-item {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.share-unlock-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.share-unlock-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.share-unlock-btn:hover {
+  transform: scale(1.1);
+}
+
+.share-unlock-btn.tiktok { background: #000; color: white; }
+.share-unlock-btn.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+.share-unlock-btn.facebook { background: #1877F2; color: white; }
+.share-unlock-btn.twitter { background: #1DA1F2; color: white; }
+
+/* ===== #9 FRIEND COMPARISON ===== */
+.friend-compare-section {
+  background: white;
+  border: 1px solid rgba(212, 165, 116, 0.3);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.friend-compare-title {
+  font-size: 14px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.friend-compare-subtitle {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.friend-compare-avatars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.friend-compare-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C41E3A, #8B4513);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.friend-compare-avatar.friend {
+  background: linear-gradient(135deg, #8B4513, #D4A574);
+}
+
+.friend-compare-vs {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.friend-compare-names {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 16px;
+}
+
+.friend-compare-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px;
+  color: var(--primary);
+}
+
+.friend-compare-btn {
+  background: linear-gradient(135deg, #C41E3A, #8B4513);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.friend-compare-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
+}
+
+@media (max-width: 600px) {
+  .user-case-card { min-width: 220px; padding: 16px; }
+  .share-buttons { flex-direction: column; align-items: center; }
+  .share-btn { width: 100%; max-width: 240px; justify-content: center; }
+  .live-notification { left: 10px; right: 10px; max-width: none; bottom: 10px; }
+}
+
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z9LFN79GT8"></script>
@@ -1759,20 +3124,6 @@ body {
 
       <button class="btn-primary" onclick="KPI.trackClick('startQuiz'); KPI.update({startClicks:1, quizStarts:1}); gtag('event','quiz_start'); startQuiz()">Discover My Name Meaning</button>
       
-      <!-- Free Option -->
-      <div class="free-option-divider">
-        <span>or</span>
-      </div>
-      <button class="btn-free" onclick="KPI.trackClick('freeTranslate'); KPI.update({freeTranslateClicks:1}); gtag('event','free_translate'); showPage('page-freetranslate')">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 6px;">
-          <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-          <polyline points="2 17 12 22 22 17"></polyline>
-          <polyline points="2 12 12 17 22 12"></polyline>
-        </svg>
-        Free: Translate My Name
-      </button>
-      <p class="free-option-desc">Enter your name, get a Chinese name based on pronunciation</p>
-      
       <div class="chinese-watermark">你 的 中 文 名 之 灵</div>
     </div>
 
@@ -1784,8 +3135,10 @@ body {
         <div class="progress-step"></div>
         <div class="progress-step"></div>
         <div class="progress-step"></div>
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
       </div>
-      <p class="progress-text">Step 1 of 5</p>
+      <p class="progress-text">Step 1 of 7</p>
       <div class="encouragement-msg">Let's begin your journey! 🌟</div>
       <h2 class="question-text">What is your gender?</h2>
       <div class="question-tooltip">This helps us select characters with appropriate cultural associations</div>
@@ -1808,8 +3161,10 @@ body {
         <div class="progress-step"></div>
         <div class="progress-step"></div>
         <div class="progress-step"></div>
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
       </div>
-      <p class="progress-text">Step 2 of 5</p>
+      <p class="progress-text">Step 2 of 7</p>
       <div class="encouragement-msg">You're doing great! ✨</div>
       <h2 class="question-text">How would you like your name to sound?</h2>
       <div class="question-tooltip">Choose the tone that resonates with your personality</div>
@@ -1839,8 +3194,10 @@ body {
         <div class="progress-step active"></div>
         <div class="progress-step"></div>
         <div class="progress-step"></div>
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
       </div>
-      <p class="progress-text">Step 3 of 5</p>
+      <p class="progress-text">Step 3 of 7</p>
       <div class="encouragement-msg">Halfway there! Keep going! 🎯</div>
       <h2 class="question-text">Which natural element do you love most?</h2>
       <div class="question-tooltip">Elements in Chinese names carry deep symbolic meanings</div>
@@ -1870,8 +3227,10 @@ body {
         <div class="progress-step completed"></div>
         <div class="progress-step active"></div>
         <div class="progress-step"></div>
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
       </div>
-      <p class="progress-text">Step 4 of 5</p>
+      <p class="progress-text">Step 4 of 7</p>
       <div class="encouragement-msg">Almost there! Just two more! 💪</div>
       <h2 class="question-text">What profession do you wish to pursue?</h2>
       <div class="question-tooltip">Your career path influences the character selection</div>
@@ -1906,14 +3265,92 @@ body {
         <div class="progress-step completed"></div>
         <div class="progress-step completed"></div>
         <div class="progress-step active"></div>
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
       </div>
-      <p class="progress-text">Step 5 of 5</p>
+      <p class="progress-text">Step 5 of 7</p>
+      <div class="encouragement-msg">Great progress! Keep going! 🌟</div>
+      <h2 class="question-text">Which personality trait describes you best?</h2>
+      <div class="question-tooltip">This helps us match characters that reflect your inner nature</div>
+      <div class="options">
+        <button class="option-btn" onclick="selectOption(5, 'A', this)">
+          <span class="option-label">A.</span> Calm and thoughtful
+          <span class="option-example">e.g., 静思 (Jìng Sī), 悠然 (Yōu Rán)</span>
+          <div class="option-feedback">Thoughtful names reflect wisdom and inner peace</div>
+        </button>
+        <button class="option-btn" onclick="selectOption(5, 'B', this)">
+          <span class="option-label">B.</span> Energetic and adventurous
+          <span class="option-example">e.g., 凌飞 (Líng Fēi), 跃翔 (Yuè Xiáng)</span>
+          <div class="option-feedback">Adventurous names convey dynamism and courage</div>
+        </button>
+        <button class="option-btn" onclick="selectOption(5, 'C', this)">
+          <span class="option-label">C.</span> Creative and artistic
+          <span class="option-example">e.g., 墨韵 (Mò Yùn), 诗涵 (Shī Hán)</span>
+          <div class="option-feedback">Artistic names reflect imagination and beauty</div>
+        </button>
+        <button class="option-btn" onclick="selectOption(5, 'D', this)">
+          <span class="option-label">D.</span> Ambitious and driven
+          <span class="option-example">e.g., 志远 (Zhì Yuǎn), 锐进 (Ruì Jìn)</span>
+          <div class="option-feedback">Driven names symbolize determination and success</div>
+        </button>
+      </div>
+    </div>
+
+    <div class="page" id="page-q6">
+      <div class="progress-bar">
+        <div class="progress-step completed"></div>
+        <div class="progress-step completed"></div>
+        <div class="progress-step completed"></div>
+        <div class="progress-step completed"></div>
+        <div class="progress-step completed"></div>
+        <div class="progress-step active"></div>
+        <div class="progress-step"></div>
+      </div>
+      <p class="progress-text">Step 6 of 7</p>
+      <div class="encouragement-msg">Almost there! Just one more after this! 💪</div>
+      <h2 class="question-text">What life value matters most to you?</h2>
+      <div class="question-tooltip">Chinese names often embody core life philosophies</div>
+      <div class="options">
+        <button class="option-btn" onclick="selectOption(6, 'A', this)">
+          <span class="option-label">A.</span> Harmony and balance
+          <span class="option-example">e.g., 和悦 (Hé Yuè), 静宜 (Jìng Yí)</span>
+          <div class="option-feedback">Harmony names reflect balance and tranquility</div>
+        </button>
+        <button class="option-btn" onclick="selectOption(6, 'B', this)">
+          <span class="option-label">B.</span> Growth and learning
+          <span class="option-example">e.g., 博学 (Bó Xué), 思进 (Sī Jìn)</span>
+          <div class="option-feedback">Growth names symbolize continuous improvement</div>
+        </button>
+        <button class="option-btn" onclick="selectOption(6, 'C', this)">
+          <span class="option-label">C.</span> Freedom and independence
+          <span class="option-example">e.g., 逸飞 (Yì Fēi), 云翔 (Yún Xiáng)</span>
+          <div class="option-feedback">Freedom names convey independence and aspiration</div>
+        </button>
+        <button class="option-btn" onclick="selectOption(6, 'D', this)">
+          <span class="option-label">D.</span> Family and relationships
+          <span class="option-example">e.g., 家和 (Jiā Hé), 仁爱 (Rén Ài)</span>
+          <div class="option-feedback">Family names reflect warmth and connection</div>
+        </button>
+      </div>
+    </div>
+
+    <div class="page" id="page-q7">
+      <div class="progress-bar">
+        <div class="progress-step completed"></div>
+        <div class="progress-step completed"></div>
+        <div class="progress-step completed"></div>
+        <div class="progress-step completed"></div>
+        <div class="progress-step completed"></div>
+        <div class="progress-step completed"></div>
+        <div class="progress-step active"></div>
+      </div>
+      <p class="progress-text">Step 7 of 7</p>
       <div class="encouragement-msg">Final step! You're amazing! 🎉</div>
       <h2 class="question-text">What is your current name? (Optional)</h2>
       <div class="question-tooltip">We'll try to match the sound or meaning of your current name</div>
       <div class="text-input-group">
-        <input type="text" class="text-input" id="currentNameInput" placeholder="Your name" autocomplete="off" style="width: 200px; font-size: 20px; text-transform: none;" />
-        <p class="input-hint">Enter your English or Chinese name for phonetic matching</p>
+        <input type="text" class="text-input" id="currentNameInput" placeholder="Your name" autocomplete="off" style="width: 200px; font-size: 20px; text-transform: none;" oninput="document.getElementById('nextBtn').disabled = false;" />
+        <p class="input-hint">Enter your English or Chinese name for phonetic matching (optional)</p>
       </div>
     </div>
 
@@ -1922,62 +3359,383 @@ body {
       <button class="btn-primary" id="nextBtn" disabled onclick="nextStep()">Next Step</button>
     </div>
 
-    <!-- Preview Page - NEW -->
+    <!-- Preview Page - Enhanced -->
     <div class="page" id="page-preview">
       <div class="preview-container">
-        <h2 class="preview-title">Your Chinese Name Awaits!</h2>
-        <p class="preview-subtitle">Based on your answers, we've crafted something special for you</p>
+        <h2 class="preview-title">Your Chinese Identity is Ready!</h2>
+        <p class="preview-subtitle">Based on your 7 answers, we've crafted your complete Chinese identity profile</p>
         
-        <div class="preview-highlights">
-          <div class="preview-highlight-card">
-            <div class="preview-highlight-title">Your Primary Character</div>
-            <div class="preview-highlight-content" id="previewChar1">--</div>
-            <div class="preview-highlight-desc" id="previewDesc1">Represents your core personality traits</div>
-          </div>
-          <div class="preview-highlight-card locked">
-            <div class="preview-highlight-title">Your Secondary Character</div>
-            <div class="preview-highlight-content">--</div>
-            <div class="preview-highlight-desc">Unlock to reveal your complete name meaning</div>
-          </div>
-          <div class="preview-highlight-card locked">
-            <div class="preview-highlight-title">Your Full Name Blessing</div>
-            <div class="preview-highlight-content">--</div>
-            <div class="preview-highlight-desc">A personalized blessing based on your name</div>
+        <!-- Full Name Reveal -->
+        <div class="preview-name-reveal">
+          <div class="name-display" id="previewFullName">明远</div>
+          <div class="pinyin-display" id="previewFullPinyin">Míng Yuǎn</div>
+          <div class="meaning-display" id="previewFullMeaning">
+            Meaning: <span class="meaning-highlight">Bright and far-reaching</span> — Symbolizing wisdom that illuminates the path ahead
           </div>
         </div>
 
-        <div style="font-size: 14px; color: var(--text-light); margin-bottom: 16px;">Your complete report includes:</div>
-        <div class="report-modules">
-          <div class="report-module">Name Meaning</div>
-          <div class="report-module">Cultural Significance</div>
-          <div class="report-module">Phonetic Analysis</div>
-          <div class="report-module locked">Personality Match</div>
-          <div class="report-module locked">Career Alignment</div>
-          <div class="report-module locked">Lucky Elements</div>
-          <div class="report-module locked">Name Poster</div>
-          <div class="report-module locked">Shareable Card</div>
-        </div>
-
-        <div class="testimonials-section">
-          <div class="testimonials-title">What Others Say</div>
-          <div class="testimonial-card">
-            <div class="testimonial-text">"The report was incredibly detailed. I learned so much about Chinese naming culture and my name fits me perfectly!"</div>
-            <div class="testimonial-author">— Michael T., London</div>
-          </div>
-          <div class="testimonial-card">
-            <div class="testimonial-text">"I shared my name poster on Instagram and got so many questions about it. Absolutely love it!"</div>
-            <div class="testimonial-author">— Emma L., Sydney</div>
+        <!-- Teaser Content Section -->
+        <div class="preview-teaser-section">
+          <div class="preview-teaser-title">What Your Name Reveals About You</div>
+          <div class="preview-teaser-content">
+            <p><span class="teaser-highlight">🎯 Personality Match:</span> You value wisdom and long-term thinking. Your name reflects your <span class="teaser-blur">deep insight and strategic nature...</span></p>
+            <p style="margin-top: 12px;"><span class="teaser-highlight">🏔️ Career Energy:</span> Ideal for roles requiring <span class="teaser-blur">vision, leadership, and creative problem-solving...</span></p>
+            <p style="margin-top: 12px; color: var(--text-light); font-style: italic; font-size: 13px;">
+              🔒 Unlock to see your complete personality analysis, career alignment, and lucky elements...
+            </p>
           </div>
         </div>
 
-        <div class="unlock-cta">
-          <div class="unlock-cta-title">Unlock Your Full Report</div>
-          <div class="unlock-cta-price">From $0.99 <span>$2.99</span></div>
-          <div class="unlock-cta-note">One-time payment • Instant access • Lifetime updates</div>
+        <!-- Step 1: Compatibility Score - Priority #1 -->
+        <div class="compatibility-score-section">
+          <div class="compatibility-score-label">Compatibility Score</div>
+          <div class="compatibility-score-circle">
+            <svg viewBox="0 0 140 140">
+              <defs>
+                <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color:#C41E3A"/>
+                  <stop offset="100%" style="stop-color:#8B4513"/>
+                </linearGradient>
+              </defs>
+              <circle class="compatibility-score-circle-bg" cx="70" cy="70" r="60"/>
+              <circle class="compatibility-score-circle-fill" id="compatibilityCircleFill" cx="70" cy="70" r="60"/>
+            </svg>
+            <div class="compatibility-score-number" id="compatibilityScoreNumber">94%</div>
+          </div>
+          <div class="compatibility-score-rating" id="compatibilityScoreRating">Excellent Match</div>
+          <div class="compatibility-score-traits" id="compatibilityScoreTraits">
+            <span class="compatibility-trait">Leadership</span>
+            <span class="compatibility-trait">Confidence</span>
+            <span class="compatibility-trait">Integrity</span>
+          </div>
+          <div class="compatibility-score-cta">
+            🔓 <a href="#" onclick="showPage('page-payment'); return false;">Unlock to see why your score is 94% →</a>
+          </div>
         </div>
 
-        <button class="btn-gold" onclick="KPI.update({paymentPageViews:1}); gtag('event','view_pricing'); showPage('page-payment')">Unlock Now - 80% Off</button>
-        <p style="font-size: 12px; color: var(--text-light); margin-top: 12px;">30-day money-back guarantee</p>
+        <!-- Step 2: Certificate Preview - Priority #2 -->
+        <div class="certificate-preview-section">
+          <div class="certificate-preview-title">📜 Your Name Certificate</div>
+          <div class="certificate-preview-card">
+            <div class="certificate-preview-seal">印</div>
+            <div class="certificate-preview-header">Chinese Name Certificate</div>
+            <div class="certificate-preview-name" id="certificatePreviewName">浩然</div>
+            <div class="certificate-preview-pinyin" id="certificatePreviewPinyin">(Haoran)</div>
+            <div class="certificate-preview-meaning-label">Meaning</div>
+            <div class="certificate-preview-meaning" id="certificatePreviewMeaning">Vast Spirit</div>
+            <div class="certificate-preview-date">Issued: 2026</div>
+          </div>
+          <div class="certificate-preview-badge">🔒 HD PNG for Premium</div>
+          <p style="font-size: 12px; color: var(--text-light); margin-top: 8px;">Perfect for Instagram, Facebook, TikTok</p>
+        </div>
+
+        <!-- Report Modules Preview -->
+        <div style="font-size: 14px; color: var(--text-light); margin-bottom: 12px;">Your complete report includes:</div>
+        <div class="preview-report-modules">
+          <div class="preview-report-module revealed">Name Meaning</div>
+          <div class="preview-report-module revealed">Cultural Significance</div>
+          <div class="preview-report-module revealed">Phonetic Analysis</div>
+          <div class="preview-report-module revealed">Name Blessing</div>
+          <div class="preview-report-module revealed">Personality Match</div>
+          <div class="preview-report-module locked">Career Alignment</div>
+          <div class="preview-report-module locked">Lucky Elements</div>
+          <div class="preview-report-module locked">Name Certificate</div>
+        </div>
+
+        <!-- Urgency CTA -->
+        <div class="preview-urgency">
+          <div class="preview-urgency-text">✨ Unlock everything for just $1.99</div>
+          <div class="preview-urgency-sub">Limited time offer • 50-60% off regular price</div>
+        </div>
+
+        <!-- FOMO Timer -->
+        <div class="fomo-banner" id="fomoBanner">
+          <div class="fomo-text">🔥 Special Offer Ends In</div>
+          <div class="fomo-timer" id="fomoTimer">14:59</div>
+          <div class="fomo-sub">80% discount will expire when timer runs out</div>
+          <div class="fomo-viewers">
+            <div class="fomo-viewer-dot"></div>
+            <span id="fomoViewers">23 people are viewing this page right now</span>
+          </div>
+        </div>
+
+        <!-- #2 AI Name Story Preview -->
+        <div class="story-preview-section">
+          <div class="story-preview-title">📖 Your Name's Story</div>
+          <div class="story-preview-content" id="storyPreviewContent">
+            <span class="story-visible">In ancient China, a scholar named <strong id="storyName">浩然</strong> was known for his unwavering integrity and vast knowledge. He believed that true wisdom comes from understanding both oneself and the world...</span>
+            <span class="story-blur"> His name became a symbol of moral courage and intellectual depth, passed down through generations as an inspiration for those who seek to make a meaningful impact on the world...</span>
+          </div>
+          <button class="story-preview-btn" onclick="showPage('page-payment')">🔓 Unlock Full Story</button>
+        </div>
+
+        <!-- #3 Chinese People's View of You -->
+        <div class="traits-section">
+          <div class="traits-title">👥 How Chinese People See You</div>
+          <div class="traits-subtitle">Based on your name, here's what Chinese people would think of you</div>
+          <div class="traits-grid">
+            <div class="trait-card">
+              <div class="trait-icon">🧠</div>
+              <div class="trait-name">Smart & Wise</div>
+              <div class="trait-desc">Intelligent and thoughtful</div>
+            </div>
+            <div class="trait-card">
+              <div class="trait-icon">🤝</div>
+              <div class="trait-name">Trustworthy</div>
+              <div class="trait-desc">Reliable and honest</div>
+            </div>
+            <div class="trait-card">
+              <div class="trait-icon">💪</div>
+              <div class="trait-name">Responsible</div>
+              <div class="trait-desc">Takes charge when needed</div>
+            </div>
+            <div class="trait-card">
+              <div class="trait-icon">✨</div>
+              <div class="trait-name">Charismatic</div>
+              <div class="trait-desc">Natural charm and grace</div>
+            </div>
+          </div>
+          <div class="traits-locked">
+            <div class="traits-locked-text">🔒 Unlock to see detailed personality analysis and how your name influences first impressions</div>
+          </div>
+        </div>
+
+        <!-- #4 Calligraphy Signature -->
+        <div class="calligraphy-section">
+          <div class="calligraphy-title">✍️ Your Name in Calligraphy</div>
+          <div class="calligraphy-styles">
+            <div class="calligraphy-style">
+              <div class="calligraphy-style-name">Regular Script</div>
+              <div class="calligraphy-char" id="calligraphyRegular">浩然</div>
+            </div>
+            <div class="calligraphy-style">
+              <div class="calligraphy-style-name">Running Script</div>
+              <div class="calligraphy-char calligraphy-locked" id="calligraphyRunning">🔒</div>
+            </div>
+            <div class="calligraphy-style">
+              <div class="calligraphy-style-name">Cursive Script</div>
+              <div class="calligraphy-char calligraphy-locked" id="calligraphyCursive">🔒</div>
+            </div>
+          </div>
+          <button class="story-preview-btn" onclick="showPage('page-payment')">🔓 Unlock All Styles</button>
+        </div>
+
+        <!-- #5 Name Match Score -->
+        <div class="match-score-section">
+          <div class="match-score-title">🎯 Name-Personality Match</div>
+          <div class="match-score-display">
+            <div class="match-score-circle">
+              <div class="match-score-number" id="matchScoreNumber">95%</div>
+            </div>
+          </div>
+          <div class="match-score-label">Your name matches your personality</div>
+          <div class="match-score-stars">★★★★★</div>
+          <div class="match-score-detail">Based on your answers, this name aligns perfectly with your traits</div>
+        </div>
+
+        <!-- Step 3: Ancient Chinese Identity - Priority #3 -->
+        <div class="ancient-identity-card-premium">
+          <div class="ancient-identity-premium-title">🏛️ Ancient Chinese Identity</div>
+          <div class="ancient-identity-premium-role" id="ancientIdentityPremiumRole">Scholar</div>
+          <div class="ancient-identity-premium-match" id="ancientIdentityPremiumMatch">95% Match</div>
+          <div class="ancient-identity-premium-traits" id="ancientIdentityPremiumTraits">
+            <span class="ancient-identity-premium-trait">Wisdom</span>
+            <span class="ancient-identity-premium-trait">Learning</span>
+            <span class="ancient-identity-premium-trait">Leadership</span>
+            <span class="ancient-identity-premium-trait">Respect</span>
+          </div>
+          <div class="ancient-identity-premium-story" id="ancientIdentityPremiumStory">
+            If you had lived in ancient China, you would have been known as a respected scholar whose wisdom guided others through difficult times.
+          </div>
+          <div class="traits-locked" style="margin-top: 16px;">
+            <div class="traits-locked-text">🔒 Unlock your complete ancient identity story</div>
+          </div>
+        </div>
+
+        <!-- #7 Name Popularity Ranking -->
+        <div class="popularity-section">
+          <div class="popularity-title">📊 Name Popularity</div>
+          <div class="popularity-rank">
+            <span>Top</span>
+            <span class="popularity-rank-number" id="popularityRank">12%</span>
+          </div>
+          <div class="popularity-desc">Your name is rarer than 88% of Chinese names!<br>This makes it unique and special.</div>
+          <div class="popularity-chart">
+            <div class="popularity-bar"></div>
+            <div class="popularity-bar"></div>
+            <div class="popularity-bar"></div>
+            <div class="popularity-bar active"></div>
+            <div class="popularity-bar"></div>
+          </div>
+          <div class="traits-locked">
+            <div class="traits-locked-text">🔒 Unlock to see detailed popularity trends and regional distribution</div>
+          </div>
+        </div>
+
+        <!-- #8 Share to Unlock -->
+        <div class="share-unlock-section">
+          <div class="share-unlock-title">🎁 Share & Unlock Bonus Content</div>
+          <div class="share-unlock-subtitle">Share your name with friends to unlock exclusive features</div>
+          <div class="share-unlock-reward">
+            <div class="share-unlock-reward-title">🎉 Unlock Reward:</div>
+            <div class="share-unlock-reward-item">✓ Lucky Elements Guide<br>✓ Name Compatibility Report<br>✓ Custom Name Poster</div>
+          </div>
+          <div class="share-unlock-btns">
+            <button class="share-unlock-btn tiktok" onclick="shareToSocial('tiktok')" title="TikTok">🎵</button>
+            <button class="share-unlock-btn instagram" onclick="shareToSocial('instagram')" title="Instagram">📷</button>
+            <button class="share-unlock-btn facebook" onclick="shareToSocial('facebook')" title="Facebook">f</button>
+            <button class="share-unlock-btn twitter" onclick="shareToSocial('twitter')" title="Twitter">𝕏</button>
+          </div>
+        </div>
+
+        <!-- #9 Friend Comparison -->
+        <div class="friend-compare-section">
+          <div class="friend-compare-title">👫 Compare with Friends</div>
+          <div class="friend-compare-subtitle">See how your Chinese name compares to your friends'</div>
+          <div class="friend-compare-avatars">
+            <div class="friend-compare-avatar">You</div>
+            <div class="friend-compare-vs">VS</div>
+            <div class="friend-compare-avatar friend">?</div>
+          </div>
+          <div class="friend-compare-names">
+            <div class="friend-compare-name" id="yourCompareName">浩然</div>
+            <div class="friend-compare-name" style="color: var(--text-light);">?</div>
+          </div>
+          <button class="friend-compare-btn" onclick="shareToSocial('copy')">📋 Invite Friend to Compare</button>
+        </div>
+
+        <!-- User Cases Carousel -->
+        <div class="user-cases-section">
+          <div class="user-cases-title">Real People, Real Names</div>
+          <div class="user-cases-carousel" id="userCasesCarousel">
+            <div class="user-case-card">
+              <div class="user-case-header">
+                <div class="user-case-avatar">S</div>
+                <div class="user-case-info">
+                  <div class="user-case-name">Sarah M.</div>
+                  <div class="user-case-origin">New York, USA</div>
+                </div>
+              </div>
+              <div class="user-case-chinese-name">雅慧</div>
+              <div class="user-case-pinyin">Yǎ Huì</div>
+              <div class="user-case-quote">"My Chinese name means 'elegant wisdom'. My Chinese teacher said it perfectly captures my personality!"</div>
+              <div class="user-case-stars">★★★★★</div>
+            </div>
+            <div class="user-case-card">
+              <div class="user-case-header">
+                <div class="user-case-avatar">J</div>
+                <div class="user-case-info">
+                  <div class="user-case-name">James K.</div>
+                  <div class="user-case-origin">London, UK</div>
+                </div>
+              </div>
+              <div class="user-case-chinese-name">浩然</div>
+              <div class="user-case-pinyin">Hào Rán</div>
+              <div class="user-case-quote">"My Chinese friends were amazed at how natural my name sounds. They thought I'd picked it myself!"</div>
+              <div class="user-case-stars">★★★★★</div>
+            </div>
+            <div class="user-case-card">
+              <div class="user-case-header">
+                <div class="user-case-avatar">E</div>
+                <div class="user-case-info">
+                  <div class="user-case-name">Emma L.</div>
+                  <div class="user-case-origin">Sydney, Australia</div>
+                </div>
+              </div>
+              <div class="user-case-chinese-name">思远</div>
+              <div class="user-case-pinyin">Sī Yuǎn</div>
+              <div class="user-case-quote">"The cultural insights were fascinating. I learned so much about what my name says about me."</div>
+              <div class="user-case-stars">★★★★★</div>
+            </div>
+            <div class="user-case-card">
+              <div class="user-case-header">
+                <div class="user-case-avatar">M</div>
+                <div class="user-case-info">
+                  <div class="user-case-name">Michael R.</div>
+                  <div class="user-case-origin">Toronto, Canada</div>
+                </div>
+              </div>
+              <div class="user-case-chinese-name">明远</div>
+              <div class="user-case-pinyin">Míng Yuǎn</div>
+              <div class="user-case-quote">"I've been learning Chinese for 2 years. This gave me the perfect name — my teacher loved it!"</div>
+              <div class="user-case-stars">★★★★★</div>
+            </div>
+            <div class="user-case-card">
+              <div class="user-case-header">
+                <div class="user-case-avatar">L</div>
+                <div class="user-case-info">
+                  <div class="user-case-name">Lisa T.</div>
+                  <div class="user-case-origin">San Francisco, USA</div>
+                </div>
+              </div>
+              <div class="user-case-chinese-name">月华</div>
+              <div class="user-case-pinyin">Yuè Huá</div>
+              <div class="user-case-quote">"The lucky elements section was so cool. My name aligns perfectly with my birth element!"</div>
+              <div class="user-case-stars">★★★★★</div>
+            </div>
+            <div class="user-case-card">
+              <div class="user-case-header">
+                <div class="user-case-avatar">D</div>
+                <div class="user-case-info">
+                  <div class="user-case-name">David W.</div>
+                  <div class="user-case-origin">Singapore</div>
+                </div>
+              </div>
+              <div class="user-case-chinese-name">知行</div>
+              <div class="user-case-pinyin">Zhī Xíng</div>
+              <div class="user-case-quote">"My Chinese colleagues said the name was spot on. They were impressed by the cultural depth."</div>
+              <div class="user-case-stars">★★★★★</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-gold" onclick="KPI.update({paymentPageViews:1}); gtag('event','view_pricing'); showPage('page-payment')">🔓 Unlock Complete Identity Report</button>
+        <p style="font-size: 12px; color: var(--text-light); margin-top: 12px;">Includes name story, cultural impression, personality match & certificate • 30-day guarantee</p>
+      </div>
+    </div>
+
+    <!-- Generation Animation Overlay -->
+    <div id="generationOverlay" class="generation-overlay" style="display: none;">
+      <div class="generation-container">
+        <div class="generation-title">Discovering Your Chinese Name...</div>
+        <div class="generation-steps">
+          <div class="generation-step">
+            <div class="generation-step-icon">🧠</div>
+            <div class="generation-step-text">
+              <div>Analyzing Your Personality</div>
+              <div class="generation-step-sub">Processing your preferences and traits</div>
+            </div>
+          </div>
+          <div class="generation-step">
+            <div class="generation-step-icon">⚡</div>
+            <div class="generation-step-text">
+              <div>Matching Name Energy</div>
+              <div class="generation-step-sub">Finding characters that align with you</div>
+            </div>
+          </div>
+          <div class="generation-step">
+            <div class="generation-step-icon">📜</div>
+            <div class="generation-step-text">
+              <div>Consulting Ancient Wisdom</div>
+              <div class="generation-step-sub">Searching classical texts for meaning</div>
+            </div>
+          </div>
+          <div class="generation-step">
+            <div class="generation-step-icon">✨</div>
+            <div class="generation-step-text">
+              <div>Creating Your Name</div>
+              <div class="generation-step-sub">Crafting a name that's uniquely yours</div>
+            </div>
+          </div>
+        </div>
+        <div class="generation-progress">
+          <div class="generation-progress-bar"></div>
+        </div>
+        <div class="generation-reveal">
+          <div class="generation-reveal-name" id="genRevealName"></div>
+          <div class="generation-reveal-pinyin" id="genRevealPinyin"></div>
+          <div class="generation-reveal-meaning" id="genRevealMeaning"></div>
+        </div>
       </div>
     </div>
 
@@ -1989,53 +3747,41 @@ body {
 
         <!-- Pricing Cards -->
         <div class="pricing-container">
-          <div class="pricing-card" id="card-basic" onclick="selectPlan('basic')">
-            <div class="pricing-name">Basic</div>
-            <div class="pricing-lang">🇬🇧 English Report</div>
-            <div class="pricing-price">$0.99</div>
-            <div class="pricing-original">$2.99</div>
+          <div class="pricing-card" id="card-standard" onclick="selectPlan('standard')">
+            <div class="pricing-name">Standard</div>
+            <div class="pricing-lang">🇬🇧 English Identity Report</div>
+            <div class="pricing-price">$1.99</div>
+            <div class="pricing-original">$4.99</div>
             <ul class="pricing-features">
-              <li>Your Chinese name</li>
-              <li>Basic meaning</li>
-              <li>Digital poster</li>
-              <li class="disabled">Full report</li>
-              <li class="disabled">Personality analysis</li>
-              <li class="disabled">Career alignment</li>
+              <li>✓ Complete Chinese Identity Report</li>
+              <li>✓ Name meaning & cultural story</li>
+              <li>✓ Personality match analysis</li>
+              <li>✓ Chinese people's impression of you</li>
+              <li>✓ Ancient identity & background story</li>
+              <li>✓ Name popularity ranking</li>
+              <li class="disabled">✗ Name certificate (PNG)</li>
+              <li class="disabled">✗ Bilingual report</li>
             </ul>
-            <button class="pricing-btn" id="btn-basic">Select Basic</button>
+            <button class="pricing-btn" id="btn-standard">Select Standard</button>
           </div>
           
           <div class="pricing-card featured" id="card-premium" onclick="selectPlan('premium')">
             <div class="pricing-badge">Best Value</div>
             <div class="pricing-name">Premium</div>
-            <div class="pricing-lang">🇬🇧 English Report</div>
-            <div class="pricing-price">$1.99</div>
-            <div class="pricing-original">$4.99</div>
+            <div class="pricing-lang">🇨🇳🇬🇧 Bilingual + Certificate</div>
+            <div class="pricing-price">$3.99</div>
+            <div class="pricing-original">$9.99</div>
             <ul class="pricing-features">
-              <li>Your Chinese name</li>
-              <li>Detailed meaning</li>
-              <li>HD digital poster</li>
-              <li>Full 8-module report</li>
-              <li>Personality analysis</li>
-              <li>Career alignment</li>
+              <li>✓ Everything in Standard</li>
+              <li>✓ <strong>Name Certificate (PNG)</strong></li>
+              <li>✓ <strong>中英双语 Bilingual report</strong></li>
+              <li>✓ Custom calligraphy styles</li>
+              <li>✓ Complete name history</li>
+              <li>✓ Lucky elements guide</li>
+              <li>✓ Friend comparison feature</li>
+              <li>✓ Share & unlock rewards</li>
             </ul>
             <button class="pricing-btn" id="btn-premium">Select Premium</button>
-          </div>
-          
-          <div class="pricing-card" id="card-deluxe" onclick="selectPlan('deluxe')">
-            <div class="pricing-name">Deluxe</div>
-            <div class="pricing-lang">🇨🇳🇬🇧 中英双语 Bilingual</div>
-            <div class="pricing-price">$2.99</div>
-            <div class="pricing-original">$6.99</div>
-            <ul class="pricing-features">
-              <li>Everything in Premium</li>
-              <li>中英双语完整报告</li>
-              <li>Custom calligraphy</li>
-              <li>Name history report</li>
-              <li>Lucky elements guide</li>
-              <li>Priority support</li>
-            </ul>
-            <button class="pricing-btn" id="btn-deluxe">Select Deluxe</button>
           </div>
         </div>
 
@@ -2108,42 +3854,29 @@ body {
           <button class="btn-satisfied" onclick="satisfiedAction()">Love it ❤️</button>
           <button class="btn-refresh" onclick="refreshName()">Try Another 🔄</button>
         </div>
-        <button class="btn-secondary restart-btn" onclick="showPage('page-fullreport')">View Full Report</button>
-      </div>
-    </div>
-
-    <!-- Free Translate Page - NEW -->
-    <div class="page" id="page-freetranslate">
-      <div class="freetranslate-container">
-        <h2 class="freetranslate-title">Free Name Translation</h2>
-        <p class="freetranslate-subtitle">Enter your name, we'll create a Chinese name based on pronunciation</p>
         
-        <div class="name-input-group">
-          <label class="name-input-label">Your Name (English or other language)</label>
-          <input type="text" class="name-input" id="foreignNameInput" placeholder="e.g., Michael, Emma, Alessandro..." maxlength="30">
-        </div>
-        
-        <button class="btn-primary" onclick="generatePhoneticName()">Get My Chinese Name</button>
-        
-        <div class="phonetic-result" id="phoneticResult" style="display: none;">
-          <div class="phonetic-result-name" id="phoneticName"></div>
-          <div class="phonetic-result-pinyin" id="phoneticPinyin"></div>
-          <div class="phonetic-result-meaning" id="phoneticMeaning"></div>
-          <div class="phonetic-note">
-            💡 This is a phonetic translation based on your name's sound. For a personalized name based on your personality and preferences, try our full quiz!
+        <!-- Share Section -->
+        <div class="share-section">
+          <div class="share-title">Share Your Chinese Name</div>
+          <div class="share-subtitle">Let your friends discover their Chinese name too!</div>
+          <div class="share-buttons">
+            <button class="share-btn share-btn-twitter" onclick="shareToTwitter()">𝕏 Twitter</button>
+            <button class="share-btn share-btn-facebook" onclick="shareToFacebook()">f Facebook</button>
+            <button class="share-btn share-btn-whatsapp" onclick="shareToWhatsApp()">WhatsApp</button>
+            <button class="share-btn share-btn-copy" onclick="copyShareLink()">📋 Copy Link</button>
           </div>
-          <button class="btn-primary" onclick="startQuiz()" style="margin-top: 20px;">Get Personalized Name</button>
+          <div class="share-result-text" id="shareResultText"></div>
         </div>
         
-        <button class="btn-secondary restart-btn" onclick="showPage('page-welcome')" style="margin-top: 24px;">← Back</button>
+        <button class="btn-secondary restart-btn" onclick="showPage('page-fullreport')">📋 View Complete Identity Report</button>
       </div>
     </div>
 
     <!-- Full Report Page - NEW -->
     <div class="page" id="page-fullreport">
       <div class="fullreport-container">
-        <h2 class="fullreport-title">Your Complete Name Analysis</h2>
-        <p class="fullreport-subtitle">Deep insights into your Chinese name and what it reveals about you</p>
+        <h2 class="fullreport-title">Your Complete Chinese Identity Report</h2>
+        <p class="fullreport-subtitle">A comprehensive cultural profile based on your Chinese name</p>
 
         <div class="result-name" id="fullreportName" style="font-size: 48px; margin-bottom: 24px;"></div>
 
@@ -2941,7 +4674,7 @@ const nameDatabase = [
 ];
 
 // ============ QUIZ STATE ============
-const answers = {};
+let answers = {};
 let currentQuestion = 0;
 let currentResult = null;
 
@@ -2983,6 +4716,7 @@ function showPage(pageId) {
 
 function startQuiz() {
   currentQuestion = 1;
+  answers = {}; // Reset answers (object, not array)
   showPage('page-q1');
 }
 
@@ -3001,7 +4735,8 @@ function selectOption(questionNum, value, btn) {
 function nextStep() {
   const currentQ = currentQuestion || 1;
 
-  if (currentQ >= 5) {
+  // If we're on Q7 and click the button, submit the quiz
+  if (currentQ === 7) {
     submitQuiz();
     return;
   }
@@ -3010,8 +4745,8 @@ function nextStep() {
   currentQuestion = currentQ + 1;
   showPage('page-q' + currentQuestion);
 
-  // Q5 has no options to select - enable button immediately
-  if (currentQuestion === 5) {
+  // Q7 has no options to select - enable button immediately
+  if (currentQuestion === 7) {
     document.getElementById('nextBtn').disabled = false;
     document.getElementById('nextBtn').textContent = 'Reveal My Chinese Name';
   } else {
@@ -3025,16 +4760,16 @@ function submitQuiz() {
   const currentNameInput = document.getElementById('currentNameInput');
   const currentName = currentNameInput.value.trim();
   if (currentName) {
-    answers[5] = currentName;
+    answers[7] = currentName; // Use index 7 for Q7 input, not 5
   }
 
-  // Generate preview content
+  // Generate result first
   currentResult = generateName();
-  updatePreview(currentResult);
-
+  
   // Check if already paid (payment expires after 24 hours)
   const payTime = localStorage.getItem('nameQuizPayTime');
   const isPaid = localStorage.getItem('nameQuizPaid') === 'true' && payTime && (Date.now() - parseInt(payTime)) < 86400000;
+  
   if (isPaid) {
     lastResultName = currentResult.name.name;
     showResult(currentResult);
@@ -3046,18 +4781,80 @@ function submitQuiz() {
     localStorage.removeItem('nameQuizPayTime');
     KPI.update({quizCompletions:1});
     gtag('event','quiz_complete');
-    showPage('page-preview');
+    
+    // Show generation animation first, then preview
+    showGenerationAnimation(currentResult, function() {
+      updatePreview(currentResult);
+      showPage('page-preview');
+    });
   }
 }
 
 let lastResultName = '';
 
+function showGenerationAnimation(result, callback) {
+  const overlay = document.getElementById('generationOverlay');
+  const revealName = document.getElementById('genRevealName');
+  const revealPinyin = document.getElementById('genRevealPinyin');
+  const revealMeaning = document.getElementById('genRevealMeaning');
+  
+  if (!overlay || !revealName) {
+    // Skip animation if elements not found, go directly to callback
+    if (callback) callback();
+    return;
+  }
+  
+  // Set content
+  revealName.textContent = result.name.name;
+  revealPinyin.textContent = result.name.pinyin || getPinyin(result.name.name);
+  revealMeaning.textContent = result.name.meaning.split('，')[0];
+  
+  // Show overlay
+  overlay.style.display = 'flex';
+  
+  // Fixed delay: 4 seconds
+  const totalDelay = 4000;
+  
+  // Hide after animation completes
+  setTimeout(function() {
+    overlay.style.display = 'none';
+    if (callback) callback();
+  }, totalDelay);
+}
+
+function getPinyin(name) {
+  // Simple pinyin mapping for common characters
+  const pinyinMap = {
+    '明': 'Míng', '远': 'Yuǎn', '浩': 'Hào', '然': 'Rán', '雅': 'Yǎ', '慧': 'Huì',
+    '思': 'Sī', '源': 'Yuán', '清': 'Qīng', '风': 'Fēng', '云': 'Yún', '雨': 'Yǔ',
+    '桐': 'Tóng', '芷': 'Zhǐ', '柔': 'Róu', '溪': 'Xī', '月': 'Yuè', '柳': 'Liǔ',
+    '烟': 'Yān', '泉': 'Quán', '兰': 'Lán', '星': 'Xīng', '辰': 'Chén', '瑶': 'Yáo',
+    '光': 'Guāng', '辉': 'Huī', '暖': 'Nuǎn', '阳': 'Yáng', '曦': 'Xī', '晴': 'Qíng',
+    '岚': 'Lán', '舒': 'Shū', '飞': 'Fēi', '锦': 'Jǐn', '华': 'Huá', '文': 'Wén',
+    '武': 'Wǔ', '德': 'Dé', '志': 'Zhì', '诚': 'Chéng', '信': 'Xìn', '仁': 'Rén',
+    '义': 'Yì', '礼': 'Lǐ', '智': 'Zhì', '勇': 'Yǒng', '毅': 'Yì', '恒': 'Héng',
+    '博': 'Bó', '学': 'Xué', '问': 'Wèn', '知': 'Zhī', '行': 'Xíng', '正': 'Zhèng',
+    '直': 'Zhí', '善': 'Shàn', '美': 'Měi', '真': 'Zhēn', '朴': 'Pǔ', '素': 'Sù'
+  };
+  
+  let pinyin = '';
+  for (let char of name) {
+    pinyin += (pinyinMap[char] || char) + ' ';
+  }
+  return pinyin.trim();
+}
+
 function updatePreview(result) {
   const { name } = result;
-  // Show first character of the name
-  const firstChar = name.name.charAt(0);
-  document.getElementById('previewChar1').textContent = firstChar;
-  document.getElementById('previewDesc1').textContent = `This character represents ${name.meaning.split('，')[0]}`;
+  
+  // Update full name display
+  document.getElementById('previewFullName').textContent = name.name;
+  document.getElementById('previewFullPinyin').textContent = getPinyin(name.name);
+  document.getElementById('previewFullMeaning').innerHTML = 
+    'Meaning: <span class="meaning-highlight">' + name.meaning.split('，')[0] + '</span> — ' + name.blessing;
+  
+  // Update all new preview content
+  updatePreviewContent(result);
 }
 
 function refreshName() {
@@ -3099,12 +4896,18 @@ function generateName(excludeName) {
   const elementMap = { A: 'mountain', B: 'sun', C: 'wind' };
   // New profession mapping: A(Tech)→tech, B(Finance)→business, C(Creative)→creative, D(Education)→tech, E(Business)→business
   const professionMap = { A: 'tech', B: 'business', C: 'creative', D: 'tech', E: 'business' };
+  // Q5 personality trait: A(calm)→wisdom, B(energetic)→courage, C(creative)→art, D(ambitious)→leadership
+  const personalityMap = { A: 'wisdom', B: 'courage', C: 'art', D: 'leadership' };
+  // Q6 life value: A(harmony)→balance, B(growth)→growth, C(freedom)→freedom, D(family)→family
+  const valueMap = { A: 'balance', B: 'growth', C: 'freedom', D: 'family' };
 
   const gender = genderMap[answers[1]] || 'M';
   const sound = soundMap[answers[2]] || 'soft';
   const element = elementMap[answers[3]] || 'mountain';
   const profession = professionMap[answers[4]] || 'creative';
-  const currentName = answers[5] || null;
+  const personality = personalityMap[answers[5]] || 'wisdom';
+  const lifeValue = valueMap[answers[6]] || 'balance';
+  const currentName = answers[7] || null; // Q7 input stored at index 7
 
   // Check for phonetic matching
   let phoneticMatched = false;
@@ -3277,9 +5080,9 @@ function renderPayPalButton() {
     
     // Create order - use selected plan price
     createOrder: function(data, actions) {
-      const planPrices = { basic: '0.99', premium: '1.99', deluxe: '2.99' };
-      const planNames = { basic: 'Basic', premium: 'Premium', deluxe: 'Deluxe' };
-      const currentPlan = window.selectedPlan || 'basic';
+      const planPrices = { standard: '1.99', premium: '3.99' };
+      const planNames = { standard: 'Standard', premium: 'Premium' };
+        const currentPlan = window.selectedPlan || 'standard';
       const price = planPrices[currentPlan];
       const planName = planNames[currentPlan];
       
@@ -3334,9 +5137,9 @@ function onPaymentSuccess(method) {
   localStorage.setItem('nameQuizPlan', selectedPlan || 'basic');
   
   // Track payment success
-  const planPrices = { basic: 0.99, premium: 1.99, deluxe: 2.99 };
-  const plan = selectedPlan || 'basic';
-  const amount = planPrices[plan] || 0.99;
+  const planPrices = { standard: 1.99, premium: 3.99 };
+  const plan = selectedPlan || 'standard';
+    const amount = planPrices[plan] || 1.99;
   KPI.update({payments: 1});
   const stats = KPI.getStats();
   stats.paymentAmounts.push(amount);
@@ -3360,7 +5163,7 @@ function onPaymentSuccess(method) {
 }
 
 // ============ PLAN SELECTION ============
-let selectedPlan = 'premium'; // Default to premium
+let selectedPlan = 'standard'; // Default to standard
 window.selectedPlan = selectedPlan; // Make it globally accessible for PayPal
 
 function selectPlan(plan) {
@@ -3380,7 +5183,7 @@ function selectPlan(plan) {
   document.getElementById(`card-${plan}`).classList.add('selected');
   
   // Update PayPal amount based on plan
-  const prices = { basic: '0.99', premium: '1.99', deluxe: '2.99' };
+  const prices = { standard: '1.99', premium: '3.99' };
   const container = document.getElementById('paypal-button-container');
   container.innerHTML = ''; // Clear existing button
   renderPayPalButton(prices[plan]);
@@ -3822,6 +5625,295 @@ const observer = new MutationObserver((mutations) => {
 
 observer.observe(document.getElementById('page-payment'), { attributes: true, attributeFilter: ['class'] });
 
+// ============ FOMO TIMER ============
+(function() {
+  let totalSeconds = 15 * 60; // 15 minutes
+  const timerEl = document.getElementById('fomoTimer');
+  const viewersEl = document.getElementById('fomoViewers');
+  
+  function updateTimer() {
+    if (totalSeconds <= 0) {
+      timerEl.textContent = '00:00';
+      return;
+    }
+    totalSeconds--;
+    const mins = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+    timerEl.textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+  }
+  
+  setInterval(updateTimer, 1000);
+  
+  // Randomly update viewer count
+  setInterval(function() {
+    const viewers = Math.floor(Math.random() * 30) + 15;
+    viewersEl.textContent = viewers + ' people are viewing this page right now';
+  }, 8000);
+})();
+
+// ============ SHARE FUNCTIONS ============
+function getShareText() {
+  const nameEl = document.getElementById('resultName');
+  const name = nameEl ? nameEl.textContent : 'a beautiful Chinese name';
+  return 'I just discovered my Chinese name: ' + name + '! Find yours at';
+}
+
+function shareToTwitter() {
+  const text = encodeURIComponent(getShareText() + ' ');
+  const url = encodeURIComponent('https://joed-sze.github.io/chinese-name-spirit/');
+  window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+  gtag('event', 'share', { method: 'twitter' });
+}
+
+function shareToFacebook() {
+  const url = encodeURIComponent('https://joed-sze.github.io/chinese-name-spirit/');
+  window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank');
+  gtag('event', 'share', { method: 'facebook' });
+}
+
+function shareToWhatsApp() {
+  const text = encodeURIComponent(getShareText() + ' ');
+  const url = encodeURIComponent('https://joed-sze.github.io/chinese-name-spirit/');
+  window.open('https://wa.me/?text=' + text + url, '_blank');
+  gtag('event', 'share', { method: 'whatsapp' });
+}
+
+function copyShareLink() {
+  const text = getShareText() + ' https://joed-sze.github.io/chinese-name-spirit/';
+  navigator.clipboard.writeText(text).then(function() {
+    const resultEl = document.getElementById('shareResultText');
+    resultEl.textContent = '✅ Link copied to clipboard!';
+    setTimeout(function() { resultEl.textContent = ''; }, 3000);
+  });
+  gtag('event', 'share', { method: 'copy' });
+}
+
+// ===== SOCIAL SHARE FOR UNLOCK =====
+function shareToSocial(platform) {
+  const name = document.getElementById('previewFullName')?.textContent || 'a beautiful Chinese name';
+  const text = 'I just discovered my Chinese name: ' + name + '! Find yours at';
+  const url = 'https://joed-sze.github.io/chinese-name-spirit/';
+  
+  const shareUrls = {
+    tiktok: 'https://www.tiktok.com/upload?referer=' + encodeURIComponent(url),
+    instagram: 'https://www.instagram.com/',
+    facebook: 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url),
+    twitter: 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text + ' ') + '&url=' + encodeURIComponent(url),
+    copy: 'copy'
+  };
+  
+  if (platform === 'copy') {
+    navigator.clipboard.writeText(text + ' ' + url).then(function() {
+      alert('✅ Link copied! Share with friends to unlock bonus content!');
+    });
+  } else {
+    window.open(shareUrls[platform], '_blank');
+  }
+  
+  gtag('event', 'share_unlock', { method: platform });
+  
+  // Simulate unlock after sharing
+  setTimeout(function() {
+    alert('🎉 Thank you for sharing! Bonus content unlocked!');
+  }, 2000);
+}
+
+// ===== UPDATE PREVIEW PAGE WITH DYNAMIC CONTENT =====
+function updatePreviewContent(result) {
+  const name = result.name.name;
+  const meaning = result.name.meaning;
+  
+  // Update story preview
+  const storyName = document.getElementById('storyName');
+  if (storyName) storyName.textContent = name;
+  
+  // Update calligraphy
+  const calligraphyRegular = document.getElementById('calligraphyRegular');
+  if (calligraphyRegular) calligraphyRegular.textContent = name;
+  
+  // Update friend comparison
+  const yourCompareName = document.getElementById('yourCompareName');
+  if (yourCompareName) yourCompareName.textContent = name;
+  
+  // Update certificate preview
+  const certName = document.getElementById('certificatePreviewName');
+  const certPinyin = document.getElementById('certificatePreviewPinyin');
+  const certMeaning = document.getElementById('certificatePreviewMeaning');
+  if (certName) certName.textContent = name;
+  if (certPinyin) certPinyin.textContent = '(' + (result.name.pinyin || getPinyin(name)) + ')';
+  if (certMeaning) certMeaning.textContent = meaning.split('，')[0];
+  
+  // Update ancient identity based on name
+  updateAncientIdentity(name);
+  
+  // Update compatibility score
+  updateCompatibilityScore();
+}
+
+function updateAncientIdentity(name) {
+  const identities = {
+    '浩然': { role: 'Scholar & Poet', icon: '📜', desc: 'A respected intellectual who valued wisdom and artistic expression. Known for composing beautiful poetry and advising rulers with integrity.' },
+    '雅慧': { role: 'Noble Lady', icon: '🌸', desc: 'A graceful and intelligent woman admired for her wisdom and elegance. Known for her artistic talents and diplomatic skills.' },
+    '明远': { role: 'Strategist & Advisor', icon: '⚔️', desc: 'A visionary leader who could see far beyond the present. Trusted by emperors for strategic counsel and foresight.' },
+    '思远': { role: 'Philosopher & Thinker', icon: '🏔️', desc: 'A deep thinker who contemplated the meaning of life and the universe. Sought after for wisdom and guidance.' },
+    '知行': { role: 'Master Craftsman', icon: '🔨', desc: 'A skilled artisan who believed in learning by doing. Created beautiful works that stood the test of time.' }
+  };
+  
+  const identity = identities[name] || { role: 'Scholar & Poet', icon: '📜', desc: 'A respected intellectual who valued wisdom and artistic expression.' };
+  
+  const roleEl = document.getElementById('ancientIdentityRole');
+  const descEl = document.getElementById('ancientIdentityDesc');
+  const iconEl = document.querySelector('.ancient-identity-icon');
+  
+  if (roleEl) roleEl.textContent = identity.role;
+  if (descEl) descEl.textContent = identity.desc;
+  if (iconEl) iconEl.textContent = identity.icon;
+}
+
+function updateCompatibilityScore() {
+  // Calculate score based on answers (80-99 range, no 100%)
+  const baseScore = 80;
+  const answerCount = Object.keys(answers).filter(k => answers[k]).length;
+  const answerBonus = answerCount * 2;
+  const randomBonus = Math.floor(Math.random() * 8);
+  const score = Math.min(baseScore + answerBonus + randomBonus, 99);
+  
+  // Determine rating
+  let rating = 'Good Match';
+  if (score >= 90) rating = 'Excellent Match';
+  else if (score >= 85) rating = 'Very Good Match';
+  
+  // Determine traits based on answers
+  const traitsMap = {
+    'A': ['Leadership', 'Confidence', 'Integrity'],
+    'B': ['Creativity', 'Passion', 'Vision'],
+    'C': ['Wisdom', 'Balance', 'Harmony'],
+    'D': ['Strength', 'Courage', 'Determination']
+  };
+  
+  // Get traits from first 3 answers
+  const userTraits = [];
+  for (let i = 0; i < Math.min(3, answers.length); i++) {
+    const answer = answers[i];
+    if (answer && traitsMap[answer]) {
+      userTraits.push(...traitsMap[answer]);
+    }
+  }
+  // Take first 3 unique traits
+  const uniqueTraits = userTraits.slice(0, 3);
+  if (uniqueTraits.length < 3) {
+    uniqueTraits.push('Wisdom', 'Integrity', 'Vision');
+  }
+  
+  // Update UI
+  const scoreNumEl = document.getElementById('compatibilityScoreNumber');
+  const ratingEl = document.getElementById('compatibilityScoreRating');
+  const traitsEl = document.getElementById('compatibilityScoreTraits');
+  const circleFill = document.getElementById('compatibilityCircleFill');
+  
+  if (scoreNumEl) scoreNumEl.textContent = score + '%';
+  if (ratingEl) ratingEl.textContent = rating;
+  
+  // Update traits
+  if (traitsEl) {
+    traitsEl.innerHTML = uniqueTraits.slice(0, 3).map(trait => 
+      '<span class="compatibility-trait">' + trait + '</span>'
+    ).join('');
+  }
+  
+  // Animate circle
+  if (circleFill) {
+    const circumference = 377; // 2 * PI * 60
+    const offset = circumference - (score / 100) * circumference;
+    setTimeout(() => {
+      circleFill.style.strokeDashoffset = offset;
+    }, 300);
+  }
+  
+  // Update ancient identity
+  updateAncientIdentityPremium(score);
+}
+
+function updateAncientIdentityPremium(score) {
+  const roles = [
+    { role: 'Scholar', match: '95%', traits: ['Wisdom', 'Learning', 'Leadership', 'Respect'], story: 'If you had lived in ancient China, you would have been known as a respected scholar whose wisdom guided others through difficult times.' },
+    { role: 'Warrior', match: '92%', traits: ['Courage', 'Strength', 'Honor', 'Loyalty'], story: 'In ancient China, you would have been a fearless warrior, protecting your people with unwavering courage and honor.' },
+    { role: 'Strategist', match: '94%', traits: ['Intelligence', 'Vision', 'Patience', 'Wisdom'], story: 'Your strategic mind would have made you a trusted advisor to emperors, known for your brilliant tactical insights.' },
+    { role: 'Artist', match: '91%', traits: ['Creativity', 'Beauty', 'Expression', 'Grace'], story: 'You would have been celebrated as a master artist, creating works that captured the essence of Chinese culture and beauty.' },
+    { role: 'Explorer', match: '93%', traits: ['Curiosity', 'Adventure', 'Discovery', 'Bravery'], story: 'Your adventurous spirit would have led you to discover new lands and trade routes, connecting China with the world.' }
+  ];
+  
+  // Select role based on answers
+  const roleIndex = answers[0] ? (answers[0].charCodeAt(0) % roles.length) : 0;
+  const role = roles[roleIndex];
+  
+  const roleEl = document.getElementById('ancientIdentityPremiumRole');
+  const matchEl = document.getElementById('ancientIdentityPremiumMatch');
+  const traitsEl = document.getElementById('ancientIdentityPremiumTraits');
+  const storyEl = document.getElementById('ancientIdentityPremiumStory');
+  
+  if (roleEl) roleEl.textContent = role.role;
+  if (matchEl) matchEl.textContent = role.match + ' Match';
+  if (storyEl) storyEl.textContent = role.story;
+  
+  if (traitsEl) {
+    traitsEl.innerHTML = role.traits.map(trait => 
+      '<span class="ancient-identity-premium-trait">' + trait + '</span>'
+    ).join('');
+  }
+}
+
+// ============ LIVE NOTIFICATION POPUP ============
+(function() {
+  const notifications = [
+    { name: 'Sarah', city: 'New York', action: 'just unlocked their full report', initial: 'S', time: '2 minutes ago' },
+    { name: 'James', city: 'London', action: 'just got the name 浩然 (Hào Rán)', initial: 'J', time: '5 minutes ago' },
+    { name: 'Emma', city: 'Sydney', action: 'just purchased Premium package', initial: 'E', time: '8 minutes ago' },
+    { name: 'Michael', city: 'Toronto', action: 'just discovered their Chinese name', initial: 'M', time: '12 minutes ago' },
+    { name: 'Lisa', city: 'San Francisco', action: 'just shared their name on Instagram', initial: 'L', time: '15 minutes ago' },
+    { name: 'David', city: 'Singapore', action: 'just unlocked the Deluxe report', initial: 'D', time: '18 minutes ago' },
+    { name: 'Anna', city: 'Berlin', action: 'just got the name 雅慧 (Yǎ Huì)', initial: 'A', time: '22 minutes ago' },
+    { name: 'Carlos', city: 'Madrid', action: 'just completed the quiz', initial: 'C', time: '25 minutes ago' },
+  ];
+  
+  const notifEl = document.getElementById('liveNotification');
+  const avatarEl = document.getElementById('liveNotifAvatar');
+  const textEl = document.getElementById('liveNotifText');
+  const timeEl = document.getElementById('liveNotifTime');
+  
+  let lastIndex = -1;
+  
+  function showNotification() {
+    let idx;
+    do {
+      idx = Math.floor(Math.random() * notifications.length);
+    } while (idx === lastIndex);
+    lastIndex = idx;
+    
+    const n = notifications[idx];
+    if (avatarEl) avatarEl.textContent = n.initial;
+    if (textEl) textEl.innerHTML = '<strong>' + n.name + '</strong> from ' + n.city + ' ' + n.action;
+    if (timeEl) timeEl.textContent = n.time;
+    
+    if (notifEl) {
+      notifEl.classList.add('show');
+      
+      setTimeout(function() {
+        notifEl.classList.remove('show');
+      }, 5000);
+    }
+  }
+  
+  // Show first notification after 10 seconds, then every 20-40 seconds
+  setTimeout(function() {
+    showNotification();
+    setInterval(function() {
+      const delay = Math.floor(Math.random() * 20000) + 20000;
+      setTimeout(showNotification, delay);
+    }, 30000);
+  }, 10000);
+})();
+
 // ============ KPI DASHBOARD (Type 'AADON' to open, ESC to close) ============
 let kpiBuffer = '';
 document.addEventListener('keydown', function(e) {
@@ -3970,5 +6062,14 @@ function clearKPI() {
   #kpi-dashboard .kpi-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
+<!-- Live Notification Popup -->
+<div class="live-notification" id="liveNotification">
+  <div class="live-notification-avatar" id="liveNotifAvatar">S</div>
+  <div>
+    <div class="live-notification-text" id="liveNotifText"><strong>Sarah</strong> from New York just unlocked their report</div>
+    <div class="live-notification-time" id="liveNotifTime">2 minutes ago</div>
+  </div>
+</div>
+
 </body>
 </html>
