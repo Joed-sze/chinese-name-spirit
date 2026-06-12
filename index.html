@@ -3463,8 +3463,8 @@ body {
         <div class="story-preview-section">
           <div class="story-preview-title">📖 Your Name's Story</div>
           <div class="story-preview-content" id="storyPreviewContent">
-            <span class="story-visible">In ancient China, a scholar named <strong id="storyName">浩然</strong> was known for his unwavering integrity and vast knowledge. He believed that true wisdom comes from understanding both oneself and the world...</span>
-            <span class="story-blur"> His name became a symbol of moral courage and intellectual depth, passed down through generations as an inspiration for those who seek to make a meaningful impact on the world...</span>
+            <span class="story-visible" id="storyVisibleText">In ancient China, a scholar named <strong id="storyName">浩然</strong> was known for his unwavering integrity and vast knowledge. He believed that true wisdom comes from understanding both oneself and the world...</span>
+            <span class="story-blur" id="storyBlurText"> His name became a symbol of moral courage and intellectual depth, passed down through generations as an inspiration for those who seek to make a meaningful impact on the world...</span>
           </div>
           <button class="story-preview-btn" onclick="showPage('page-payment')">🔓 Unlock Full Story</button>
         </div>
@@ -5016,9 +5016,153 @@ function generateName(excludeName) {
   return { name: finalName, phoneticMatched: phoneticMatched, matchedName: matchedName };
 }
 
+// ============ PERSONALIZED CONTENT GENERATOR ============
+function generatePersonalizedContent(name, answers) {
+  // Extract key info from answers
+  const gender = answers[1]; // A=Male, B=Female
+  const sound = answers[2]; // A=soft, B=bold, C=neutral
+  const element = answers[3]; // A=mountain, B=sun, C=wind
+  const profession = answers[4]; // A=tech, B=finance, C=creative, D=education, E=business
+  const personality = answers[5]; // A=calm, B=energetic, C=creative, D=ambitious
+  const lifeValue = answers[6]; // A=harmony, B=growth, C=freedom, D=family
+  
+  // Parse name meaning for keywords
+  const meaningText = name.meaning || '';
+  const blessingText = name.blessing || '';
+  
+  // Extract Chinese character meanings (simplified approach)
+  const nameChars = name.name || '';
+  
+  // ===== ANCIENT IDENTITY GENERATION =====
+  const identities = {
+    M: {
+      mountain: ['Scholar', 'Mountain Hermit', 'Imperial Advisor', 'Poet-Warrior', 'Philosopher'],
+      sun: ['Imperial Scholar', 'Sun Guardian', 'Royal Astronomer', 'Golden General', 'Radiant Sage'],
+      wind: ['Wandering Poet', 'Wind Rider', 'Free Spirit', 'Traveling Sage', 'Sky Watcher']
+    },
+    F: {
+      mountain: ['Noble Lady', 'Mountain Muse', 'Jade Scholar', 'Bamboo Princess', 'Garden Poet'],
+      sun: ['Sun Maiden', 'Imperial Consort', 'Golden Weaver', 'Radiant Healer', 'Star Gazer'],
+      wind: ['Wind Dancer', 'Free Spirit', 'Cloud Weaver', 'Butterfly Dreamer', 'Willow Maiden']
+    }
+  };
+  
+  const genderKey = gender === 'B' ? 'F' : 'M';
+  const elementKey = element === 'A' ? 'mountain' : element === 'B' ? 'sun' : 'wind';
+  const identityPool = identities[genderKey][elementKey];
+  const ancientIdentity = identityPool[Math.floor(Math.random() * identityPool.length)];
+  
+  // ===== STORY GENERATION =====
+  const storyTemplates = [
+    `In ancient China, a ${ancientIdentity.toLowerCase()} named ${nameChars} was known for ${meaningText.split('，')[0].split('寓意')[0] || 'their remarkable wisdom'}. Legends say that during the Tang Dynasty, ${gender === 'B' ? 'she' : 'he'} would ${element === 'A' ? 'meditate by mountain streams, finding inspiration in the flowing water' : element === 'B' ? 'greet each sunrise with poetry, capturing the golden light in verse' : 'wander through bamboo forests, composing songs that echoed with the wind'}. ${gender === 'B' ? 'Her' : 'His'} name became synonymous with ${meaningText.includes('智慧') ? 'wisdom' : meaningText.includes('勇气') ? 'courage' : meaningText.includes('美') ? 'beauty' : 'integrity'}, and scholars would invoke ${nameChars} when seeking ${lifeValue === 'A' ? 'inner peace' : lifeValue === 'B' ? 'knowledge' : lifeValue === 'C' ? 'freedom' : 'family harmony'}. Even today, ${gender === 'B' ? 'her' : 'his'} spirit lives on in those who bear this name — ${blessingText || 'may you carry this legacy forward'}.`,
+    
+    `The name ${nameChars} first appeared in the Song Dynasty, belonging to a renowned ${ancientIdentity.toLowerCase()} who ${profession === 'A' ? 'invented early astronomical instruments' : profession === 'B' ? 'managed the imperial treasury with unwavering integrity' : profession === 'C' ? 'painted murals that still adorn palace walls' : profession === 'D' ? 'taught the children of emperors and commoners alike' : 'built trade routes connecting distant lands'}. ${gender === 'B' ? 'She' : 'He'} was known for ${meaningText.split('，')[0] || 'a heart full of compassion'}, and ${gender === 'B' ? 'her' : 'his'} ${sound === 'A' ? 'gentle voice could calm storms' : sound === 'B' ? 'bold declarations moved mountains' : 'balanced wisdom guided generations'}. The ancient text "Book of Names" records that ${nameChars} would often say: "${blessingText || 'True strength comes from within'}". This wisdom has been passed down through centuries, and now it belongs to you.`,
+    
+    `During the Ming Dynasty, ${nameChars} was a ${ancientIdentity.toLowerCase()} who walked the path of ${lifeValue === 'A' ? 'harmony, seeking balance in all things' : lifeValue === 'B' ? 'knowledge, never ceasing to learn' : lifeValue === 'C' ? 'freedom, refusing to be bound by convention' : 'love, putting family above all else'}. ${gender === 'B' ? 'She' : 'He'} lived in a ${element === 'A' ? 'mountain retreat surrounded by ancient pines' : element === 'B' ? 'sunlit pavilion overlooking the imperial city' : 'bamboo grove where the wind sang eternal melodies'}, and ${gender === 'B' ? 'her' : 'his'} ${meaningText.split('寓意')[1]?.split('，')[0] || 'wisdom'} attracted students from across the empire. One famous story tells of how ${nameChars} once ${personality === 'A' ? 'sat in meditation for three days to solve a philosophical puzzle' : personality === 'B' ? 'traveled alone across treacherous mountains to deliver a message of peace' : personality === 'C' ? 'created a masterpiece in a single night of inspiration' : 'climbed to the highest peak to plant a flag of ambition'}. The name ${nameChars} became a symbol of ${meaningText.includes('坚定') ? 'unwavering resolve' : meaningText.includes('温柔') ? 'gentle strength' : meaningText.includes('智慧') ? 'profound wisdom' : 'noble character'} — a legacy you now carry.`
+  ];
+  
+  const story = storyTemplates[Math.floor(Math.random() * storyTemplates.length)];
+  
+  // ===== CHINESE IMPRESSION GENERATION =====
+  const impressionTraits = {
+    A: { // Calm
+      primary: ['Thoughtful', 'Wise', 'Patient', 'Deep Thinker'],
+      secondary: 'Chinese people would see you as someone who thinks before speaking. Your calm demeanor suggests wisdom beyond your years, and they would trust your judgment in important matters.',
+      detail: 'In Chinese culture, still waters run deep. Your reserved nature is respected as a sign of inner strength and maturity.'
+    },
+    B: { // Energetic
+      primary: ['Dynamic', 'Passionate', 'Adventurous', 'Charismatic'],
+      secondary: 'Chinese people would be drawn to your vibrant energy. They would see you as a natural leader who brings excitement to any room.',
+      detail: 'Your enthusiasm reminds them of the "yang" energy — active, bright, and full of life. You would be seen as someone who creates opportunities.'
+    },
+    C: { // Creative
+      primary: ['Artistic', 'Imaginative', 'Unique', 'Expressive'],
+      secondary: 'Chinese people would admire your creative spirit. They would see you as someone who sees the world differently and brings beauty to everyday life.',
+      detail: 'Your artistic nature aligns with the Chinese ideal of "文人" (literati) — someone who cultivates beauty in all aspects of life.'
+    },
+    D: { // Ambitious
+      primary: ['Driven', 'Focused', 'Determined', 'Visionary'],
+      secondary: 'Chinese people would respect your ambition. They would see you as someone who sets high goals and works tirelessly to achieve them.',
+      detail: 'Your drive embodies the Chinese value of "奋斗" (striving). You would be admired for your persistence and dedication.'
+    }
+  };
+  
+  const trait = impressionTraits[personality] || impressionTraits.A;
+  
+  // ===== LUCKY ELEMENTS GENERATION =====
+  const luckyElements = {
+    mountain: {
+      element: 'Earth (土)',
+      elementEn: 'Earth',
+      numbers: ['2', '5', '8'],
+      colors: ['Yellow', 'Brown'],
+      colorsCn: '黄色、棕色',
+      directions: ['Center', 'Southwest', 'Northeast'],
+      directionsCn: '中央、西南方、东北方',
+      description: 'Like the steadfast mountains, you draw strength from stability and grounding. Earth element brings prosperity through persistence.'
+    },
+    sun: {
+      element: 'Fire (火)',
+      elementEn: 'Fire',
+      numbers: ['3', '9'],
+      colors: ['Red', 'Orange', 'Purple'],
+      colorsCn: '红色、橙色、紫色',
+      directions: ['South'],
+      directionsCn: '南方',
+      description: 'Like the radiant sun, you illuminate everything around you. Fire element brings passion, recognition, and transformation.'
+    },
+    wind: {
+      element: 'Wood (木)',
+      elementEn: 'Wood',
+      numbers: ['3', '8'],
+      colors: ['Green', 'Teal'],
+      colorsCn: '绿色、青色',
+      directions: ['East', 'Southeast'],
+      directionsCn: '东方、东南方',
+      description: 'Like the wind through bamboo, you bring change and growth. Wood element fuels creativity, expansion, and new beginnings.'
+    }
+  };
+  
+  const lucky = luckyElements[elementKey];
+  
+  // ===== CALLIGRAPHY STYLES =====
+  const calligraphyStyles = [
+    { name: 'Regular Script (楷书)', desc: 'The standard form of Chinese calligraphy, known for its clarity and balance. Perfect for official documents and certificates.', style: 'regular' },
+    { name: 'Running Script (行书)', desc: 'A semi-cursive style that flows gracefully between characters. Represents elegance and fluidity.', style: 'running' },
+    { name: 'Clerical Script (隶书)', desc: 'An ancient style with distinctive "silkworm head and swallow tail" strokes. Evokes history and tradition.', style: 'clerical' },
+    { name: 'Seal Script (篆书)', desc: 'The oldest form of Chinese writing, used in ancient seals and ceremonial inscriptions. Symbolizes timeless wisdom.', style: 'seal' }
+  ];
+  
+  // ===== CAREER ADVICE =====
+  const careerAdvice = {
+    A: `In the Technology field, your name ${nameChars} suggests you have the ${meaningText.includes('思') || meaningText.includes('智') ? 'intellectual depth' : 'creative insight'} to solve complex problems. Your ${sound === 'A' ? 'patient approach' : sound === 'B' ? 'bold vision' : 'balanced perspective'} will help you navigate the ever-changing tech landscape. Consider focusing on ${element === 'A' ? 'infrastructure and systems architecture' : element === 'B' ? 'AI and innovation' : 'user experience and design'} where your natural strengths shine.`,
+    
+    B: `In Finance, your name ${nameChars} carries the energy of ${meaningText.includes('稳') || meaningText.includes('定') ? 'stability and trust' : 'growth and prosperity'}. Your ${personality === 'A' ? 'analytical mind' : personality === 'D' ? 'ambitious drive' : 'creative approach'} sets you apart. You would excel in ${element === 'A' ? 'wealth management and long-term investments' : element === 'B' ? 'venture capital and emerging markets' : 'fintech and innovative banking solutions'}.`,
+    
+    C: `In the Creative Arts, your name ${nameChars} reflects ${meaningText.includes('美') || meaningText.includes('艺') ? 'artistic beauty' : 'unique vision'}. Your ${sound === 'A' ? 'sensitive soul' : sound === 'B' ? 'powerful expression' : 'versatile talent'} allows you to create work that resonates deeply. Explore ${element === 'A' ? 'traditional arts and cultural preservation' : element === 'B' ? 'digital media and visual storytelling' : 'performance and expressive arts'}.`,
+    
+    D: `In Education, your name ${nameChars} embodies ${meaningText.includes('传') || meaningText.includes('授') ? 'the spirit of transmission' : 'wisdom and guidance'}. Your ${lifeValue === 'B' ? 'love of learning' : lifeValue === 'A' ? 'balanced approach' : 'passionate spirit'} makes you a natural mentor. Consider ${element === 'A' ? 'classical studies and philosophy' : element === 'B' ? 'science and discovery' : 'language and cross-cultural communication'}.`,
+    
+    E: `In Business, your name ${nameChars} suggests ${meaningText.includes('远') || meaningText.includes('宏') ? 'visionary leadership' : 'practical wisdom'}. Your ${personality === 'D' ? 'determination' : personality === 'B' ? 'enthusiasm' : 'thoughtful approach'} will help you build lasting enterprises. Focus on ${element === 'A' ? 'sustainable and community-based business' : element === 'B' ? 'innovation and market disruption' : 'global trade and cultural exchange'}.`
+  };
+  
+  return {
+    ancientIdentity,
+    story,
+    impression: trait,
+    lucky,
+    calligraphyStyles,
+    careerAdvice: careerAdvice[profession] || careerAdvice.E
+  };
+}
+
 // ============ SHOW RESULT ============
 function showResult(result) {
   const { name, phoneticMatched, matchedName } = result;
+  
+  // Generate personalized content
+  const personalized = generatePersonalizedContent(name, answers);
+  window.currentPersonalizedContent = personalized;
 
   document.getElementById('resultName').textContent = name.name;
   document.getElementById('resultMeaning').textContent = name.meaning;
@@ -5282,52 +5426,56 @@ function updateReportLanguage(plan) {
 }
 
 function updateDeluxeReport() {
-  // Cultural Significance - add Chinese
+  // Get personalized content
+  const personalized = window.currentPersonalizedContent;
+  if (!personalized) return;
+  
+  // Cultural Significance - add Chinese + personalized story
   const culturalEl = document.getElementById('fullreportCultural');
   if (culturalEl) {
     culturalEl.innerHTML = `
-      <p style="margin-bottom: 12px;">Your name draws from ancient Chinese literary traditions, combining characters that have been cherished for millennia.</p>
-      <p style="margin-bottom: 12px; color: var(--text-light); font-style: italic;">您的名字源自中国古典文学传统，融合了千年来文人雅士所珍视的意象。</p>
-      <p>Each character carries layers of meaning from classical poetry, philosophy, and nature imagery.</p>
-      <p style="color: var(--text-light); font-style: italic;">每个汉字都承载着来自古典诗词、哲学和自然意象的多重含义。</p>
+      <p style="margin-bottom: 12px;">${personalized.story}</p>
+      <p style="margin-bottom: 12px; color: var(--text-light); font-style: italic;">您的名字源自中国古典文学传统，融合了千年来文人雅士所珍视的意象。每个汉字都承载着来自古典诗词、哲学和自然意象的多重含义。</p>
+      <p>Your name draws from ancient Chinese literary traditions, combining characters that have been cherished for millennia. Each character carries layers of meaning from classical poetry, philosophy, and nature imagery.</p>
     `;
   }
   
-  // Personality Match - add Chinese
+  // Personality Match - add Chinese + personalized impression
   const personalityEl = document.getElementById('fullreportPersonality');
   if (personalityEl) {
-    const traits = document.getElementById('personalityTraits').textContent;
+    const traits = personalized.impression.primary.join(', ');
     const sound = document.getElementById('soundPreference').textContent;
     const element = document.getElementById('elementPreference').textContent;
     personalityEl.innerHTML = `
       <p>Based on your quiz responses, your name reflects someone who values <strong>${traits}</strong>.</p>
       <p style="color: var(--text-light); font-style: italic;">根据您的问卷回答，您的名字反映了一位重视<strong>${traits}</strong>的人。</p>
+      <p style="margin-top: 8px;">${personalized.impression.secondary}</p>
+      <p style="color: var(--text-light); font-style: italic;">${personalized.impression.detail}</p>
       <p style="margin-top: 8px;">The character selection aligns with your preference for <strong>${sound}</strong> tones and <strong>${element}</strong>.</p>
       <p style="color: var(--text-light); font-style: italic;">名字选择契合您对<strong>${sound}</strong>音韵和<strong>${element}</strong>的偏好。</p>
     `;
   }
   
-  // Career Alignment - add Chinese
+  // Career Alignment - add Chinese + personalized career advice
   const careerEl = document.getElementById('fullreportCareer');
   if (careerEl) {
     const field = document.getElementById('careerField').textContent;
     careerEl.innerHTML = `
-      <p>Your name carries energies that support success in <strong>${field}</strong>.</p>
-      <p style="color: var(--text-light); font-style: italic;">您的名字蕴含着支持您在<strong>${field}</strong>领域取得成功的能量。</p>
-      <p style="margin-top: 8px;">The characters emphasize determination, creativity, and insight.</p>
-      <p style="color: var(--text-light); font-style: italic;">所选汉字强调决断力、创造力和洞察力——这些品质将在您的职业道路上助您一臂之力。</p>
+      <p>${personalized.careerAdvice}</p>
+      <p style="color: var(--text-light); font-style: italic;">您的名字蕴含着支持您在<strong>${field}</strong>领域取得成功的能量。所选汉字强调决断力、创造力和洞察力——这些品质将在您的职业道路上助您一臂之力。</p>
+      <p style="margin-top: 8px;">Your name carries energies that support success in <strong>${field}</strong>. The characters emphasize determination, creativity, and insight.</p>
     `;
   }
   
-  // Lucky Elements - add Chinese
+  // Lucky Elements - add Chinese + personalized lucky elements
   const luckyEl = document.getElementById('fullreportLucky');
   if (luckyEl) {
     luckyEl.innerHTML = `
-      <p>Your name is harmonized with the <strong>Wood (木)</strong> element, bringing balance and growth.</p>
-      <p style="color: var(--text-light); font-style: italic;">您的名字与<strong>木元素</strong>相调和，带来平衡与成长。</p>
-      <p style="margin-top: 8px;">Lucky numbers: <strong>3, 8</strong> | Lucky colors: <strong>Green, Brown (绿色、棕色)</strong></p>
-      <p>Lucky directions: <strong>East, Southeast (东方、东南方)</strong></p>
-      <p style="color: var(--text-light); font-style: italic;">幸运数字：<strong>3、8</strong> | 幸运颜色：<strong>绿色、棕色</strong> | 幸运方位：<strong>东方、东南方</strong></p>
+      <p>${personalized.lucky.description}</p>
+      <p style="color: var(--text-light); font-style: italic;">您的名字与<strong>${personalized.lucky.element}</strong>相调和，带来平衡与成长。</p>
+      <p style="margin-top: 8px;">Lucky numbers: <strong>${personalized.lucky.numbers.join(', ')}</strong> | Lucky colors: <strong>${personalized.lucky.colors.join(', ')} (${personalized.lucky.colorsCn})</strong></p>
+      <p>Lucky directions: <strong>${personalized.lucky.directions.join(', ')} (${personalized.lucky.directionsCn})</strong></p>
+      <p style="color: var(--text-light); font-style: italic;">幸运数字：<strong>${personalized.lucky.numbers.join('、')}</strong> | 幸运颜色：<strong>${personalized.lucky.colorsCn}</strong> | 幸运方位：<strong>${personalized.lucky.directionsCn}</strong></p>
     `;
   }
   
@@ -5808,9 +5956,30 @@ function updatePreviewContent(result) {
   const name = result.name.name;
   const meaning = result.name.meaning;
   
-  // Update story preview
+  // Generate or retrieve personalized content
+  let personalized;
+  if (window.currentPersonalizedContent) {
+    personalized = window.currentPersonalizedContent;
+  } else {
+    personalized = generatePersonalizedContent(result.name, answers);
+    window.currentPersonalizedContent = personalized;
+  }
+  
+  // Update story preview with personalized story
   const storyName = document.getElementById('storyName');
+  const storyVisibleText = document.getElementById('storyVisibleText');
+  const storyBlurText = document.getElementById('storyBlurText');
   if (storyName) storyName.textContent = name;
+  if (storyVisibleText) {
+    // Show first 120 chars of story + "..."
+    const shortStory = personalized.story.substring(0, 120) + '...';
+    storyVisibleText.innerHTML = shortStory;
+  }
+  if (storyBlurText) {
+    // Show remaining story blurred
+    const remainingStory = personalized.story.substring(120, 300) + '...';
+    storyBlurText.textContent = ' ' + remainingStory;
+  }
   
   // Update calligraphy
   const calligraphyRegular = document.getElementById('calligraphyRegular');
@@ -5828,31 +5997,76 @@ function updatePreviewContent(result) {
   if (certPinyin) certPinyin.textContent = '(' + (result.name.pinyin || getPinyin(name)) + ')';
   if (certMeaning) certMeaning.textContent = meaning.split('，')[0];
   
-  // Update ancient identity based on name
-  updateAncientIdentity(name);
+  // Update ancient identity with personalized content
+  updateAncientIdentity(name, personalized);
+  
+  // Update Chinese impression with personalized content
+  updateChineseImpression(personalized);
+  
+  // Update lucky elements with personalized content
+  updateLuckyElements(personalized);
   
   // Update compatibility score
   updateCompatibilityScore();
 }
 
-function updateAncientIdentity(name) {
-  const identities = {
-    '浩然': { role: 'Scholar & Poet', icon: '📜', desc: 'A respected intellectual who valued wisdom and artistic expression. Known for composing beautiful poetry and advising rulers with integrity.' },
-    '雅慧': { role: 'Noble Lady', icon: '🌸', desc: 'A graceful and intelligent woman admired for her wisdom and elegance. Known for her artistic talents and diplomatic skills.' },
-    '明远': { role: 'Strategist & Advisor', icon: '⚔️', desc: 'A visionary leader who could see far beyond the present. Trusted by emperors for strategic counsel and foresight.' },
-    '思远': { role: 'Philosopher & Thinker', icon: '🏔️', desc: 'A deep thinker who contemplated the meaning of life and the universe. Sought after for wisdom and guidance.' },
-    '知行': { role: 'Master Craftsman', icon: '🔨', desc: 'A skilled artisan who believed in learning by doing. Created beautiful works that stood the test of time.' }
-  };
-  
-  const identity = identities[name] || { role: 'Scholar & Poet', icon: '📜', desc: 'A respected intellectual who valued wisdom and artistic expression.' };
-  
+function updateAncientIdentity(name, personalized) {
   const roleEl = document.getElementById('ancientIdentityRole');
   const descEl = document.getElementById('ancientIdentityDesc');
   const iconEl = document.querySelector('.ancient-identity-icon');
   
-  if (roleEl) roleEl.textContent = identity.role;
-  if (descEl) descEl.textContent = identity.desc;
-  if (iconEl) iconEl.textContent = identity.icon;
+  // Use personalized ancient identity
+  const identityIcons = {
+    'Scholar': '📜', 'Mountain Hermit': '🏔️', 'Imperial Advisor': '👑', 'Poet-Warrior': '⚔️', 'Philosopher': '🤔',
+    'Noble Lady': '🌸', 'Mountain Muse': '🎨', 'Jade Scholar': '💎', 'Bamboo Princess': '🎋', 'Garden Poet': '🌺',
+    'Sun Guardian': '☀️', 'Royal Astronomer': '🔭', 'Golden General': '🏆', 'Radiant Sage': '✨',
+    'Wandering Poet': '📖', 'Wind Rider': '🌪️', 'Free Spirit': '🦋', 'Traveling Sage': '🧭', 'Sky Watcher': '🔭',
+    'Sun Maiden': '🌅', 'Imperial Consort': '👸', 'Golden Weaver': '🧵', 'Radiant Healer': '💫', 'Star Gazer': '⭐',
+    'Wind Dancer': '💃', 'Cloud Weaver': '☁️', 'Butterfly Dreamer': '🦋', 'Willow Maiden': '🌿'
+  };
+  
+  if (roleEl) roleEl.textContent = personalized.ancientIdentity;
+  if (descEl) {
+    // Generate unique description based on identity and name meaning
+    const desc = `As a ${personalized.ancientIdentity}, you would have ${name.substring(0, 2)} as your mark of distinction. ${personalized.story.substring(0, 200)}...`;
+    descEl.textContent = desc;
+  }
+  if (iconEl) iconEl.textContent = identityIcons[personalized.ancientIdentity] || '📜';
+}
+
+function updateChineseImpression(personalized) {
+  // Update impression cards
+  const impressionCards = document.querySelectorAll('.impression-card');
+  if (impressionCards.length >= 4) {
+    const traits = personalized.impression.primary;
+    const descriptions = [
+      personalized.impression.secondary,
+      personalized.impression.detail,
+      'Your name suggests ' + traits[0].toLowerCase() + ' and ' + traits[1].toLowerCase() + ' qualities that Chinese people deeply admire.',
+      'In Chinese culture, these traits are associated with ' + (answers[3] === 'A' ? 'earth wisdom' : answers[3] === 'B' ? 'solar brilliance' : 'wind-born creativity') + '.'
+    ];
+    
+    impressionCards.forEach((card, index) => {
+      const titleEl = card.querySelector('.impression-card-title');
+      const descEl = card.querySelector('.impression-card-desc');
+      if (titleEl && traits[index]) titleEl.textContent = traits[index];
+      if (descEl && descriptions[index]) descEl.textContent = descriptions[index];
+    });
+  }
+}
+
+function updateLuckyElements(personalized) {
+  const luckyEl = document.getElementById('luckyElement');
+  const luckyDesc = document.getElementById('luckyElementDesc');
+  const luckyNumbers = document.getElementById('luckyNumbers');
+  const luckyColors = document.getElementById('luckyColors');
+  const luckyDirections = document.getElementById('luckyDirections');
+  
+  if (luckyEl) luckyEl.textContent = personalized.lucky.element;
+  if (luckyDesc) luckyDesc.textContent = personalized.lucky.description;
+  if (luckyNumbers) luckyNumbers.textContent = personalized.lucky.numbers.join(', ');
+  if (luckyColors) luckyColors.textContent = personalized.lucky.colors.join(', ');
+  if (luckyDirections) luckyDirections.textContent = personalized.lucky.directions.join(', ');
 }
 
 function updateCompatibilityScore() {
@@ -5920,31 +6134,45 @@ function updateCompatibilityScore() {
 }
 
 function updateAncientIdentityPremium(score) {
-  const roles = [
-    { role: 'Scholar', match: '95%', traits: ['Wisdom', 'Learning', 'Leadership', 'Respect'], story: 'If you had lived in ancient China, you would have been known as a respected scholar whose wisdom guided others through difficult times.' },
-    { role: 'Warrior', match: '92%', traits: ['Courage', 'Strength', 'Honor', 'Loyalty'], story: 'In ancient China, you would have been a fearless warrior, protecting your people with unwavering courage and honor.' },
-    { role: 'Strategist', match: '94%', traits: ['Intelligence', 'Vision', 'Patience', 'Wisdom'], story: 'Your strategic mind would have made you a trusted advisor to emperors, known for your brilliant tactical insights.' },
-    { role: 'Artist', match: '91%', traits: ['Creativity', 'Beauty', 'Expression', 'Grace'], story: 'You would have been celebrated as a master artist, creating works that captured the essence of Chinese culture and beauty.' },
-    { role: 'Explorer', match: '93%', traits: ['Curiosity', 'Adventure', 'Discovery', 'Bravery'], story: 'Your adventurous spirit would have led you to discover new lands and trade routes, connecting China with the world.' }
-  ];
+  // Use personalized content if available
+  const personalized = window.currentPersonalizedContent;
   
-  // Select role based on answers
-  const roleIndex = answers[0] ? (answers[0].charCodeAt(0) % roles.length) : 0;
-  const role = roles[roleIndex];
-  
-  const roleEl = document.getElementById('ancientIdentityPremiumRole');
-  const matchEl = document.getElementById('ancientIdentityPremiumMatch');
-  const traitsEl = document.getElementById('ancientIdentityPremiumTraits');
-  const storyEl = document.getElementById('ancientIdentityPremiumStory');
-  
-  if (roleEl) roleEl.textContent = role.role;
-  if (matchEl) matchEl.textContent = role.match + ' Match';
-  if (storyEl) storyEl.textContent = role.story;
-  
-  if (traitsEl) {
-    traitsEl.innerHTML = role.traits.map(trait => 
-      '<span class="ancient-identity-premium-trait">' + trait + '</span>'
-    ).join('');
+  if (personalized) {
+    const roleEl = document.getElementById('ancientIdentityPremiumRole');
+    const matchEl = document.getElementById('ancientIdentityPremiumMatch');
+    const traitsEl = document.getElementById('ancientIdentityPremiumTraits');
+    const storyEl = document.getElementById('ancientIdentityPremiumStory');
+    
+    if (roleEl) roleEl.textContent = personalized.ancientIdentity;
+    if (matchEl) matchEl.textContent = score + '% Match';
+    if (storyEl) storyEl.textContent = personalized.story.substring(0, 300) + '...';
+    
+    if (traitsEl) {
+      traitsEl.innerHTML = personalized.impression.primary.map(trait => 
+        '<span class="ancient-identity-premium-trait">' + trait + '</span>'
+      ).join('');
+    }
+  } else {
+    // Fallback to default
+    const roles = [
+      { role: 'Scholar', match: '95%', traits: ['Wisdom', 'Learning', 'Leadership', 'Respect'], story: 'If you had lived in ancient China, you would have been known as a respected scholar whose wisdom guided others through difficult times.' }
+    ];
+    const role = roles[0];
+    
+    const roleEl = document.getElementById('ancientIdentityPremiumRole');
+    const matchEl = document.getElementById('ancientIdentityPremiumMatch');
+    const traitsEl = document.getElementById('ancientIdentityPremiumTraits');
+    const storyEl = document.getElementById('ancientIdentityPremiumStory');
+    
+    if (roleEl) roleEl.textContent = role.role;
+    if (matchEl) matchEl.textContent = role.match + ' Match';
+    if (storyEl) storyEl.textContent = role.story;
+    
+    if (traitsEl) {
+      traitsEl.innerHTML = role.traits.map(trait => 
+        '<span class="ancient-identity-premium-trait">' + trait + '</span>'
+      ).join('');
+    }
   }
 }
 
