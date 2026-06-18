@@ -1,9 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://joed-sze.github.io/chinese-name-spirit/</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-</urlset>
+# Chinese Name Spirit 
+
+> 一个关于中文名字寓意与文化内涵的展示项目
+
+##  项目简介
+
+本项目旨在探索与展示中文名字背后的文化、寓意以及“精气神”。通过简洁的网页界面，用户可以了解不同名字的深层含义及其承载的美好祝愿。
+
+##  功能特点
+
+- **名字解析**：展示特定中文名字的字面意思与引申义。
+- **文化溯源**：介绍名字中汉字的传统文化背景。
+- **简洁展示**：基于 HTML/CSS 构建的轻量级网页，易于访问。
+
+##  如何运行
+
+. 克隆或下载本仓库到你的本地电脑。
+. 在项目文件夹中找到 `index.html` 文件。
+. 双击使用任意现代浏览器（如 Chrome, Edge, Safari）打开即可预览。
+
+## ️ 技术栈
+
+- HTML5
+- CSS3
+- (如果你用了 JavaScript，可以在这里加上) JavaScript
+
+##  更新日志
+
+- **v1.0**: 初始化项目，上传基础页面结构。
+
+##  许可证
+
+本项目基于 MIT 协议开源。
