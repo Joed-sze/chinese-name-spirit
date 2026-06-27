@@ -3361,11 +3361,11 @@ body {
       </div>
       <p class="progress-text">Step 7 of 7</p>
       <div class="encouragement-msg">Final step! You're amazing! 🎉</div>
-      <h2 class="question-text">What is your current name? (Optional)</h2>
-      <div class="question-tooltip">We'll try to match the sound or meaning of your current name</div>
+      <h2 class="question-text">What is your current name?</h2>
+      <div class="question-tooltip">We'll match the sound of your name to find the best Chinese name</div>
       <div class="text-input-group">
-        <input type="text" class="text-input" id="currentNameInput" placeholder="Your name" autocomplete="off" style="width: 200px; font-size: 20px; text-transform: none;" oninput="document.getElementById('nextBtn').disabled = false;" />
-        <p class="input-hint">Enter your English or Chinese name for phonetic matching (optional)</p>
+        <input type="text" class="text-input" id="currentNameInput" placeholder="Your name" autocomplete="off" style="width: 200px; font-size: 20px; text-transform: none;" oninput="document.getElementById('nextBtn').disabled = this.value.trim().length < 1;" />
+        <p class="input-hint">Enter your English or Chinese name for phonetic matching (required)</p>
       </div>
     </div>
 
@@ -3648,6 +3648,9 @@ body {
           </div>
         </div>
 
+        <div style="text-align:center;margin-bottom:16px;">
+          <a href="sample-report.html" target="_blank" style="display:inline-block;color:#8B4513;text-decoration:none;font-size:14px;font-weight:600;background:#f5f0e8;border:2px solid #c9b99a;border-radius:10px;padding:10px 20px;transition:all 0.3s ease;" onmouseover="this.style.background='#c9b99a';this.style.color='white';" onmouseout="this.style.background='#f5f0e8';this.style.color='#8B4513';">📄 See a sample report first →</a>
+        </div>
         <button class="btn-gold" onclick="KPI.update({paymentPageViews:1}); gtag('event','view_pricing'); showPage('page-payment')">🔓 Unlock Complete Identity Report</button>
         <p style="font-size: 12px; color: var(--text-light); margin-top: 12px;">Includes name story, cultural impression, personality match & certificate</p>
       </div>
@@ -3834,8 +3837,6 @@ body {
         <h2 class="fullreport-title">Your Complete Chinese Identity Report</h2>
         <p class="fullreport-subtitle">A comprehensive cultural profile based on your Chinese name</p>
 
-        <div class="result-name" id="fullreportName" style="font-size: 48px; margin-bottom: 24px;"></div>
-
         <!-- PDF Download Button -->
         <button class="btn-primary pdf-download-btn" onclick="downloadPDF()" style="margin-bottom: 24px; background: linear-gradient(135deg, #C41E3A, #8B4513);">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
@@ -3847,46 +3848,60 @@ body {
         </button>
 
         <div class="report-sections" id="reportContent">
-          <div class="report-section">
-            <div class="report-section-title">📜 Name Meaning</div>
-            <div class="report-section-content" id="fullreportMeaning"></div>
+          
+          <!-- Name Hero -->
+          <div class="report-section" style="text-align:center;">
+            <div class="section-label">your chinese name</div>
+            <div style="font-size:64px;font-weight:400;color:var(--primary);line-height:1;font-family:'Noto Serif SC',serif;margin:16px 0;" id="reportNameHero"></div>
+            <div style="font-size:22px;color:var(--text-light);letter-spacing:0.15em;font-family:'Playfair Display',serif;" id="reportPinyin"></div>
+            <div style="display:inline-block;background:rgba(76,175,80,0.12);border:0.5px solid rgba(76,175,80,0.3);color:#4CAF50;font-size:13px;padding:5px 16px;border-radius:10px;margin-top:12px;font-weight:500;" id="reportMeaningTag"></div>
           </div>
 
+          <!-- Char Breakdown -->
           <div class="report-section">
-            <div class="report-section-title">🎋 Cultural Significance</div>
-            <div class="report-section-content" id="fullreportCultural">
-              Your name draws from ancient Chinese literary traditions, combining characters that have been cherished for millennia. 
-              Each character carries layers of meaning from classical poetry, philosophy, and nature imagery that has inspired 
-              scholars and artists throughout Chinese history.
-            </div>
+            <div class="section-label">character meaning</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;" id="reportCharBreakdown"></div>
           </div>
 
+          <!-- Personality Match -->
           <div class="report-section">
-            <div class="report-section-title">🎯 Personality Match</div>
-            <div class="report-section-content" id="fullreportPersonality">
-              Based on your quiz responses, your name reflects someone who values <span id="personalityTraits">harmony, wisdom, and inner strength</span>. 
-              The character selection aligns with your preference for <span id="soundPreference">balanced</span> tones and 
-              <span id="elementPreference">natural elements</span>, suggesting a personality that appreciates both beauty and depth.
-            </div>
+            <div class="section-label">personality match</div>
+            <div id="reportScoreBars"></div>
+            <hr style="border:none;border-top:0.5px solid rgba(212,165,116,0.3);margin:16px 0;">
+            <div class="section-label" style="margin-bottom:10px;">traits your name carries</div>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;" id="reportTraits"></div>
           </div>
 
+          <!-- How Chinese People See You -->
           <div class="report-section">
-            <div class="report-section-title">💼 Career Alignment</div>
-            <div class="report-section-content" id="fullreportCareer">
-              Your name carries energies that support success in <span id="careerField">your chosen field</span>. 
-              The characters selected emphasize qualities like determination, creativity, and insight—traits that will 
-              serve you well in your professional journey.
-            </div>
+            <div class="section-label">how chinese people see you</div>
+            <div style="font-size:15px;color:var(--text-secondary);line-height:1.85;" id="reportImpression"></div>
           </div>
 
+          <!-- Ancient Identity -->
           <div class="report-section">
-            <div class="report-section-title">✨ Lucky Elements</div>
-            <div class="report-section-content" id="fullreportLucky">
-              Your name is harmonized with the <span id="luckyElement">Wood</span> element, bringing balance and growth. 
-              Lucky numbers: <strong>3, 8</strong> | Lucky colors: <strong>Green, Brown</strong> | 
-              Lucky directions: <strong>East, Southeast</strong>
-            </div>
+            <div class="section-label">ancient chinese identity</div>
+            <div style="display:flex;align-items:flex-start;gap:18px;" id="reportAncient"></div>
           </div>
+
+          <!-- Lucky Elements -->
+          <div class="report-section">
+            <div class="section-label">lucky elements</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;" id="reportLucky"></div>
+          </div>
+
+          <!-- Name Story -->
+          <div class="report-section">
+            <div class="section-label">name story</div>
+            <div style="font-size:15px;color:var(--text-secondary);line-height:1.85;" id="reportStory"></div>
+          </div>
+
+          <!-- Career Alignment -->
+          <div class="report-section">
+            <div class="section-label">career alignment</div>
+            <div style="font-size:15px;color:var(--text-secondary);line-height:1.85;" id="reportCareer"></div>
+          </div>
+
         </div>
 
         <!-- Share Section -->
@@ -4718,9 +4733,10 @@ function nextStep() {
   showPage('page-q' + currentQuestion);
   updatePrevButton();
 
-  // Q7 has no options to select - enable button immediately
+  // Q7 has no options to select - enable button only when name is entered
   if (currentQuestion === 7) {
-    document.getElementById('nextBtn').disabled = false;
+    const nameInput = document.getElementById('currentNameInput');
+    document.getElementById('nextBtn').disabled = !nameInput.value.trim();
     document.getElementById('nextBtn').textContent = 'Reveal My Chinese Name';
   } else {
     // Disable next button until option selected
@@ -4766,9 +4782,12 @@ function updatePrevButton() {
 function submitQuiz() {
   const currentNameInput = document.getElementById('currentNameInput');
   const currentName = currentNameInput.value.trim();
-  if (currentName) {
-    answers[7] = currentName; // Use index 7 for Q7 input, not 5
+  if (!currentName) {
+    currentNameInput.focus();
+    currentNameInput.style.borderColor = '#C41E3A';
+    return;
   }
+  answers[7] = currentName; // Use index 7 for Q7 input
 
   // Generate result first
   currentResult = generateName();
@@ -4969,11 +4988,11 @@ function generateName(excludeName) {
     // Q4: Profession (20%)
     if (name.profession === profession) score += 20;
 
-    // Q5: Phonetic matching bonus (10%)
+    // Q5: Phonetic matching bonus (25%) — important since name is required
     if (phoneticMatched && phoneticChars.length > 0) {
       for (const char of phoneticChars) {
         if (name.name.includes(char)) {
-          score += 10;
+          score += 25;
           break;
         }
       }
@@ -5163,6 +5182,35 @@ function generatePersonalizedContent(name, answers) {
   };
 }
 
+// ============ PINYIN HELPER ============
+function getPinyin(str) {
+  const map = {
+    "一": "yī", "业": "yè", "东": "dōng", "乘": "chéng", "书": "shū", "云": "yún", "从": "cóng", "佑": "yòu",
+    "信": "xìn", "光": "guāng", "兰": "lán", "凌": "líng", "化": "huà", "华": "huá", "厚": "hòu", "吟": "yín",
+    "启": "qǐ", "和": "hé", "啸": "xiào", "垠": "yín", "墨": "mò", "威": "wēi", "宁": "níng", "安": "ān",
+    "宗": "zōng", "容": "róng", "山": "shān", "岚": "lán", "岩": "yán", "岭": "lǐng", "岳": "yuè", "峰": "fēng",
+    "峻": "jùn", "巍": "wēi", "川": "chuān", "帆": "fān", "平": "píng", "幽": "yōu", "弦": "xián", "归": "guī",
+    "微": "wēi", "德": "dé", "心": "xīn", "思": "sī", "恒": "héng", "惊": "jīng", "意": "yì", "慎": "shèn",
+    "慧": "huì", "文": "wén", "无": "wú", "旭": "xù", "明": "míng", "星": "xīng", "昭": "zhāo", "昼": "zhòu",
+    "晓": "xiǎo", "晖": "huī", "晨": "chén", "晴": "qíng", "智": "zhì", "暖": "nuǎn", "曜": "yào", "曦": "xī",
+    "月": "yuè", "朴": "pǔ", "松": "sōng", "极": "jí", "枫": "fēng", "柔": "róu", "柳": "liǔ", "桐": "tóng",
+    "桦": "huà", "森": "sēn", "歌": "gē", "正": "zhèng", "沁": "qìn", "沉": "chén", "河": "hé", "泉": "quán",
+    "波": "bō", "泰": "tài", "泽": "zé", "流": "liú", "浩": "hào", "海": "hǎi", "润": "rùn", "涵": "hán",
+    "淡": "dàn", "深": "shēn", "清": "qīng", "渊": "yuān", "源": "yuán", "溪": "xī", "澈": "chè", "澜": "lán",
+    "瀚": "hàn", "灵": "líng", "炽": "chì", "烈": "liè", "烟": "yān", "然": "rán", "煌": "huáng", "煦": "xù",
+    "玉": "yù", "理": "lǐ", "琪": "qí", "琳": "lín", "瑶": "yáo", "璞": "pú", "白": "bái", "盛": "shèng",
+    "真": "zhēn", "眠": "mián", "知": "zhī", "石": "shí", "码": "mǎ", "破": "pò", "磐": "pán", "祥": "xiáng",
+    "程": "chéng", "稳": "wěn", "端": "duān", "竹": "zhú", "策": "cè", "简": "jiǎn", "算": "suàn", "素": "sù",
+    "絮": "xù", "翎": "líng", "翔": "xiáng", "翱": "áo", "翼": "yì", "耀": "yào", "舒": "shū", "舟": "zhōu",
+    "芷": "zhǐ", "苍": "cāng", "茧": "jiǎn", "荷": "hé", "虚": "xū", "蝶": "dié", "行": "xíng", "观": "guān",
+    "言": "yán", "语": "yǔ", "谷": "gǔ", "辰": "chén", "达": "dá", "远": "yuǎn", "逸": "yì", "铁": "tiě",
+    "铭": "míng", "锦": "jǐn", "阳": "yáng", "雅": "yǎ", "雨": "yǔ", "雪": "xuě", "雷": "léi", "霄": "xiāo",
+    "霆": "tíng", "霖": "lín", "霜": "shuāng", "霞": "xiá", "露": "lù", "静": "jìng", "音": "yīn", "韵": "yùn",
+    "风": "fēng", "飙": "biāo", "飞": "fēi", "鸣": "míng", "鸿": "hóng", "鹏": "péng", "默": "mò"
+  };
+  return str.split('').map(c => map[c] || c).join(' ');
+}
+
 // ============ SHOW RESULT ============
 function showResult(result) {
   const { name, phoneticMatched, matchedName } = result;
@@ -5175,19 +5223,108 @@ function showResult(result) {
   document.getElementById('resultMeaning').textContent = name.meaning;
   document.getElementById('resultBlessing').textContent = name.blessing;
 
-  // Update full report page
-  document.getElementById('fullreportName').textContent = name.name;
-  document.getElementById('fullreportMeaning').textContent = name.meaning;
-  
-  // Update personality traits based on answers
-  const soundMap = { A: 'harmony and grace', B: 'strength and determination', C: 'balance and clarity' };
-  const elementMap = { A: 'earth and nature', B: 'light and clarity', C: 'freedom and aspiration' };
-  const professionMap = { A: 'Technology', B: 'Finance', C: 'Creative Arts', D: 'Education', E: 'Business' };
-  
-  document.getElementById('personalityTraits').textContent = `${soundMap[answers[2]] || 'harmony and grace'}`;
-  document.getElementById('soundPreference').textContent = answers[2] === 'A' ? 'soft, gentle' : answers[2] === 'B' ? 'bold, powerful' : 'balanced, neutral';
-  document.getElementById('elementPreference').textContent = elementMap[answers[3]] || 'natural elements';
-  document.getElementById('careerField').textContent = professionMap[answers[4]] || 'your chosen field';
+  // Update full report page - NEW STYLE
+  document.getElementById('reportNameHero').textContent = name.name;
+  document.getElementById('reportPinyin').textContent = getPinyin(name.name);
+  document.getElementById('reportMeaningTag').textContent = name.meaning.split('，')[0] || name.meaning;
+
+  // Character breakdown
+  const chars = name.name.split('');
+  const charMeanings = name.meaning.split('，');
+  const charBreakdownHtml = chars.map((char, i) => {
+    const charMeaning = charMeanings[i] || charMeanings[0];
+    return `<div style="background:rgba(212,165,116,0.06);border:0.5px solid rgba(212,165,116,0.2);border-radius:12px;padding:16px;text-align:center;">
+      <div style="font-size:36px;color:var(--primary);font-family:'Noto Serif SC',serif;margin-bottom:8px;">${char}</div>
+      <div style="font-size:12px;color:var(--text-light);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">${getPinyin(char)}</div>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">${charMeaning.split('寓意')[0] || charMeaning}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('reportCharBreakdown').innerHTML = charBreakdownHtml;
+
+  // Score bars (deterministic based on name hash)
+  let hash = 0;
+  for (let i = 0; i < name.name.length; i++) {
+    hash = ((hash << 5) - hash) + name.name.charCodeAt(i);
+    hash |= 0;
+  }
+  const personalityScore = 85 + (Math.abs(hash) % 15);
+  const soundScore = 80 + (Math.abs(hash) % 18);
+  const culturalScore = 82 + (Math.abs(hash) % 16);
+  const scoreBarsHtml = `
+    <div style="margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-secondary);margin-bottom:4px;">
+        <span>Personality alignment</span><span>${personalityScore}%</span>
+      </div>
+      <div style="background:rgba(212,165,116,0.15);border-radius:6px;height:6px;overflow:hidden;">
+        <div style="width:${personalityScore}%;background:linear-gradient(90deg,#C41E3A,#D4A574);height:100%;border-radius:6px;"></div>
+      </div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-secondary);margin-bottom:4px;">
+        <span>Sound match</span><span>${soundScore}%</span>
+      </div>
+      <div style="background:rgba(212,165,116,0.15);border-radius:6px;height:6px;overflow:hidden;">
+        <div style="width:${soundScore}%;background:linear-gradient(90deg,#8B4513,#D4A574);height:100%;border-radius:6px;"></div>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-secondary);margin-bottom:4px;">
+        <span>Cultural fit</span><span>${culturalScore}%</span>
+      </div>
+      <div style="background:rgba(212,165,116,0.15);border-radius:6px;height:6px;overflow:hidden;">
+        <div style="width:${culturalScore}%;background:linear-gradient(90deg,#D4A574,#C41E3A);height:100%;border-radius:6px;"></div>
+      </div>
+    </div>
+  `;
+  document.getElementById('reportScoreBars').innerHTML = scoreBarsHtml;
+
+  // Traits
+  const traitsHtml = personalized.impression.primary.map(trait =>
+    `<span style="background:rgba(196,30,58,0.08);border:0.5px solid rgba(196,30,58,0.2);color:#C41E3A;font-size:12px;padding:5px 14px;border-radius:20px;font-weight:500;">${trait}</span>`
+  ).join('');
+  document.getElementById('reportTraits').innerHTML = traitsHtml;
+
+  // Impression
+  document.getElementById('reportImpression').innerHTML = `${personalized.impression.secondary} ${personalized.impression.detail}`;
+
+  // Ancient Identity
+  const genderKey = answers[1] === 'B' ? 'F' : 'M';
+  const elementKey = answers[3] === 'A' ? 'mountain' : answers[3] === 'B' ? 'sun' : 'wind';
+  const elementIcons = { mountain: '⛰️', sun: '☀️', wind: '🌬️' };
+  const elementNames = { mountain: 'Earth Element', sun: 'Fire Element', wind: 'Wood Element' };
+  document.getElementById('reportAncient').innerHTML = `
+    <div style="font-size:40px;line-height:1;">${elementIcons[elementKey]}</div>
+    <div>
+      <div style="font-size:17px;color:var(--primary);font-weight:600;margin-bottom:4px;">${personalized.ancientIdentity}</div>
+      <div style="font-size:13px;color:var(--text-light);">${elementNames[elementKey]} · ${genderKey === 'F' ? 'Feminine' : 'Masculine'} Archetype</div>
+    </div>
+  `;
+
+  // Lucky elements
+  const lucky = personalized.lucky;
+  document.getElementById('reportLucky').innerHTML = `
+    <div style="background:rgba(212,165,116,0.06);border:0.5px solid rgba(212,165,116,0.2);border-radius:12px;padding:14px;text-align:center;">
+      <div style="font-size:22px;margin-bottom:4px;">🔢</div>
+      <div style="font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:0.06em;">Numbers</div>
+      <div style="font-size:14px;color:var(--primary);font-weight:600;margin-top:2px;">${lucky.numbers.join(', ')}</div>
+    </div>
+    <div style="background:rgba(212,165,116,0.06);border:0.5px solid rgba(212,165,116,0.2);border-radius:12px;padding:14px;text-align:center;">
+      <div style="font-size:22px;margin-bottom:4px;">🎨</div>
+      <div style="font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:0.06em;">Colors</div>
+      <div style="font-size:14px;color:var(--primary);font-weight:600;margin-top:2px;">${lucky.colors.join(', ')}</div>
+    </div>
+    <div style="background:rgba(212,165,116,0.06);border:0.5px solid rgba(212,165,116,0.2);border-radius:12px;padding:14px;text-align:center;">
+      <div style="font-size:22px;margin-bottom:4px;">🧭</div>
+      <div style="font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:0.06em;">Directions</div>
+      <div style="font-size:14px;color:var(--primary);font-weight:600;margin-top:2px;">${lucky.directions.join(', ')}</div>
+    </div>
+  `;
+
+  // Story
+  document.getElementById('reportStory').textContent = personalized.story;
+
+  // Career
+  document.getElementById('reportCareer').textContent = personalized.careerAdvice;
 
   // Fun fact about phonetic matching
   const funFactEl = document.getElementById('resultFunFact');
