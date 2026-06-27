@@ -63,12 +63,6 @@
       "priceCurrency": "USD"
     }
   ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "ratingCount": "50000",
-    "bestRating": "5"
-  }
 }
 </script>
 
@@ -1276,13 +1270,6 @@ body {
   font-size: 14px;
   font-weight: 400;
   color: var(--text-light);
-}
-
-.pricing-original {
-  font-size: 14px;
-  color: #999;
-  text-decoration: line-through;
-  margin-bottom: 16px;
 }
 
 .pricing-features {
@@ -3063,10 +3050,6 @@ body {
       
       <!-- Trust Badges -->
       <div class="trust-badges">
-        <div class="trust-badge">
-          <span class="stars">★★★★★</span>
-          <span>4.9/5 Rating</span>
-        </div>
         <div class="trust-badge blog-badge">
           <span class="icon">📝</span>
           <span><a href="blog/index.html" class="blog-link">Blog</a></span>
@@ -3477,19 +3460,7 @@ body {
 
         <!-- Urgency CTA -->
         <div class="preview-urgency">
-          <div class="preview-urgency-text">✨ Unlock everything for just $1.99</div>
-          <div class="preview-urgency-sub">Limited time offer • 50-60% off regular price</div>
-        </div>
-
-        <!-- FOMO Timer -->
-        <div class="fomo-banner" id="fomoBanner">
-          <div class="fomo-text">🔥 Special Offer Ends In</div>
-          <div class="fomo-timer" id="fomoTimer">14:59</div>
-          <div class="fomo-sub">80% discount will expire when timer runs out</div>
-          <div class="fomo-viewers">
-            <div class="fomo-viewer-dot"></div>
-            <span id="fomoViewers">23 people are viewing this page right now</span>
-          </div>
+          <div class="preview-urgency-text">✨ Introductory price — just $1.99</div>
         </div>
 
         <!-- #2 AI Name Story Preview -->
@@ -3506,30 +3477,11 @@ body {
         <div class="traits-section">
           <div class="traits-title">👥 How Chinese People See You</div>
           <div class="traits-subtitle">Based on your name, here's what Chinese people would think of you</div>
-          <div class="traits-grid">
-            <div class="trait-card">
-              <div class="trait-icon">🧠</div>
-              <div class="trait-name">Smart & Wise</div>
-              <div class="trait-desc">Intelligent and thoughtful</div>
+          <div class="traits-preview" style="background:var(--surface-1);border:0.5px solid var(--border-accent);border-radius:var(--radius);padding:20px;text-align:center;">
+            <div style="font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">
+              Your full report includes a personalized first-impression analysis — how Chinese people would perceive you based on your specific name, not a generic template.
             </div>
-            <div class="trait-card">
-              <div class="trait-icon">🤝</div>
-              <div class="trait-name">Trustworthy</div>
-              <div class="trait-desc">Reliable and honest</div>
-            </div>
-            <div class="trait-card">
-              <div class="trait-icon">💪</div>
-              <div class="trait-name">Responsible</div>
-              <div class="trait-desc">Takes charge when needed</div>
-            </div>
-            <div class="trait-card">
-              <div class="trait-icon">✨</div>
-              <div class="trait-name">Charismatic</div>
-              <div class="trait-desc">Natural charm and grace</div>
-            </div>
-          </div>
-          <div class="traits-locked">
-            <div class="traits-locked-text">🔒 Unlock to see detailed personality analysis and how your name influences first impressions</div>
+            <div style="font-size:12px;color:var(--text-muted);">🔒 Unlock to see your detailed personality match</div>
           </div>
         </div>
 
@@ -3551,19 +3503,6 @@ body {
             </div>
           </div>
           <button class="story-preview-btn" onclick="showPage('page-payment')">🔓 Unlock All Styles</button>
-        </div>
-
-        <!-- #5 Name Match Score -->
-        <div class="match-score-section">
-          <div class="match-score-title">🎯 Name-Personality Match</div>
-          <div class="match-score-display">
-            <div class="match-score-circle">
-              <div class="match-score-number" id="matchScoreNumber">95%</div>
-            </div>
-          </div>
-          <div class="match-score-label">Your name matches your personality</div>
-          <div class="match-score-stars">★★★★★</div>
-          <div class="match-score-detail">Based on your answers, this name aligns perfectly with your traits</div>
         </div>
 
         <!-- Step 3: Ancient Chinese Identity - Priority #3 -->
@@ -3643,19 +3582,6 @@ body {
           <div class="user-cases-carousel" id="userCasesCarousel">
             <div class="user-case-card">
               <div class="user-case-header">
-                <div class="user-case-avatar">S</div>
-                <div class="user-case-info">
-                  <div class="user-case-name">Sarah M.</div>
-                  <div class="user-case-origin">New York, USA</div>
-                </div>
-              </div>
-              <div class="user-case-chinese-name">雅慧</div>
-              <div class="user-case-pinyin">Yǎ Huì</div>
-              <div class="user-case-quote">"My Chinese name means 'elegant wisdom'. My Chinese teacher said it perfectly captures my personality!"</div>
-              <div class="user-case-stars">★★★★★</div>
-            </div>
-            <div class="user-case-card">
-              <div class="user-case-header">
                 <div class="user-case-avatar">J</div>
                 <div class="user-case-info">
                   <div class="user-case-name">James K.</div>
@@ -3723,7 +3649,7 @@ body {
         </div>
 
         <button class="btn-gold" onclick="KPI.update({paymentPageViews:1}); gtag('event','view_pricing'); showPage('page-payment')">🔓 Unlock Complete Identity Report</button>
-        <p style="font-size: 12px; color: var(--text-light); margin-top: 12px;">Includes name story, cultural impression, personality match & certificate • 30-day guarantee</p>
+        <p style="font-size: 12px; color: var(--text-light); margin-top: 12px;">Includes name story, cultural impression, personality match & certificate</p>
       </div>
     </div>
 
@@ -3765,7 +3691,6 @@ body {
           <div class="generation-progress-bar"></div>
         </div>
         <div class="generation-reveal">
-          <div class="generation-reveal-name" id="genRevealName"></div>
           <div class="generation-reveal-pinyin" id="genRevealPinyin"></div>
           <div class="generation-reveal-meaning" id="genRevealMeaning"></div>
         </div>
@@ -3779,13 +3704,14 @@ body {
         <h2 class="payment-title">Choose Your Package</h2>
         <p class="payment-subtitle">Select the perfect option for your Chinese Name journey</p>
 
+
+
         <!-- Pricing Cards -->
         <div class="pricing-container">
           <div class="pricing-card" id="card-standard" onclick="selectPlan('standard')">
             <div class="pricing-name">Standard</div>
             <div class="pricing-lang">🇬🇧 English Identity Report</div>
             <div class="pricing-price">$1.99</div>
-            <div class="pricing-original">$4.99</div>
             <ul class="pricing-features">
               <li>✓ Complete Chinese Identity Report</li>
               <li>✓ Name meaning & cultural story</li>
@@ -3804,7 +3730,7 @@ body {
             <div class="pricing-name">Premium</div>
             <div class="pricing-lang">🇨🇳🇬🇧 Bilingual + Certificate</div>
             <div class="pricing-price">$3.99</div>
-            <div class="pricing-original">$9.99</div>
+            <div style="font-size:12px;color:#4CAF50;margin-top:4px;font-weight:500;">&#128077; Most popular choice</div>
             <ul class="pricing-features">
               <li>✓ Everything in Standard</li>
               <li>✓ <strong>Name Certificate (PNG)</strong></li>
@@ -3979,7 +3905,7 @@ body {
         <div class="referral-section">
           <div class="referral-title">Share & Earn Rewards</div>
           <div class="referral-desc">Share your unique code with friends. When they unlock their report, you both get a free expansion pack!</div>
-          <div class="referral-code" id="referralCode">CHINANAME2024</div>
+          <div class="referral-code" id="referralCode">CHINANAME2026</div>
           <button class="btn-secondary" onclick="copyReferral()">Copy Code</button>
         </div>
 
@@ -4015,6 +3941,8 @@ body {
       <a href="blog/index.html" style="color:#c9b99a;text-decoration:none;margin:0 12px;font-weight:bold;">Blog</a>
       <span style="color:#555;">|</span>
       <a href="about/index.html" style="color:#c9b99a;text-decoration:none;margin:0 12px;font-weight:bold;">About</a>
+      <span style="color:#555;">|</span>
+      <a href="refund-policy.html" style="color:#c9b99a;text-decoration:none;margin:0 12px;font-weight:bold;">Refund Policy</a>
     </p>
     <p style="color:#666;font-size:13px;">© 2026 The Spirit of Your Chinese Name. All rights reserved.</p>
   </div>
@@ -5937,32 +5865,6 @@ const observer = new MutationObserver((mutations) => {
 
 observer.observe(document.getElementById('page-payment'), { attributes: true, attributeFilter: ['class'] });
 
-// ============ FOMO TIMER ============
-(function() {
-  let totalSeconds = 15 * 60; // 15 minutes
-  const timerEl = document.getElementById('fomoTimer');
-  const viewersEl = document.getElementById('fomoViewers');
-  
-  function updateTimer() {
-    if (totalSeconds <= 0) {
-      timerEl.textContent = '00:00';
-      return;
-    }
-    totalSeconds--;
-    const mins = Math.floor(totalSeconds / 60);
-    const secs = totalSeconds % 60;
-    timerEl.textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
-  }
-  
-  setInterval(updateTimer, 1000);
-  
-  // Randomly update viewer count
-  setInterval(function() {
-    const viewers = Math.floor(Math.random() * 30) + 15;
-    viewersEl.textContent = viewers + ' people are viewing this page right now';
-  }, 8000);
-})();
-
 // ============ SHARE FUNCTIONS ============
 function getShareText() {
   const nameEl = document.getElementById('resultName');
@@ -6255,57 +6157,6 @@ function updateAncientIdentityPremium(score) {
   }
 }
 
-// ============ LIVE NOTIFICATION POPUP ============
-(function() {
-  const notifications = [
-    { name: 'Sarah', city: 'New York', action: 'just unlocked their full report', initial: 'S', time: '2 minutes ago' },
-    { name: 'James', city: 'London', action: 'just got the name 浩然 (Hào Rán)', initial: 'J', time: '5 minutes ago' },
-    { name: 'Emma', city: 'Sydney', action: 'just purchased Premium package', initial: 'E', time: '8 minutes ago' },
-    { name: 'Michael', city: 'Toronto', action: 'just discovered their Chinese name', initial: 'M', time: '12 minutes ago' },
-    { name: 'Lisa', city: 'San Francisco', action: 'just shared their name on Instagram', initial: 'L', time: '15 minutes ago' },
-    { name: 'David', city: 'Singapore', action: 'just unlocked the Deluxe report', initial: 'D', time: '18 minutes ago' },
-    { name: 'Anna', city: 'Berlin', action: 'just got the name 雅慧 (Yǎ Huì)', initial: 'A', time: '22 minutes ago' },
-    { name: 'Carlos', city: 'Madrid', action: 'just completed the quiz', initial: 'C', time: '25 minutes ago' },
-  ];
-  
-  const notifEl = document.getElementById('liveNotification');
-  const avatarEl = document.getElementById('liveNotifAvatar');
-  const textEl = document.getElementById('liveNotifText');
-  const timeEl = document.getElementById('liveNotifTime');
-  
-  let lastIndex = -1;
-  
-  function showNotification() {
-    let idx;
-    do {
-      idx = Math.floor(Math.random() * notifications.length);
-    } while (idx === lastIndex);
-    lastIndex = idx;
-    
-    const n = notifications[idx];
-    if (avatarEl) avatarEl.textContent = n.initial;
-    if (textEl) textEl.innerHTML = '<strong>' + n.name + '</strong> from ' + n.city + ' ' + n.action;
-    if (timeEl) timeEl.textContent = n.time;
-    
-    if (notifEl) {
-      notifEl.classList.add('show');
-      
-      setTimeout(function() {
-        notifEl.classList.remove('show');
-      }, 5000);
-    }
-  }
-  
-  // Show first notification after 10 seconds, then every 20-40 seconds
-  setTimeout(function() {
-    showNotification();
-    setInterval(function() {
-      const delay = Math.floor(Math.random() * 20000) + 20000;
-      setTimeout(showNotification, delay);
-    }, 30000);
-  }, 10000);
-})();
-
 // ============ KPI DASHBOARD (Type 'AADON' to open, ESC to close) ============
 let kpiBuffer = '';
 document.addEventListener('keydown', function(e) {
@@ -6454,14 +6305,7 @@ function clearKPI() {
   #kpi-dashboard .kpi-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
-<!-- Live Notification Popup -->
-<div class="live-notification" id="liveNotification">
-  <div class="live-notification-avatar" id="liveNotifAvatar">S</div>
-  <div>
-    <div class="live-notification-text" id="liveNotifText"><strong>Sarah</strong> from New York just unlocked their report</div>
-    <div class="live-notification-time" id="liveNotifTime">2 minutes ago</div>
-  </div>
-</div>
+
 
 </body>
 </html>

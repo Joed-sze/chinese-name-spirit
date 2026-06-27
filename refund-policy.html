@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Refund Policy | The Spirit of Your Chinese Name</title>
+<meta name="description" content="Refund and satisfaction policy for The Spirit of Your Chinese Name. We offer a 30-day money-back guarantee on all reports.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://joed-sze.github.io/chinese-name-spirit/refund-policy.html">
+
+<link rel="icon" type="image/png" href="https://joed-sze.github.io/chinese-name-spirit/favicon.png">
+<link rel="apple-touch-icon" href="https://joed-sze.github.io/chinese-name-spirit/favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #8B4513;
+  --secondary: #D4A574;
+  --bg: #F5F0E8;
+  --card-bg: rgba(255, 255, 255, 0.82);
+  --text: #3E2723;
+  --text-light: #6D4C41;
+  --text-muted: #8d7b68;
+  --text-secondary: #5d4e3e;
+  --border-accent: rgba(212, 165, 116, 0.35);
+  --surface-1: #faf8f5;
+  --success: #4CAF50;
+  --radius: 10px;
+}
+
+body {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.bg-ink-mountains {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background: url('images/ink-mountains.jpg') center center / cover no-repeat;
+  opacity: 0.30;
+}
+
+.nav-bar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 100;
+  background: rgba(245, 240, 232, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-accent);
+  padding: 12px 24px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.nav-bar a {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.3s;
+  letter-spacing: 0.5px;
+}
+
+.nav-bar a:hover { color: var(--secondary); }
+
+.container {
+  position: relative;
+  z-index: 10;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 90px 20px 60px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.page-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.page-header p {
+  font-size: 15px;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.last-updated {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+/* Guarantee highlight box */
+.guarantee-box {
+  background: rgba(76, 175, 80, 0.08);
+  border: 1px solid rgba(76, 175, 80, 0.25);
+  border-radius: 16px;
+  padding: 28px 28px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.guarantee-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.guarantee-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--success);
+  margin-bottom: 8px;
+}
+
+.guarantee-text {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Section cards */
+.section {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-accent);
+  border-radius: 20px;
+  padding: 28px 28px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 32px rgba(139, 69, 19, 0.06);
+}
+
+.section h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 0.5px solid var(--border-accent);
+}
+
+.section p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.85;
+  margin-bottom: 12px;
+}
+
+.section p:last-child { margin-bottom: 0; }
+
+.section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.section ul li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  padding: 6px 0 6px 22px;
+  position: relative;
+  border-bottom: 0.5px solid var(--border-accent);
+}
+
+.section ul li:last-child { border-bottom: none; }
+
+.section ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--success);
+  font-weight: 700;
+}
+
+.section ul li.cross::before {
+  content: '✕';
+  color: #c0392b;
+}
+
+/* Steps */
+.steps { display: flex; flex-direction: column; gap: 14px; }
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.step-body h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.step-body p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Contact box */
+.contact-box {
+  background: var(--surface-1);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.contact-icon { font-size: 28px; flex-shrink: 0; }
+
+.contact-body h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.contact-body p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.contact-body a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+/* CTA */
+.cta-box {
+  background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(250,248,245,0.9) 100%);
+  border: 1px solid var(--border-accent);
+  border-radius: 20px;
+  padding: 32px 28px;
+  text-align: center;
+  margin-top: 10px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(139, 69, 19, 0.1);
+}
+
+.cta-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.cta-sub {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Playfair Display', serif;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background: #6d360f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 20px;
+  border-top: 1px solid rgba(212, 165, 116, 0.3);
+}
+
+.footer-nav { margin-bottom: 12px; }
+
+.footer-nav a {
+  color: #c9b99a;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.footer-nav a:hover { text-decoration: underline; }
+
+.footer p { color: #999; font-size: 13px; }
+
+@media (max-width: 600px) {
+  .container { padding: 70px 16px 40px; }
+  .page-header h1 { font-size: 26px; }
+  .section { padding: 22px 18px; }
+  .nav-bar { gap: 20px; padding: 10px 16px; }
+  .nav-bar a { font-size: 13px; }
+  .contact-box { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-ink-mountains"></div>
+
+<nav class="nav-bar">
+  <a href="index.html">Home</a>
+  <a href="blog/index.html">Blog</a>
+  <a href="about/index.html">About</a>
+  <a href="refund-policy.html">Refund Policy</a>
+</nav>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>Refund Policy</h1>
+    <p>Please read before purchasing</p>
+  </div>
+
+  <p class="last-updated">Last updated: June 2026</p>
+
+  <!-- Digital product notice -->
+  <div class="guarantee-box" style="background: rgba(139,69,19,0.06); border-color: rgba(139,69,19,0.2);">
+    <div class="guarantee-icon">📄</div>
+    <div class="guarantee-title" style="color: var(--primary);">Digital Product — No Refunds</div>
+    <div class="guarantee-text">
+      All reports are digital products delivered instantly upon payment. By completing your purchase, you acknowledge that the report is made available to you immediately and that you lose your right to cancel or request a refund once the report has been accessed.
+    </div>
+  </div>
+
+  <!-- What we deliver -->
+  <div class="section">
+    <h2>What you receive</h2>
+    <p>Upon successful payment, you receive immediate access to your personalized Chinese name report. The report is generated based on your quiz answers and delivered digitally within the browser — there is no physical product and no shipping.</p>
+    <p>We encourage you to <a href="sample-report.html" style="color:var(--primary);">view the sample report</a> before purchasing so you understand exactly what is included.</p>
+  </div>
+
+  <!-- No refund policy -->
+  <div class="section">
+    <h2>Refund eligibility</h2>
+    <p>Because this is a digital product that is delivered and accessible immediately, <strong>all sales are final</strong>. We do not offer refunds on the basis of dissatisfaction with the name result, change of mind, or personal preference.</p>
+    <p>We will, however, review requests in the following exceptional circumstances:</p>
+    <ul>
+      <li>You were charged more than once for the same order (duplicate charge)</li>
+      <li>A technical failure on our end prevented you from accessing your report at all</li>
+    </ul>
+    <p style="margin-top:14px;">Exceptional requests must be submitted within <strong>7 days</strong> of purchase and are reviewed at our sole discretion. Submitting a request does not guarantee a refund.</p>
+  </div>
+
+  <!-- Before you buy -->
+  <div class="section">
+    <h2>Before you purchase</h2>
+    <p>To make sure you are happy with your report, we recommend:</p>
+    <ul>
+      <li>Reviewing the <a href="sample-report.html" style="color:var(--primary);">sample report</a> to see exactly what is included</li>
+      <li>Completing all 7 quiz questions carefully — your answers directly shape your name and report content</li>
+      <li>Noting that you may retake the quiz as many times as you like before purchasing</li>
+    </ul>
+  </div>
+
+  <!-- Dispute / chargeback notice -->
+  <div class="section">
+    <h2>Payment disputes</h2>
+    <p>If you initiate a chargeback or payment dispute without first contacting us, we reserve the right to contest the dispute with your payment provider and provide evidence of delivery and access.</p>
+    <p>We always prefer to resolve issues directly — please contact us before escalating to your bank or PayPal.</p>
+  </div>
+
+  <!-- Contact -->
+  <div class="section">
+    <h2>Contact</h2>
+    <p>For billing issues or exceptional refund requests, contact us at:</p>
+    <div class="contact-box">
+      <div class="contact-icon">✉️</div>
+      <div class="contact-body">
+        <h4>Email</h4>
+        <p>
+          <a href="mailto:support@chinesenamespirit.com">support@chinesenamespirit.com</a><br>
+          We aim to respond within 2 business days.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div class="cta-title">Ready to discover your Chinese name?</div>
+    <div class="cta-sub">View the sample report first, then take the quiz — your name is generated from your answers.</div>
+    <a href="index.html" class="btn-primary">Generate My Chinese Name</a>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-nav">
+      <a href="index.html">Home</a> |
+      <a href="blog/index.html">Blog</a> |
+      <a href="about/index.html">About</a> |
+      <a href="refund-policy.html">Refund Policy</a>
+    </div>
+    <p>© 2026 The Spirit of Your Chinese Name. All rights reserved.</p>
+  </div>
+
+</div>
+
+</body>
+</html>

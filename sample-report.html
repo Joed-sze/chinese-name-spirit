@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO Meta Tags -->
+<title>Sample Chinese Name Report | What Is My Chinese Name?</title>
+<meta name="description" content="See a sample Chinese name report. Discover what your Chinese name means, how it reflects your personality, and the cultural story behind it.">
+<meta name="keywords" content="Chinese name report, Chinese name meaning, what is my Chinese name, Chinese name sample, Chinese name generator report">
+<meta name="author" content="The Spirit of Your Chinese Name">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://joed-sze.github.io/chinese-name-spirit/sample-report.html">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="https://joed-sze.github.io/chinese-name-spirit/favicon.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://joed-sze.github.io/chinese-name-spirit/sample-report.html">
+<meta property="og:title" content="Sample Chinese Name Report | What Is My Chinese Name?">
+<meta property="og:description" content="See what a personalized Chinese name report looks like. Name meaning, personality match, cultural story, and lucky elements.">
+<meta property="og:image" content="https://joed-sze.github.io/chinese-name-spirit/og-image.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sample Chinese Name Report | What Is My Chinese Name?">
+<meta name="twitter:description" content="See what a personalized Chinese name report looks like.">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #8B4513;
+  --secondary: #D4A574;
+  --accent: #C41E3A;
+  --bg: #F5F0E8;
+  --card-bg: rgba(255, 255, 255, 0.82);
+  --text: #3E2723;
+  --text-light: #6D4C41;
+  --success: #4CAF50;
+  --gold: #FFD700;
+  --border-accent: rgba(212, 165, 116, 0.35);
+  --surface-1: #faf8f5;
+  --surface-2: rgba(255,255,255,0.9);
+  --text-muted: #8d7b68;
+  --text-secondary: #5d4e3e;
+  --fill-accent: #c9b99a;
+  --fill-success: #8bc34a;
+  --radius: 10px;
+}
+
+body {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Ink Wash Mountain Background */
+.bg-ink-mountains {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background: url('images/ink-mountains.jpg') center center / cover no-repeat;
+  opacity: 0.30;
+}
+
+.bg-ink-mountains::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgba(245,240,232,0.3) 0%, rgba(245,240,232,0.1) 50%, rgba(245,240,232,0.4) 100%);
+}
+
+/* Floating particles */
+.particles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: var(--secondary);
+  border-radius: 50%;
+  opacity: 0;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(100vh) scale(0); }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.3; }
+  100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+}
+
+/* Navigation */
+.nav-bar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 100;
+  background: rgba(245, 240, 232, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-accent);
+  padding: 12px 24px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.nav-bar a {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.3s;
+  letter-spacing: 0.5px;
+}
+
+.nav-bar a:hover {
+  color: var(--secondary);
+}
+
+/* Main container */
+.container {
+  position: relative;
+  z-index: 10;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 80px 20px 40px;
+}
+
+/* Header */
+.page-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.page-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  font-size: 15px;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* Preview banner */
+.preview-banner {
+  background: rgba(201, 185, 154, 0.15);
+  border: 0.5px solid var(--border-accent);
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(8px);
+}
+
+.preview-banner span {
+  color: var(--text-light);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Section cards */
+.section {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-accent);
+  border-radius: 20px;
+  padding: 28px 28px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 32px rgba(139, 69, 19, 0.08);
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* Name Hero */
+.name-hero {
+  text-align: center;
+  padding: 20px 0 16px;
+}
+
+.char-big {
+  font-size: 72px;
+  font-weight: 400;
+  color: var(--primary);
+  line-height: 1;
+  font-family: "Noto Serif SC", serif;
+  text-shadow: 0 2px 12px rgba(139, 69, 19, 0.15);
+}
+
+.pinyin {
+  font-size: 22px;
+  color: var(--text-light);
+  margin-top: 10px;
+  letter-spacing: 0.15em;
+  font-family: 'Playfair Display', serif;
+}
+
+.meaning-tag {
+  display: inline-block;
+  background: rgba(76, 175, 80, 0.12);
+  border: 0.5px solid rgba(76, 175, 80, 0.3);
+  color: var(--success);
+  font-size: 13px;
+  padding: 5px 16px;
+  border-radius: var(--radius);
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+/* Char Breakdown */
+.char-breakdown {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.char-card {
+  background: var(--surface-1);
+  border: 0.5px solid var(--border-accent);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+}
+
+.char-single {
+  font-size: 36px;
+  color: var(--primary);
+  font-family: "Noto Serif SC", serif;
+}
+
+.char-pinyin {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  font-family: 'Playfair Display', serif;
+}
+
+.char-meaning {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+/* Score bars */
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.score-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  width: 140px;
+  flex-shrink: 0;
+}
+
+.score-bar-bg {
+  flex: 1;
+  height: 7px;
+  background: var(--surface-1);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.score-bar-fill {
+  height: 7px;
+  border-radius: 99px;
+  transition: width 1.2s ease;
+}
+
+.score-num {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  width: 40px;
+  text-align: right;
+}
+
+/* Trait pills */
+.trait-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.trait-pill {
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: 0.5px solid var(--border-accent);
+  background: var(--surface-1);
+  color: var(--text-secondary);
+}
+
+/* Story text */
+.story-text {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.85;
+}
+
+.story-text em {
+  color: var(--primary);
+  font-style: italic;
+}
+
+/* Lucky elements */
+.lucky-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.lucky-item {
+  background: var(--surface-1);
+  border: 0.5px solid var(--border-accent);
+  border-radius: var(--radius);
+  padding: 16px 12px;
+  text-align: center;
+}
+
+.lucky-icon {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.lucky-type {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.lucky-val {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: 4px;
+}
+
+/* Ancient identity */
+.ancient-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.ancient-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius);
+  background: rgba(201, 185, 154, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 24px;
+}
+
+.ancient-text h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0 0 6px;
+}
+
+.ancient-text p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 0.5px solid var(--border-accent);
+  margin: 10px 0 16px;
+}
+
+/* CTA Box */
+.cta-box {
+  background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(250,248,245,0.9) 100%);
+  border: 1px solid var(--border-accent);
+  border-radius: 20px;
+  padding: 32px 28px;
+  text-align: center;
+  margin-top: 10px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(139, 69, 19, 0.1);
+}
+
+.cta-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.cta-sub {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.cta-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Playfair Display', serif;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background: #6d360f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius);
+  padding: 12px 28px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Playfair Display', serif;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-secondary:hover {
+  background: var(--surface-1);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 20px;
+}
+
+.footer-nav {
+  margin-bottom: 12px;
+}
+
+.footer-nav a {
+  color: #c9b99a;
+  text-decoration: none;
+  margin: 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+
+.footer p {
+  color: #999;
+  font-size: 13px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container { padding: 70px 16px 30px; }
+  .page-header h1 { font-size: 26px; }
+  .char-big { font-size: 56px; }
+  .char-breakdown { grid-template-columns: 1fr; }
+  .lucky-row { grid-template-columns: 1fr; }
+  .score-label { width: 110px; font-size: 12px; }
+  .nav-bar { gap: 20px; padding: 10px 16px; }
+  .nav-bar a { font-size: 13px; }
+  .section { padding: 22px 20px; }
+  .ancient-row { flex-direction: column; align-items: center; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Ink Wash Mountain Background -->
+<div class="bg-ink-mountains"></div>
+
+<!-- Floating Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- Navigation -->
+<nav class="nav-bar">
+  <a href="index.html">Home</a>
+  <a href="blog/index.html">Blog</a>
+  <a href="about/index.html">About</a>
+  <a href="refund-policy.html">Refund Policy</a>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+
+  <div class="page-header">
+    <h1>Sample Chinese Name Report</h1>
+    <p>See what your personalized report could look like</p>
+  </div>
+
+  <div class="preview-banner">
+    <span style="font-size:18px;">&#128196;</span>
+    <span>This is a sample report — your real report is generated from your quiz answers</span>
+  </div>
+
+  <!-- Name Hero -->
+  <div class="section">
+    <div class="section-label">your chinese name</div>
+    <div class="name-hero">
+      <div class="char-big">&#28009;&#28982;</div>
+      <div class="pinyin">H&#224;o R&#225;n</div>
+      <div class="meaning-tag">Vast and upright spirit</div>
+    </div>
+    <div class="char-breakdown">
+      <div class="char-card">
+        <div class="char-single">&#28009;</div>
+        <div class="char-pinyin">H&#224;o</div>
+        <div class="char-meaning">Vast, boundless — like the ocean. Evokes a person of great capacity and open mind.</div>
+      </div>
+      <div class="char-card">
+        <div class="char-single">&#28982;</div>
+        <div class="char-pinyin">R&#225;n</div>
+        <div class="char-meaning">Natural, upright — from the Confucian virtue &#28009;&#28982;&#20043;&#27668; (h&#224;o r&#225;n zh&#299; q&#236;): noble moral energy.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Personality Match -->
+  <div class="section">
+    <div class="section-label">personality match</div>
+    <div class="score-row">
+      <span class="score-label">Personality alignment</span>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:94%; background: linear-gradient(90deg, #c9b99a, #8B4513);"></div></div>
+      <span class="score-num">94%</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Sound match</span>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:88%; background: linear-gradient(90deg, #8bc34a, #4CAF50);"></div></div>
+      <span class="score-num">88%</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Cultural fit</span>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:91%; background: linear-gradient(90deg, #c9b99a, #8B4513);"></div></div>
+      <span class="score-num">91%</span>
+    </div>
+    <hr class="divider">
+    <div class="section-label" style="margin-bottom:10px;">traits your name carries</div>
+    <div class="trait-grid">
+      <span class="trait-pill">Intellectually curious</span>
+      <span class="trait-pill">Morally grounded</span>
+      <span class="trait-pill">Quietly confident</span>
+      <span class="trait-pill">Big-picture thinker</span>
+      <span class="trait-pill">Respected by peers</span>
+    </div>
+  </div>
+
+  <!-- How Chinese People See You -->
+  <div class="section">
+    <div class="section-label">how chinese people see you</div>
+    <div class="story-text">
+      When a Chinese person hears <strong style="color: var(--primary); font-weight: 600;">&#28009;&#28982;</strong>, they picture someone educated and principled — not flashy, but the kind of person others trust and look up to. The name is literary; it references Mencius and Tang poetry. Your Chinese colleagues will assume you have depth before you've said a word.
+    </div>
+  </div>
+
+  <!-- Ancient Identity -->
+  <div class="section">
+    <div class="section-label">ancient chinese identity</div>
+    <div class="ancient-row">
+      <div class="ancient-icon-box">&#128218;</div>
+      <div class="ancient-text">
+        <h4>Scholar of the Tang dynasty</h4>
+        <p>In ancient China, you would have been a &#20754;&#22763; (r&#250; sh&#236;) — a Confucian scholar who advises the court and writes poetry by candlelight. Your name would have been inscribed on civil examination scrolls and recited by students for generations.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lucky Elements -->
+  <div class="section">
+    <div class="section-label">lucky elements</div>
+    <div class="lucky-row">
+      <div class="lucky-item">
+        <div class="lucky-icon">&#128167;</div>
+        <div class="lucky-type">Element</div>
+        <div class="lucky-val">Water</div>
+      </div>
+      <div class="lucky-item">
+        <div class="lucky-icon">&#128290;</div>
+        <div class="lucky-type">Numbers</div>
+        <div class="lucky-val">1 &amp; 6</div>
+      </div>
+      <div class="lucky-item">
+        <div class="lucky-icon">&#127912;</div>
+        <div class="lucky-type">Colors</div>
+        <div class="lucky-val">Black, Navy</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Name Story -->
+  <div class="section">
+    <div class="section-label">name story</div>
+    <div class="story-text">
+      The phrase <em>&#28009;&#28982;&#20043;&#27668;</em> (h&#224;o r&#225;n zh&#299; q&#236;) first appeared in the <em>Mencius</em>, written around 300 BCE. Mencius described it as a vast, righteous energy that fills the universe — the moral force that arises when a person lives in complete alignment with their values. The poet Meng Haoran, who lived during the Tang dynasty, carried this energy in his very name. He was known for turning down a government post to spend his life writing about mountains, rivers, and solitude. His poetry is still memorized by Chinese schoolchildren today.
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div class="cta-title">Your real report is waiting</div>
+    <div class="cta-sub">This sample shows the structure. Your actual report uses your quiz answers — the meaning, traits, and story will be specific to you.</div>
+    <div class="cta-btns">
+      <a href="index.html" class="btn-primary">Generate Your Chinese Name</a>
+      <a href="blog/index.html" class="btn-secondary">Explore Our Blog</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-nav">
+      <a href="index.html">Home</a> |
+      <a href="blog/index.html">Blog</a> |
+      <a href="about/index.html">About</a> |
+      <a href="refund-policy.html">Refund Policy</a>
+    </div>
+    <p>&#169; 2026 The Spirit of Your Chinese Name. All rights reserved.</p>
+  </div>
+
+</div>
+
+<script>
+// Floating particles
+(function() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (Math.random() * 8 + 6) + 's';
+    p.style.animationDelay = (Math.random() * 5) + 's';
+    p.style.width = (Math.random() * 3 + 2) + 'px';
+    p.style.height = p.style.width;
+    container.appendChild(p);
+  }
+})();
+</script>
+
+</body>
+</html>
