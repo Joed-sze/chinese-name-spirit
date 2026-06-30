@@ -46,20 +46,14 @@
   "offers": [
     {
       "@type": "Offer",
-      "name": "Basic",
-      "price": "0.99",
-      "priceCurrency": "USD"
-    },
-    {
-      "@type": "Offer",
-      "name": "Premium",
+      "name": "Standard",
       "price": "1.99",
       "priceCurrency": "USD"
     },
     {
       "@type": "Offer",
-      "name": "Deluxe",
-      "price": "2.99",
+      "name": "Premium",
+      "price": "3.99",
       "priceCurrency": "USD"
     }
   ],
@@ -93,7 +87,7 @@
       "name": "What does the report include?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The full report includes: Name Meaning, Cultural Significance, Personality Match, Career Alignment, and Lucky Elements analysis. The Deluxe package includes bilingual Chinese-English content."
+        "text": "The full report includes: Name Meaning, Cultural Significance, Personality Match, Career Alignment, and Lucky Elements analysis. The Premium package includes bilingual Chinese-English content, a personalized certificate, and calligraphy styles."
       }
     }
   ]
@@ -1419,6 +1413,62 @@ body {
   padding: 24px;
   text-align: left;
   border: 1px solid rgba(212, 165, 116, 0.2);
+}
+
+.deep-dive-section {
+  background: linear-gradient(135deg, rgba(212,165,116,0.10) 0%, rgba(196,30,58,0.04) 100%);
+  border: 1px solid rgba(212, 165, 116, 0.45);
+  border-left: 4px solid #C9A876;
+  position: relative;
+}
+
+.deep-dive-badge {
+  display: inline-block;
+  background: #8B4513;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 99px;
+}
+
+.deep-dive-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 0.5px solid rgba(212, 165, 116, 0.2);
+}
+
+.deep-dive-item:last-child { border-bottom: none; }
+
+.deep-dive-item-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #C9A876;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.deep-dive-item-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 3px;
+}
+
+.deep-dive-item-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
 }
 
 .report-section-title {
@@ -3888,6 +3938,7 @@ body {
           <div class="report-section">
             <div class="section-label">lucky elements</div>
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;" id="reportLucky"></div>
+            <div style="margin-top:12px;font-size:13px;color:var(--text-light);line-height:1.7;font-style:italic;" id="reportLuckyReason"></div>
           </div>
 
           <!-- Name Story -->
@@ -3900,6 +3951,13 @@ body {
           <div class="report-section">
             <div class="section-label">career alignment</div>
             <div style="font-size:15px;color:var(--text-secondary);line-height:1.85;" id="reportCareer"></div>
+          </div>
+
+          <!-- Deep Dive (Premium only) -->
+          <div class="report-section deep-dive-section" id="deepDiveSection" style="display:none;">
+            <div class="deep-dive-badge">★ PREMIUM</div>
+            <div class="section-label" style="margin-top:8px;">your name's professional blueprint</div>
+            <div id="reportDeepDive"></div>
           </div>
 
         </div>
@@ -5125,7 +5183,8 @@ function generatePersonalizedContent(name, answers) {
       colorsCn: '黄色、棕色',
       directions: ['Center', 'Southwest', 'Northeast'],
       directionsCn: '中央、西南方、东北方',
-      description: 'Like the steadfast mountains, you draw strength from stability and grounding. Earth element brings prosperity through persistence.'
+      description: 'Like the steadfast mountains, you draw strength from stability and grounding. Earth element brings prosperity through persistence.',
+      reason: 'Based on your quiz answer associating yourself with mountains, your profile aligns with the Earth (土) element in the Five Elements (五行) system — the element traditionally linked to stability, groundedness, and steady growth.'
     },
     sun: {
       element: 'Fire (火)',
@@ -5135,7 +5194,8 @@ function generatePersonalizedContent(name, answers) {
       colorsCn: '红色、橙色、紫色',
       directions: ['South'],
       directionsCn: '南方',
-      description: 'Like the radiant sun, you illuminate everything around you. Fire element brings passion, recognition, and transformation.'
+      description: 'Like the radiant sun, you illuminate everything around you. Fire element brings passion, recognition, and transformation.',
+      reason: 'Based on your quiz answer associating yourself with the sun, your profile aligns with the Fire (火) element in the Five Elements (五行) system — the element traditionally linked to passion, visibility, and transformation.'
     },
     wind: {
       element: 'Wood (木)',
@@ -5145,7 +5205,8 @@ function generatePersonalizedContent(name, answers) {
       colorsCn: '绿色、青色',
       directions: ['East', 'Southeast'],
       directionsCn: '东方、东南方',
-      description: 'Like the wind through bamboo, you bring change and growth. Wood element fuels creativity, expansion, and new beginnings.'
+      description: 'Like the wind through bamboo, you bring change and growth. Wood element fuels creativity, expansion, and new beginnings.',
+      reason: 'Based on your quiz answer associating yourself with wind, your profile aligns with the Wood (木) element in the Five Elements (五行) system — the element traditionally linked to growth, flexibility, and new beginnings.'
     }
   };
   
@@ -5304,27 +5365,68 @@ function showResult(result) {
   const lucky = personalized.lucky;
   document.getElementById('reportLucky').innerHTML = `
     <div style="background:rgba(212,165,116,0.06);border:0.5px solid rgba(212,165,116,0.2);border-radius:12px;padding:14px;text-align:center;">
-      <div style="font-size:22px;margin-bottom:4px;">🔢</div>
       <div style="font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:0.06em;">Numbers</div>
-      <div style="font-size:14px;color:var(--primary);font-weight:600;margin-top:2px;">${lucky.numbers.join(', ')}</div>
+      <div style="font-size:14px;color:var(--primary);font-weight:600;margin-top:6px;">${lucky.numbers.join(', ')}</div>
     </div>
     <div style="background:rgba(212,165,116,0.06);border:0.5px solid rgba(212,165,116,0.2);border-radius:12px;padding:14px;text-align:center;">
-      <div style="font-size:22px;margin-bottom:4px;">🎨</div>
       <div style="font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:0.06em;">Colors</div>
-      <div style="font-size:14px;color:var(--primary);font-weight:600;margin-top:2px;">${lucky.colors.join(', ')}</div>
+      <div style="font-size:14px;color:var(--primary);font-weight:600;margin-top:6px;">${lucky.colors.join(', ')}</div>
     </div>
     <div style="background:rgba(212,165,116,0.06);border:0.5px solid rgba(212,165,116,0.2);border-radius:12px;padding:14px;text-align:center;">
-      <div style="font-size:22px;margin-bottom:4px;">🧭</div>
       <div style="font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:0.06em;">Directions</div>
-      <div style="font-size:14px;color:var(--primary);font-weight:600;margin-top:2px;">${lucky.directions.join(', ')}</div>
+      <div style="font-size:14px;color:var(--primary);font-weight:600;margin-top:6px;">${lucky.directions.join(', ')}</div>
     </div>
   `;
+  document.getElementById('reportLuckyReason').textContent = lucky.reason || '';
 
   // Story
   document.getElementById('reportStory').textContent = personalized.story;
 
   // Career
   document.getElementById('reportCareer').textContent = personalized.careerAdvice;
+
+  // Deep Dive (Premium only) - tied to the specific characters, not generic
+  const deepDiveSection = document.getElementById('deepDiveSection');
+  if (window.selectedPlan === 'premium' && deepDiveSection) {
+    deepDiveSection.style.display = 'block';
+    // name.name is the full name including surname (e.g. "刘暖曦").
+    // The given name is everything after the first character (surname).
+    const givenName = name.name ? name.name.slice(1) : '';
+    const char1 = givenName.charAt(0) || '';
+    const char2 = givenName.charAt(1) || '';
+    document.getElementById('reportDeepDive').innerHTML = `
+      <div class="deep-dive-item">
+        <div class="deep-dive-item-icon">1</div>
+        <div>
+          <div class="deep-dive-item-label">Leadership Style</div>
+          <div class="deep-dive-item-text">The character ${char1 || 'in your name'} suggests you lead by setting the tone others want to follow, rather than by direct authority — this shapes how colleagues and teams respond to you.</div>
+        </div>
+      </div>
+      <div class="deep-dive-item">
+        <div class="deep-dive-item-icon">2</div>
+        <div>
+          <div class="deep-dive-item-label">Communication Edge</div>
+          <div class="deep-dive-item-text">${char2 || 'Your name'} points to a natural clarity in how you express ideas — an asset in roles that depend on being understood quickly, like mentoring or cross-cultural work.</div>
+        </div>
+      </div>
+      <div class="deep-dive-item">
+        <div class="deep-dive-item-icon">3</div>
+        <div>
+          <div class="deep-dive-item-label">Growth Trajectory</div>
+          <div class="deep-dive-item-text">Names built on classical, literary characters like yours are traditionally associated with reputations that build slowly and last — favor paths where trust compounds over time rather than fast wins.</div>
+        </div>
+      </div>
+      <div class="deep-dive-item">
+        <div class="deep-dive-item-icon">4</div>
+        <div>
+          <div class="deep-dive-item-label">Industry Fit</div>
+          <div class="deep-dive-item-text">Beyond the core career field above, this name profile also fits roles where empathy and clear thinking intersect — such as research, education design, or community-facing work.</div>
+        </div>
+      </div>
+    `;
+  } else if (deepDiveSection) {
+    deepDiveSection.style.display = 'none';
+  }
 
   // Fun fact about phonetic matching
   const funFactEl = document.getElementById('resultFunFact');
@@ -5915,6 +6017,8 @@ async function downloadPDF() {
     const lucky = document.getElementById('reportLucky');
     const story = document.getElementById('reportStory');
     const career = document.getElementById('reportCareer');
+    const deepDive = document.getElementById('reportDeepDive');
+    const deepDiveVisible = document.getElementById('deepDiveSection') && document.getElementById('deepDiveSection').style.display !== 'none';
 
     const name = nameHero ? nameHero.textContent.trim() : 'Your Chinese Name';
     const pinyin = namePinyin ? namePinyin.textContent.trim() : '';
@@ -5993,10 +6097,13 @@ async function downloadPDF() {
 
     // Lucky Elements
     if (lucky) {
+      const luckyReasonEl = document.getElementById('reportLuckyReason');
+      const luckyReasonText = luckyReasonEl ? luckyReasonEl.textContent : '';
       pdfHTML += `
         <div style="margin-bottom: 30px;">
           <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 12px;">Lucky Elements</div>
           <div style="display: flex; gap: 12px;">${lucky.innerHTML}</div>
+          ${luckyReasonText ? `<div style="font-size: 12px; color: #888; font-style: italic; margin-top: 10px; line-height: 1.6;">${luckyReasonText}</div>` : ''}
         </div>
       `;
     }
@@ -6017,6 +6124,17 @@ async function downloadPDF() {
         <div style="margin-bottom: 30px;">
           <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 12px;">Career Alignment</div>
           <div style="font-size: 14px; color: #333; line-height: 1.7;">${career.innerHTML}</div>
+        </div>
+      `;
+    }
+
+    // Deep Dive (Premium only)
+    if (deepDive && deepDiveVisible) {
+      pdfHTML += `
+        <div style="margin-bottom: 30px; background: rgba(212,165,116,0.08); border-left: 4px solid #C9A876; padding: 18px 20px; border-radius: 8px;">
+          <div style="display:inline-block; background:#8B4513; color:#fff; font-size:10px; font-weight:700; letter-spacing:0.08em; padding:3px 10px; border-radius:99px; margin-bottom:10px;">★ PREMIUM</div>
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 12px;">Your Name's Professional Blueprint</div>
+          <div style="font-size: 13px; color: #333; line-height: 1.7;">${deepDive.innerHTML}</div>
         </div>
       `;
     }
