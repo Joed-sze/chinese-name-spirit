@@ -3016,6 +3016,57 @@ body {
   .live-notification { left: 10px; right: 10px; max-width: none; bottom: 10px; }
 }
 
+/* Preview Locked Section */
+.preview-locked-section {
+  position: relative;
+  filter: blur(4px);
+  opacity: 0.4;
+  user-select: none;
+  pointer-events: none;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.preview-locked-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.preview-locked-label .label-icon {
+  font-size: 16px;
+}
+
+.preview-locked-label .label-lock {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+/* Share Toast */
+.share-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #4CAF50;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.share-toast.show {
+  opacity: 1;
+}
+
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z9LFN79GT8"></script>
@@ -3029,6 +3080,8 @@ body {
 <script src="https://www.paypal.com/sdk/js?client-id=AffkW3asLRM9hGJrNuodcgQw9ngVnm1PDkNw82F4rHcWwB-0R8sKXHUb4mduTUeVdw6qjMYBDjjH4tjV&currency=USD&intent=capture"></script>
 </head>
 <body>
+
+<div class="share-toast" id="shareToast"></div>
 
 <!-- SVG Mountain Background -->
 <div class="bg-mountains">
@@ -3440,6 +3493,22 @@ body {
           </div>
         </div>
 
+        <!-- Share to Unlock (moved here for social virality) -->
+        <div class="share-unlock-section">
+          <div class="share-unlock-title">🎁 Share & See Your Compatibility Score</div>
+          <div class="share-unlock-subtitle">Share your Chinese name with friends to unlock your personalized compatibility score</div>
+          <div class="share-unlock-reward">
+            <div class="share-unlock-reward-title">🎉 Unlock Reward:</div>
+            <div class="share-unlock-reward-item">✓ Your Compatibility Score & Rating<br>✓ Personality Match Module</div>
+          </div>
+          <div class="share-unlock-btns">
+            <button class="share-unlock-btn tiktok" onclick="shareToSocial('tiktok')" title="TikTok">🎵</button>
+            <button class="share-unlock-btn instagram" onclick="shareToSocial('instagram')" title="Instagram">📷</button>
+            <button class="share-unlock-btn facebook" onclick="shareToSocial('facebook')" title="Facebook">f</button>
+            <button class="share-unlock-btn twitter" onclick="shareToSocial('twitter')" title="Twitter">𝕏</button>
+          </div>
+        </div>
+
         <!-- Teaser Content Section -->
         <div class="preview-teaser-section">
           <div class="preview-teaser-title">What Your Name Reveals About You</div>
@@ -3452,75 +3521,84 @@ body {
           </div>
         </div>
 
-        <!-- Step 1: Compatibility Score - Priority #1 -->
-        <div class="compatibility-score-section">
-          <div class="compatibility-score-label">Compatibility Score</div>
-          <div class="compatibility-score-circle">
-            <svg viewBox="0 0 140 140">
-              <defs>
-                <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" style="stop-color:#C41E3A"/>
-                  <stop offset="100%" style="stop-color:#8B4513"/>
-                </linearGradient>
-              </defs>
-              <circle class="compatibility-score-circle-bg" cx="70" cy="70" r="60"/>
-              <circle class="compatibility-score-circle-fill" id="compatibilityCircleFill" cx="70" cy="70" r="60"/>
-            </svg>
-            <div class="compatibility-score-number" id="compatibilityScoreNumber">94%</div>
-          </div>
-          <div class="compatibility-score-rating" id="compatibilityScoreRating">Excellent Match</div>
-          <div class="compatibility-score-traits" id="compatibilityScoreTraits">
-            <span class="compatibility-trait">Leadership</span>
-            <span class="compatibility-trait">Confidence</span>
-            <span class="compatibility-trait">Integrity</span>
-          </div>
-          <div class="compatibility-score-cta">
-            🔓 <a href="#" onclick="showPage('page-payment'); return false;">Unlock to see why your score is 94% →</a>
+        <!-- Compatibility Score (LOCKED) -->
+        <div class="preview-locked-label"><span class="label-icon">🎯</span> Compatibility Score <span class="label-lock">🔒 Locked</span></div>
+        <div class="preview-locked-section" id="compatScoreLocked">
+          <div class="compatibility-score-section">
+            <div class="compatibility-score-label">Compatibility Score</div>
+            <div class="compatibility-score-circle">
+              <svg viewBox="0 0 140 140">
+                <defs>
+                  <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#C41E3A"/>
+                    <stop offset="100%" style="stop-color:#8B4513"/>
+                  </linearGradient>
+                </defs>
+                <circle class="compatibility-score-circle-bg" cx="70" cy="70" r="60"/>
+                <circle class="compatibility-score-circle-fill" id="compatibilityCircleFill" cx="70" cy="70" r="60"/>
+              </svg>
+              <div class="compatibility-score-number" id="compatibilityScoreNumber">94%</div>
+            </div>
+            <div class="compatibility-score-rating" id="compatibilityScoreRating">Excellent Match</div>
+            <div class="compatibility-score-traits" id="compatibilityScoreTraits">
+              <span class="compatibility-trait">Leadership</span>
+              <span class="compatibility-trait">Confidence</span>
+              <span class="compatibility-trait">Integrity</span>
+            </div>
+            <div class="compatibility-score-cta">
+              🔓 <a href="#" onclick="showPage('page-payment'); return false;">Unlock to see why your score is 94% →</a>
+            </div>
           </div>
         </div>
 
-        <!-- Step 2: Certificate Preview - Priority #2 -->
-        <div class="certificate-preview-section">
-          <div class="certificate-preview-title">📜 Your Name Certificate</div>
-          <div class="certificate-preview-card">
-            <div class="certificate-preview-seal">印</div>
-            <div class="certificate-preview-header">Chinese Name Certificate</div>
-            <div class="certificate-preview-name" id="certificatePreviewName">浩然</div>
-            <div class="certificate-preview-pinyin" id="certificatePreviewPinyin">(Haoran)</div>
-            <div class="certificate-preview-meaning-label">Meaning</div>
-            <div class="certificate-preview-meaning" id="certificatePreviewMeaning">Vast Spirit</div>
-            <div class="certificate-preview-date">Issued: 2026</div>
+        <!-- Certificate Preview (LOCKED) -->
+        <div class="preview-locked-label"><span class="label-icon">📜</span> Your Name Certificate <span class="label-lock">🔒 Locked</span></div>
+        <div class="preview-locked-section">
+          <div class="certificate-preview-section">
+            <div class="certificate-preview-title">📜 Your Name Certificate</div>
+            <div class="certificate-preview-card">
+              <div class="certificate-preview-seal">印</div>
+              <div class="certificate-preview-header">Chinese Name Certificate</div>
+              <div class="certificate-preview-name" id="certificatePreviewName">浩然</div>
+              <div class="certificate-preview-pinyin" id="certificatePreviewPinyin">(Haoran)</div>
+              <div class="certificate-preview-meaning-label">Meaning</div>
+              <div class="certificate-preview-meaning" id="certificatePreviewMeaning">Vast Spirit</div>
+              <div class="certificate-preview-date">Issued: 2026</div>
+            </div>
+            <div class="certificate-preview-badge">🔒 HD PNG for Premium</div>
+            <p style="font-size: 12px; color: var(--text-light); margin-top: 8px;">Perfect for Instagram, Facebook, TikTok</p>
           </div>
-          <div class="certificate-preview-badge">🔒 HD PNG for Premium</div>
-          <p style="font-size: 12px; color: var(--text-light); margin-top: 8px;">Perfect for Instagram, Facebook, TikTok</p>
         </div>
 
-        <!-- Report Modules Preview -->
+        <!-- Report Modules Preview (ALL LOCKED) -->
         <div style="font-size: 14px; color: var(--text-light); margin-bottom: 12px;">Your complete report includes:</div>
         <div class="preview-report-modules">
-          <div class="preview-report-module revealed">Name Meaning</div>
-          <div class="preview-report-module revealed">Cultural Significance</div>
-          <div class="preview-report-module revealed">Phonetic Analysis</div>
-          <div class="preview-report-module revealed">Name Blessing</div>
-          <div class="preview-report-module revealed">Personality Match</div>
-          <div class="preview-report-module locked">Career Alignment</div>
-          <div class="preview-report-module locked">Lucky Elements</div>
-          <div class="preview-report-module locked">Name Certificate</div>
+          <div class="preview-report-module locked" id="modulePersonalityMatch">🔒 Personality Match</div>
+          <div class="preview-report-module locked">🔒 Career Alignment</div>
+          <div class="preview-report-module locked">🔒 Lucky Elements</div>
+          <div class="preview-report-module locked">🔒 Name Certificate</div>
+          <div class="preview-report-module locked">🔒 Name Story</div>
+          <div class="preview-report-module locked">🔒 Cultural Significance</div>
+          <div class="preview-report-module locked">🔒 Phonetic Analysis</div>
+          <div class="preview-report-module locked">🔒 Name Blessing</div>
         </div>
 
         <!-- Urgency CTA -->
         <div class="preview-urgency">
-          <div class="preview-urgency-text">✨ Introductory price — just $1.99</div>
+          <div class="preview-urgency-text">✨ Your personalized report is ready</div>
         </div>
 
-        <!-- #2 AI Name Story Preview -->
-        <div class="story-preview-section">
-          <div class="story-preview-title">📖 Your Name's Story</div>
-          <div class="story-preview-content" id="storyPreviewContent">
-            <span class="story-visible" id="storyVisibleText">In ancient China, a scholar named <strong id="storyName">浩然</strong> was known for his unwavering integrity and vast knowledge. He believed that true wisdom comes from understanding both oneself and the world...</span>
-            <span class="story-blur" id="storyBlurText"> His name became a symbol of moral courage and intellectual depth, passed down through generations as an inspiration for those who seek to make a meaningful impact on the world...</span>
+        <!-- Name Story (LOCKED) -->
+        <div class="preview-locked-label"><span class="label-icon">📖</span> Your Name's Story <span class="label-lock">🔒 Locked</span></div>
+        <div class="preview-locked-section">
+          <div class="story-preview-section">
+            <div class="story-preview-title">📖 Your Name's Story</div>
+            <div class="story-preview-content" id="storyPreviewContent">
+              <span class="story-visible" id="storyVisibleText">In ancient China, a scholar named <strong id="storyName">浩然</strong> was known for his unwavering integrity and vast knowledge. He believed that true wisdom comes from understanding both oneself and the world...</span>
+              <span class="story-blur" id="storyBlurText"> His name became a symbol of moral courage and intellectual depth, passed down through generations as an inspiration for those who seek to make a meaningful impact on the world...</span>
+            </div>
+            <button class="story-preview-btn" onclick="showPage('page-payment')">🔓 Unlock Full Story</button>
           </div>
-          <button class="story-preview-btn" onclick="showPage('page-payment')">🔓 Unlock Full Story</button>
         </div>
 
         <!-- #3 Chinese People's View of You -->
@@ -3535,78 +3613,71 @@ body {
           </div>
         </div>
 
-        <!-- #4 Calligraphy Signature -->
-        <div class="calligraphy-section">
-          <div class="calligraphy-title">✍️ Your Name in Calligraphy</div>
-          <div class="calligraphy-styles">
-            <div class="calligraphy-style">
-              <div class="calligraphy-style-name">Regular Script</div>
-              <div class="calligraphy-char" id="calligraphyRegular">浩然</div>
+        <!-- Calligraphy (LOCKED) -->
+        <div class="preview-locked-label"><span class="label-icon">✍️</span> Your Name in Calligraphy <span class="label-lock">🔒 Locked</span></div>
+        <div class="preview-locked-section">
+          <div class="calligraphy-section">
+            <div class="calligraphy-title">✍️ Your Name in Calligraphy</div>
+            <div class="calligraphy-styles">
+              <div class="calligraphy-style">
+                <div class="calligraphy-style-name">Regular Script</div>
+                <div class="calligraphy-char" id="calligraphyRegular">浩然</div>
+              </div>
+              <div class="calligraphy-style">
+                <div class="calligraphy-style-name">Running Script</div>
+                <div class="calligraphy-char calligraphy-locked" id="calligraphyRunning">🔒</div>
+              </div>
+              <div class="calligraphy-style">
+                <div class="calligraphy-style-name">Cursive Script</div>
+                <div class="calligraphy-char calligraphy-locked" id="calligraphyCursive">🔒</div>
+              </div>
             </div>
-            <div class="calligraphy-style">
-              <div class="calligraphy-style-name">Running Script</div>
-              <div class="calligraphy-char calligraphy-locked" id="calligraphyRunning">🔒</div>
-            </div>
-            <div class="calligraphy-style">
-              <div class="calligraphy-style-name">Cursive Script</div>
-              <div class="calligraphy-char calligraphy-locked" id="calligraphyCursive">🔒</div>
-            </div>
-          </div>
-          <button class="story-preview-btn" onclick="showPage('page-payment')">🔓 Unlock All Styles</button>
-        </div>
-
-        <!-- Step 3: Ancient Chinese Identity - Priority #3 -->
-        <div class="ancient-identity-card-premium">
-          <div class="ancient-identity-premium-title">🏛️ Ancient Chinese Identity</div>
-          <div class="ancient-identity-premium-role" id="ancientIdentityPremiumRole">Scholar</div>
-          <div class="ancient-identity-premium-match" id="ancientIdentityPremiumMatch">95% Match</div>
-          <div class="ancient-identity-premium-traits" id="ancientIdentityPremiumTraits">
-            <span class="ancient-identity-premium-trait">Wisdom</span>
-            <span class="ancient-identity-premium-trait">Learning</span>
-            <span class="ancient-identity-premium-trait">Leadership</span>
-            <span class="ancient-identity-premium-trait">Respect</span>
-          </div>
-          <div class="ancient-identity-premium-story" id="ancientIdentityPremiumStory">
-            If you had lived in ancient China, you would have been known as a respected scholar whose wisdom guided others through difficult times.
-          </div>
-          <div class="traits-locked" style="margin-top: 16px;">
-            <div class="traits-locked-text">🔒 Unlock your complete ancient identity story</div>
+            <button class="story-preview-btn" onclick="showPage('page-payment')">🔓 Unlock All Styles</button>
           </div>
         </div>
 
-        <!-- #7 Name Popularity Ranking -->
-        <div class="popularity-section">
-          <div class="popularity-title">📊 Name Popularity</div>
-          <div class="popularity-rank">
-            <span>Top</span>
-            <span class="popularity-rank-number" id="popularityRank">12%</span>
-          </div>
-          <div class="popularity-desc">Your name is rarer than 88% of Chinese names!<br>This makes it unique and special.</div>
-          <div class="popularity-chart">
-            <div class="popularity-bar"></div>
-            <div class="popularity-bar"></div>
-            <div class="popularity-bar"></div>
-            <div class="popularity-bar active"></div>
-            <div class="popularity-bar"></div>
-          </div>
-          <div class="traits-locked">
-            <div class="traits-locked-text">🔒 Unlock to see detailed popularity trends and regional distribution</div>
+        <!-- Ancient Chinese Identity (LOCKED) -->
+        <div class="preview-locked-label"><span class="label-icon">🏛️</span> Ancient Chinese Identity <span class="label-lock">🔒 Locked</span></div>
+        <div class="preview-locked-section">
+          <div class="ancient-identity-card-premium">
+            <div class="ancient-identity-premium-title">🏛️ Ancient Chinese Identity</div>
+            <div class="ancient-identity-premium-role" id="ancientIdentityPremiumRole">Scholar</div>
+            <div class="ancient-identity-premium-match" id="ancientIdentityPremiumMatch">95% Match</div>
+            <div class="ancient-identity-premium-traits" id="ancientIdentityPremiumTraits">
+              <span class="ancient-identity-premium-trait">Wisdom</span>
+              <span class="ancient-identity-premium-trait">Learning</span>
+              <span class="ancient-identity-premium-trait">Leadership</span>
+              <span class="ancient-identity-premium-trait">Respect</span>
+            </div>
+            <div class="ancient-identity-premium-story" id="ancientIdentityPremiumStory">
+              If you had lived in ancient China, you would have been known as a respected scholar whose wisdom guided others through difficult times.
+            </div>
+            <div class="traits-locked" style="margin-top: 16px;">
+              <div class="traits-locked-text">🔒 Unlock your complete ancient identity story</div>
+            </div>
           </div>
         </div>
 
-        <!-- #8 Share to Unlock -->
-        <div class="share-unlock-section">
-          <div class="share-unlock-title">🎁 Share & Unlock Bonus Content</div>
-          <div class="share-unlock-subtitle">Share your name with friends to unlock exclusive features</div>
-          <div class="share-unlock-reward">
-            <div class="share-unlock-reward-title">🎉 Unlock Reward:</div>
-            <div class="share-unlock-reward-item">✓ Lucky Elements Guide<br>✓ Name Compatibility Report<br>✓ Custom Name Poster</div>
-          </div>
-          <div class="share-unlock-btns">
-            <button class="share-unlock-btn tiktok" onclick="shareToSocial('tiktok')" title="TikTok">🎵</button>
-            <button class="share-unlock-btn instagram" onclick="shareToSocial('instagram')" title="Instagram">📷</button>
-            <button class="share-unlock-btn facebook" onclick="shareToSocial('facebook')" title="Facebook">f</button>
-            <button class="share-unlock-btn twitter" onclick="shareToSocial('twitter')" title="Twitter">𝕏</button>
+        <!-- Name Popularity (LOCKED) -->
+        <div class="preview-locked-label"><span class="label-icon">📊</span> Name Popularity <span class="label-lock">🔒 Locked</span></div>
+        <div class="preview-locked-section">
+          <div class="popularity-section">
+            <div class="popularity-title">📊 Name Popularity</div>
+            <div class="popularity-rank">
+              <span>Top</span>
+              <span class="popularity-rank-number" id="popularityRank">12%</span>
+            </div>
+            <div class="popularity-desc">Your name is rarer than 88% of Chinese names!<br>This makes it unique and special.</div>
+            <div class="popularity-chart">
+              <div class="popularity-bar"></div>
+              <div class="popularity-bar"></div>
+              <div class="popularity-bar"></div>
+              <div class="popularity-bar active"></div>
+              <div class="popularity-bar"></div>
+            </div>
+            <div class="traits-locked">
+              <div class="traits-locked-text">🔒 Unlock to see detailed popularity trends and regional distribution</div>
+            </div>
           </div>
         </div>
 
@@ -3701,7 +3772,7 @@ body {
         <div style="text-align:center;margin-bottom:16px;">
           <a href="sample-report.html" target="_blank" style="display:inline-block;color:#8B4513;text-decoration:none;font-size:14px;font-weight:600;background:#f5f0e8;border:2px solid #c9b99a;border-radius:10px;padding:10px 20px;transition:all 0.3s ease;" onmouseover="this.style.background='#c9b99a';this.style.color='white';" onmouseout="this.style.background='#f5f0e8';this.style.color='#8B4513';">📄 See a sample report first →</a>
         </div>
-        <button class="btn-gold" onclick="KPI.update({paymentPageViews:1}); gtag('event','view_pricing'); showPage('page-payment')">🔓 Unlock Complete Identity Report</button>
+        <button class="btn-primary" onclick="showPage('page-payment')" style="font-size:14px;padding:12px 28px;">Get Your Full Report →</button>
         <p style="font-size: 12px; color: var(--text-light); margin-top: 12px;">Includes name story, cultural impression, personality match & certificate</p>
       </div>
     </div>
@@ -4338,7 +4409,98 @@ const phoneticMap = {
   'zi': ['齐', '齐', '齐'],
   'zo': ['佐', '佐', '佐'],
   'zu': ['祖', '祖', '祖'],
-  'zy': ['齐', '齐', '齐']
+  'zy': ['齐', '齐', '齐'],
+
+  // ===== COMPLETE NAME MAPPINGS (higher priority) =====
+  'emma': ['艾', '恩', '伊'],
+  'emily': ['艾', '米', '莉'],
+  'james': ['杰', '姆', '斯'],
+  'john': ['乔', '安'],
+  'jane': ['简', '珍', '妮'],
+  'jack': ['杰', '克'],
+  'david': ['大', '维', '德'],
+  'michael': ['迈', '克', '尔'],
+  'sarah': ['莎', '拉'],
+  'lisa': ['莉', '莎'],
+  'anna': ['安', '娜'],
+  'alex': ['艾', '力'],
+  'alexander': ['亚', '历'],
+  'chris': ['克', '里', '斯'],
+  'daniel': ['丹', '尼'],
+  'matthew': ['马', '修'],
+  'robert': ['罗', '伯', '特'],
+  'william': ['威', '廉'],
+  'richard': ['理', '查', '德'],
+  'thomas': ['托', '马', '斯'],
+  'charles': ['查', '尔', '斯'],
+  'joseph': ['乔', '瑟', '夫'],
+  'benjamin': ['本', '杰', '明'],
+  'oliver': ['奥', '利', '弗'],
+  'henry': ['亨', '利'],
+  'lucas': ['卢', '卡', '斯'],
+  'mason': ['梅', '森'],
+  'logan': ['洛', '根'],
+  'ethan': ['伊', '桑'],
+  'noah': ['诺', '亚'],
+  'liam': ['利', '亚', '姆'],
+  'sophia': ['索', '菲', '亚'],
+  'isabella': ['伊', '莎', '贝'],
+  'mia': ['米', '亚'],
+  'charlotte': ['夏', '洛', '特'],
+  'amelia': ['艾', '米', '莉'],
+  'harper': ['哈', '珀'],
+  'evelyn': ['伊', '芙', '琳'],
+  'abigail': ['艾', '比', '盖'],
+  'ella': ['艾', '拉'],
+  'madison': ['麦', '迪', '森'],
+  'luna': ['露', '娜'],
+  'chloe': ['克', '洛', '伊'],
+  'penelope': ['佩', '内', '洛'],
+  'layla': ['莱', '拉'],
+  'riley': ['赖', '莉'],
+  'zoe': ['佐', '伊'],
+  'nora': ['诺', '拉'],
+  'lily': ['莉', '莉'],
+  'eleanor': ['埃', '莉', '诺'],
+  'hannah': ['汉', '娜'],
+  'lillian': ['莉', '莉', '安'],
+  'addison': ['艾', '迪', '森'],
+  'aurora': ['奥', '若', '拉'],
+  'scarlett': ['斯', '卡', '莱'],
+  'grace': ['格', '雷', '斯'],
+  'violet': ['维', '奥', '莱'],
+  'sam': ['萨', '姆'],
+  'ryan': ['瑞', '安'],
+  'nathan': ['纳', '森'],
+  'kevin': ['凯', '文'],
+  'brian': ['布', '莱', '恩'],
+  'steven': ['斯', '蒂', '文'],
+  'andrew': ['安', '德', '鲁'],
+  'peter': ['彼', '得'],
+  'mark': ['马', '克'],
+  'paul': ['保', '罗'],
+  'tom': ['托', '姆'],
+  'tony': ['托', '尼'],
+  'eric': ['艾', '瑞', '克'],
+  'leo': ['利', '奥'],
+  'ian': ['伊', '安'],
+  'kai': ['凯'],
+  'max': ['麦', '克', '斯'],
+  'jay': ['杰'],
+  'ray': ['雷'],
+  'roy': ['罗', '伊'],
+  'louis': ['路', '易', '斯'],
+  'felix': ['菲', '利', '克'],
+  'hugo': ['休', '戈'],
+  'owen': ['欧', '文'],
+  'dylan': ['迪', '伦'],
+  'aiden': ['艾', '登'],
+  'carter': ['卡', '特'],
+  'wyatt': ['怀', '特'],
+  'luke': ['卢', '克'],
+  'gabriel': ['加', '布', '里'],
+  'jackson': ['杰', '克', '森'],
+  'lincoln': ['林', '肯']
 };
 
 // Common name endings and their Chinese equivalents
@@ -4909,9 +5071,8 @@ function showGenerationAnimation(result, callback) {
   }, totalDelay);
 }
 
-function getPinyin(name) {
-  // Simple pinyin mapping for common characters
-  const pinyinMap = {
+// Global pinyin mapping for phonetic scoring and display
+const globalPinyinMap = {
     '明': 'Míng', '远': 'Yuǎn', '浩': 'Hào', '然': 'Rán', '雅': 'Yǎ', '慧': 'Huì',
     '思': 'Sī', '源': 'Yuán', '清': 'Qīng', '风': 'Fēng', '云': 'Yún', '雨': 'Yǔ',
     '桐': 'Tóng', '芷': 'Zhǐ', '柔': 'Róu', '溪': 'Xī', '月': 'Yuè', '柳': 'Liǔ',
@@ -4921,12 +5082,141 @@ function getPinyin(name) {
     '武': 'Wǔ', '德': 'Dé', '志': 'Zhì', '诚': 'Chéng', '信': 'Xìn', '仁': 'Rén',
     '义': 'Yì', '礼': 'Lǐ', '智': 'Zhì', '勇': 'Yǒng', '毅': 'Yì', '恒': 'Héng',
     '博': 'Bó', '学': 'Xué', '问': 'Wèn', '知': 'Zhī', '行': 'Xíng', '正': 'Zhèng',
-    '直': 'Zhí', '善': 'Shàn', '美': 'Měi', '真': 'Zhēn', '朴': 'Pǔ', '素': 'Sù'
-  };
-  
+    '直': 'Zhí', '善': 'Shàn', '美': 'Měi', '真': 'Zhēn', '朴': 'Pǔ', '素': 'Sù',
+    // Additional characters for phonetic matching
+    '艾': 'Ài', '恩': 'Ēn', '伊': 'Yī', '杰': 'Jié', '莎': 'Shā', '安': 'Ān', '娜': 'Nà',
+    '乔': 'Qiáo', '莉': 'Lì', '米': 'Mǐ', '菲': 'Fēi', '克': 'Kè', '瑞': 'Ruì', '诺': 'Nuò',
+    '托': 'Tuō', '威': 'Wēi', '利': 'Lì', '梅': 'Méi', '森': 'Sēn',
+    '简': 'Jiǎn', '斯': 'Sī', '拉': 'Lā', '黛': 'Dài',
+    '佩': 'Pèi', '比': 'Bǐ', '凯': 'Kǎi', '赫': 'Hè', '茜': 'Qiàn',
+    '蒂': 'Dì', '欧': 'Ōu', '维': 'Wéi', '瓦': 'Wǎ', '贝': 'Bèi',
+    '夏': 'Xià', '洛': 'Luò', '特': 'Tè', '芙': 'Fú', '琳': 'Lín',
+    '盖': 'Gài', '佐': 'Zuǒ', '亚': 'Yà', '历': 'Lì', '尔': 'Ěr',
+    '查': 'Zhā', '瑟': 'Sè', '夫': 'Fū', '明': 'Míng', '本': 'Běn',
+    '奥': 'Ào', '弗': 'Fú', '亨': 'Hēng', '卢': 'Lú', '卡': 'Kǎ',
+    '洛': 'Luò', '根': 'Gēn', '桑': 'Sāng', '姆': 'Mǔ', '亚': 'Yà',
+    '索': 'Suǒ', '莎': 'Shā', '伊': 'Yī', '莱': 'Lái', '赖': 'Lài',
+    '珀': 'Pò', '内': 'Nèi', '若': 'Ruò', '卡': 'Kǎ', '莱': 'Lái',
+    '格': 'Gé', '雷': 'Léi', '奥': 'Ào', '休': 'Xiū', '戈': 'Gē',
+    '伦': 'Lún', '登': 'Dēng', '怀': 'Huái', '加': 'Jiā', '布': 'Bù',
+    '里': 'Lǐ', '肯': 'Kěn', '罗': 'Luó', '伯': 'Bó', '马': 'Mǎ',
+    '迈': 'Mài', '克': 'Kè', '尔': 'Ěr', '理': 'Lǐ', '查': 'Zhā',
+    '德': 'Dé', '修': 'Xiū', '刘': 'Liú', '张': 'Zhāng', '王': 'Wáng',
+    '李': 'Lǐ', '陈': 'Chén', '杨': 'Yáng', '赵': 'Zhào', '黄': 'Huáng',
+    '周': 'Zhōu', '吴': 'Wú', '徐': 'Xú', '孙': 'Sūn', '胡': 'Hú',
+    '朱': 'Zhū', '高': 'Gāo', '林': 'Lín', '何': 'Hé', '郭': 'Guō',
+    '梁': 'Liáng', '宋': 'Sòng', '郑': 'Zhèng', '谢': 'Xiè', '韩': 'Hán',
+    '唐': 'Táng', '冯': 'Féng', '于': 'Yú', '董': 'Dǒng', '萧': 'Xiāo',
+    '程': 'Chéng', '曹': 'Cáo', '袁': 'Yuán', '邓': 'Dèng', '许': 'Xǔ',
+    '傅': 'Fù', '沈': 'Shěn', '曾': 'Zēng', '彭': 'Péng', '吕': 'Lǚ',
+    '苏': 'Sū', '卢': 'Lú', '蒋': 'Jiǎng', '蔡': 'Cài', '贾': 'Jiǎ',
+    '丁': 'Dīng', '魏': 'Wèi', '薛': 'Xuē', '叶': 'Yè', '阎': 'Yán',
+    '余': 'Yú', '潘': 'Pān', '杜': 'Dù', '戴': 'Dài', '夏': 'Xià',
+    '钟': 'Zhōng', '汪': 'Wāng', '田': 'Tián', '任': 'Rén', '姜': 'Jiāng',
+    '范': 'Fàn', '方': 'Fāng', '石': 'Shí', '姚': 'Yáo', '谭': 'Tán',
+    '廖': 'Liào', '邹': 'Zōu', '熊': 'Xióng', '金': 'Jīn', '陆': 'Lù',
+    '郝': 'Hǎo', '孔': 'Kǒng', '白': 'Bái', '崔': 'Cuī', '康': 'Kāng',
+    '毛': 'Máo', '邱': 'Qiū', '秦': 'Qín', '江': 'Jiāng', '史': 'Shǐ',
+    '顾': 'Gù', '侯': 'Hóu', '邵': 'Shào', '孟': 'Mèng', '龙': 'Lóng',
+    '万': 'Wàn', '段': 'Duàn', '雷': 'Léi', '钱': 'Qián', '汤': 'Tāng',
+    '尹': 'Yǐn', '黎': 'Lí', '易': 'Yì', '常': 'Cháng', '武': 'Wǔ',
+    '贺': 'Hè', '赖': 'Lài', '龚': 'Gōng', '露': 'Lù',
+    '建': 'Jiàn', '国': 'Guó', '海': 'Hǎi', '天': 'Tiān', '世': 'Shì',
+    '伟': 'Wěi', '军': 'Jūn', '平': 'Píng', '东': 'Dōng', '强': 'Qiáng',
+    '晓': 'Xiǎo', '丽': 'Lì', '红': 'Hóng', '金': 'Jīn', '新': 'Xīn',
+    '玉': 'Yù', '宝': 'Bǎo', '福': 'Fú', '生': 'Shēng', '大': 'Dà',
+    '小': 'Xiǎo', '中': 'Zhōng', '长': 'Zhǎng', '进': 'Jìn', '胜': 'Shèng',
+    '成': 'Chéng', '茂': 'Mào', '荣': 'Róng', '盛': 'Shèng', '丰': 'Fēng',
+    '春': 'Chūn', '秋': 'Qiū', '冬': 'Dōng', '寒': 'Hán', '暖': 'Nuǎn',
+    '和': 'Hé', '宁': 'Níng', '静': 'Jìng', '稳': 'Wěn', '衡': 'Héng',
+    '泰': 'Tài', '温': 'Wēn', '安': 'Ān', '韵': 'Yùn', '诗': 'Shī',
+    '画': 'Huà', '琴': 'Qín', '墨': 'Mò', '竹': 'Zhú', '柔': 'Róu',
+    '刚': 'Gāng', '坚': 'Jiān', '猛': 'Měng', '烈': 'Liè', '壮': 'Zhuàng',
+    '威': 'Wēi', '雄': 'Xióng', '领': 'Lǐng', '导': 'Dǎo', '宏': 'Hóng',
+    '达': 'Dá', '望': 'Wàng', '家': 'Jiā', '亲': 'Qīn', '爱': 'Ài',
+    '祥': 'Xiáng', '禄': 'Lù', '泽': 'Zé', '润': 'Rùn', '恩': 'Ēn',
+    '空': 'Kōng', '翔': 'Xiáng', '浪': 'Làng', '逸': 'Yì', '游': 'Yóu',
+    '阔': 'Kuò', '升': 'Shēng', '林': 'Lín', '新': 'Xīn', '源': 'Yuán',
+    '悟': 'Wù', '哲': 'Zhé', '深': 'Shēn', '渊': 'Yuān',
+    '岭': 'Lǐng', '峰': 'Fēng', '岩': 'Yán', '川': 'Chuān', '河': 'Hé',
+    '湖': 'Hú', '海': 'Hǎi', '森': 'Sēn', '木': 'Mù', '火': 'Huǒ',
+    '水': 'Shuǐ', '土': 'Tǔ', '金': 'Jīn', '龙': 'Lóng', '凤': 'Fèng',
+    '鹤': 'Hè', '虎': 'Hǔ', '鹏': 'Péng', '麟': 'Lín', '麟': 'Lín',
+    '松': 'Sōng', '柏': 'Bǎi', '莲': 'Lián', '菊': 'Jú', '梅': 'Méi',
+    '荷': 'Hé', '鹤': 'Hè', '剑': 'Jiàn', '弓': 'Gōng', '琴': 'Qín',
+    '鸣': 'Míng', '鹤': 'Hè', '吟': 'Yín', '啸': 'Xiào', '凌': 'Líng',
+    '霜': 'Shuāng', '雪': 'Xuě', '冰': 'Bīng', '炎': 'Yán', '炎': 'Yán',
+    '彦': 'Yàn', '彬': 'Bīn', '斌': 'Bīn', '杰': 'Jié', '磊': 'Lěi',
+    '鑫': 'Xīn', '涛': 'Tāo', '波': 'Bō', '瀚': 'Hàn', '浩': 'Hào',
+    '澈': 'Chè', '涵': 'Hán', '润': 'Rùn', '洋': 'Yáng', '洋': 'Yáng',
+    '瀚': 'Hàn', '瀚': 'Hàn', '铭': 'Míng', '钦': 'Qīn', '钧': 'Jūn',
+    '晨': 'Chén', '旭': 'Xù', '晖': 'Huī', '晖': 'Huī', '曦': 'Xī',
+    '煜': 'Yù', '烨': 'Yè', '焕': 'Huàn', '灿': 'Càn', '烁': 'Shuò',
+    '瑾': 'Jǐn', '瑜': 'Yú', '琦': 'Qí', '珍': 'Zhēn', '珊': 'Shān',
+    '琳': 'Lín', '璐': 'Lù', '璐': 'Lù', '琼': 'Qióng', '瑗': 'Yuàn',
+    '玲': 'Líng', '珑': 'Lóng', '珑': 'Lóng', '彦': 'Yàn', '婵': 'Chán',
+    '娟': 'Juān', '妍': 'Yán', '婷': 'Tíng', '嫣': 'Yān', '媚': 'Mèi',
+    '薇': 'Wēi', '蓉': 'Róng', '蕾': 'Lěi', '蕾': 'Lěi', '蕊': 'Ruǐ',
+    '蕊': 'Ruǐ', '瑛': 'Yīng', '瑛': 'Yīng', '璧': 'Bì', '璧': 'Bì',
+    '蓉': 'Róng', '萱': 'Xuān', '芷': 'Zhǐ', '若': 'Ruò', '若': 'Ruò',
+    '蕊': 'Ruǐ', '苑': 'Yuàn', '荷': 'Hé', '荷': 'Hé', '蓁': 'Zhēn',
+    '颖': 'Yǐng', '颖': 'Yǐng', '静': 'Jìng', '静': 'Jìng', '娴': 'Xián',
+    '姝': 'Shū', '倩': 'Qiàn', '黛': 'Dài', '黛': 'Dài', '妍': 'Yán',
+    '嫣': 'Yān', '嫣': 'Yān', '薇': 'Wēi', '薇': 'Wēi', '蕊': 'Ruǐ',
+    '艺': 'Yì', '卓': 'Zhuó', '奕': 'Yì', '睿': 'Ruì', '睿': 'Ruì',
+    '哲': 'Zhé', '颖': 'Yǐng', '聪': 'Cōng', '颖': 'Yǐng', '杰': 'Jié',
+    '睿': 'Ruì', '俊': 'Jùn', '逸': 'Yì', '健': 'Jiàn', '翔': 'Xiáng',
+    '凯': 'Kǎi', '翔': 'Xiáng', '晟': 'Shèng', '晟': 'Shèng', '晖': 'Huī',
+    '昊': 'Hào', '天': 'Tiān', '震': 'Zhèn', '震': 'Zhèn', '霆': 'Tíng',
+    '毅': 'Yì', '刚': 'Gāng', '强': 'Qiáng', '壮': 'Zhuàng', '毅': 'Yì',
+    '磊': 'Lěi', '磊': 'Lěi', '岩': 'Yán', '峰': 'Fēng', '嵩': 'Sōng',
+    '岳': 'Yuè', '峻': 'Jùn', '巍': 'Wēi', '巍': 'Wēi', '崇': 'Chóng',
+    '川': 'Chuān', '浩': 'Hào', '渊': 'Yuān', '瀚': 'Hàn', '洪': 'Hóng',
+    '涛': 'Tāo', '淳': 'Chún', '渊': 'Yuān', '深': 'Shēn', '湛': 'Zhàn',
+    '泽': 'Zé', '沛': 'Pèi', '霖': 'Lín', '雨': 'Yǔ', '露': 'Lù',
+    '霄': 'Xiāo', '霄': 'Xiāo', '霄': 'Xiāo', '霄': 'Xiāo', '霄': 'Xiāo',
+    '弘': 'Hóng', '毅': 'Yì', '正': 'Zhèng', '义': 'Yì', '信': 'Xìn',
+    '诚': 'Chéng', '廉': 'Lián', '谦': 'Qiān', '礼': 'Lǐ', '仁': 'Rén',
+    '德': 'Dé', '贤': 'Xián', '忠': 'Zhōng', '孝': 'Xiào', '和': 'Hé',
+    '睦': 'Mù', '敬': 'Jìng', '慈': 'Cí', '祥': 'Xiáng', '瑞': 'Ruì',
+    '安': 'Ān', '康': 'Kāng', '宁': 'Níng', '平': 'Píng', '泰': 'Tài',
+    '吉': 'Jí', '祥': 'Xiáng', '如': 'Rú', '意': 'Yì', '顺': 'Shùn',
+    '永': 'Yǒng', '世': 'Shì', '纪': 'Jì', '年': 'Nián', '寿': 'Shòu',
+    '延': 'Yán', '绵': 'Mián', '长': 'Cháng', '久': 'Jiǔ', '远': 'Yuǎn',
+    '博': 'Bó', '文': 'Wén', '学': 'Xué', '才': 'Cái', '艺': 'Yì',
+    '书': 'Shū', '画': 'Huà', '诗': 'Shī', '词': 'Cí', '赋': 'Fù',
+    '曲': 'Qǔ', '歌': 'Gē', '声': 'Shēng', '音': 'Yīn', '乐': 'Lè',
+    '琴': 'Qín', '棋': 'Qí', '雅': 'Yǎ', '韵': 'Yùn', '品味': 'Pǐn',
+    '麦': 'Mài', '迪': 'Dí', '萨': 'Sà', '姆': 'Mǔ', '休': 'Xiū',
+    '佩': 'Pèi', '内': 'Nèi', '洛': 'Luò', '莱': 'Lái', '赖': 'Lài',
+    '诺': 'Nuò', '拉': 'Lā', '佐': 'Zuǒ', '伊': 'Yī', '芙': 'Fú',
+    '盖': 'Gài', '比': 'Bǐ', '茜': 'Qiàn', '蒂': 'Dì', '佩': 'Pèi',
+    '黛': 'Dài', '维': 'Wéi', '瓦': 'Wǎ', '休': 'Xiū', '戈': 'Gē',
+    '欧': 'Ōu', '伦': 'Lún', '登': 'Dēng', '怀': 'Huái', '特': 'Tè',
+    '加': 'Jiā', '布': 'Bù', '里': 'Lǐ', '肯': 'Kěn', '理': 'Lǐ',
+    '查': 'Zhā', '托': 'Tuō', '马': 'Mǎ', '瑟': 'Sè', '夫': 'Fū',
+    '本': 'Běn', '明': 'Míng', '伯': 'Bó', '赫': 'Hè', '亚': 'Yà',
+    '历': 'Lì', '凯': 'Kǎi', '索': 'Suǒ', '菲': 'Fēi', '瑞': 'Ruì',
+    '克': 'Kè', '斯': 'Sī', '利': 'Lì', '杰': 'Jié', '简': 'Jiǎn',
+    '米': 'Mǐ', '莎': 'Shā', '安': 'Ān', '乔': 'Qiáo', '恩': 'Ēn',
+    '艾': 'Ài', '伊': 'Yī', '莉': 'Lì', '森': 'Sēn', '梅': 'Méi',
+    '洛': 'Luò', '根': 'Gēn', '桑': 'Sāng', '莉': 'Lì', '卡': 'Kǎ',
+    '珀': 'Pò', '莱': 'Lái', '赖': 'Lài', '奥': 'Ào', '诺': 'Nuò',
+    '格': 'Gé', '雷': 'Léi', '奥': 'Ào', '维': 'Wéi', '贝': 'Bèi',
+    '雅': 'Yǎ', '拉': 'Lā', '莎': 'Shā', '娜': 'Nà', '伊': 'Yī',
+    '夏': 'Xià', '洛': 'Luò', '特': 'Tè', '芙': 'Fú', '琳': 'Lín',
+    '艾': 'Ài', '米': 'Mǐ', '比': 'Bǐ', '盖': 'Gài', '佩': 'Pèi',
+    '内': 'Nèi', '汉': 'Hàn', '埃': 'Āi', '莉': 'Lì', '诺': 'Nuò',
+    '斯': 'Sī', '卡': 'Kǎ', '莱': 'Lái', '麦': 'Mài', '迪': 'Dí',
+    '森': 'Sēn', '佩': 'Pèi', '佐': 'Zuǒ', '伊': 'Yī', '瑞': 'Ruì',
+    '安': 'Ān', '吉': 'Jí', '娜': 'Nà', '莉': 'Lì', '莎': 'Shā',
+    '菲': 'Fēi', '克': 'Kè', '柏': 'Bǎi', '赫': 'Hè', '茜': 'Qiàn'
+};
+
+function getPinyin(name) {
   let pinyin = '';
   for (let char of name) {
-    pinyin += (pinyinMap[char] || char) + ' ';
+    pinyin += (globalPinyinMap[char] || char) + ' ';
   }
   return pinyin.trim();
 }
@@ -5034,26 +5324,87 @@ function generateName(excludeName) {
   let scored = nameDatabase.map(name => {
     let score = 0;
 
-    // Q1: Gender (20%)
-    if (name.gender === gender) score += 20;
+    // Q1: Gender (15%)
+    if (name.gender === gender) score += 15;
 
-    // Q2: Sound (30%)
-    if (name.sound === sound) score += 30;
+    // Q2: Sound (15%)
+    if (name.sound === sound) score += 15;
 
-    // Q3: Element (30%)
-    if (name.element === element) score += 30;
+    // Q3: Element (15%)
+    if (name.element === element) score += 15;
 
-    // Q4: Profession (20%)
-    if (name.profession === profession) score += 20;
+    // Q4: Profession (15%)
+    if (name.profession === profession) score += 15;
 
-    // Q5: Phonetic matching bonus (25%) — important since name is required
+    // Q5: Personality (10%) — derived from meaning keywords since nameDatabase has no personality field
+    const meaningText = name.meaning || '';
+    const personalityKeywords = {
+      wisdom: ['智', '慧', '思', '知', '悟', '明', '哲', '学', '博', '深', '渊', '清'],
+      courage: ['勇', '毅', '刚', '坚', '强', '武', '猛', '烈', '壮', '威', '雄', '志'],
+      art: ['美', '雅', '韵', '诗', '画', '琴', '墨', '兰', '竹', '莉', '瑶', '柔', '艺术'],
+      leadership: ['领', '导', '德', '仁', '义', '信', '正', '诚', '宏', '远', '达', '泽', '望']
+    };
+    const pKeywords = personalityKeywords[personality] || personalityKeywords.wisdom;
+    if (pKeywords.some(kw => name.name.includes(kw) || meaningText.includes(kw))) {
+      score += 10;
+    }
+
+    // Q6: Life Value (10%) — derived from meaning keywords
+    const valueKeywords = {
+      balance: ['和', '平', '安', '静', '宁', '稳', '衡', '中', '泰', '然', '清', '温'],
+      growth: ['成', '长', '进', '升', '茂', '荣', '盛', '丰', '林', '春', '新', '源'],
+      freedom: ['自由', '飞', '风', '云', '逍遥', '浪', '逸', '游', '远', '阔', '空', '翔'],
+      family: ['家', '亲', '爱', '和', '恩', '泽', '润', '福', '禄', '祥', '安', '暖']
+    };
+    const vKeywords = valueKeywords[lifeValue] || valueKeywords.balance;
+    if (vKeywords.some(kw => name.name.includes(kw) || meaningText.includes(kw))) {
+      score += 10;
+    }
+
+    // Q7: Phonetic scoring (40%) — three-tier matching mechanism
     if (phoneticMatched && phoneticChars.length > 0) {
-      for (const char of phoneticChars) {
-        if (name.name.includes(char)) {
-          score += 25;
-          break;
+      const nameChars = name.name.split('');
+      let bestPhoneticScore = 0;
+
+      for (const char of nameChars) {
+        const charPinyin = globalPinyinMap[char] || '';
+        const charFirstLetter = charPinyin.charAt(0).toUpperCase(); // e.g., 'N' for Nuǎn
+
+        for (const phChar of phoneticChars) {
+          const phPinyin = globalPinyinMap[phChar] || '';
+          const phFirstLetter = phPinyin.charAt(0).toUpperCase();
+
+          // Tier 1: Exact match — same pinyin initial (+40)
+          if (phPinyin.length > 0 && charPinyin.length > 0 && phFirstLetter === charFirstLetter) {
+            bestPhoneticScore = 40;
+            break;
+          }
+
+          // Tier 2: Syllable match — character is in phoneticChars list (+35)
+          if (phoneticChars.includes(char)) {
+            bestPhoneticScore = Math.max(bestPhoneticScore, 35);
+          }
+        }
+        if (bestPhoneticScore === 40) break;
+      }
+
+      // Tier 3: Vowel match — user name main vowel matches a name char's pinyin vowel (+20)
+      if (bestPhoneticScore < 20 && currentName) {
+        const vowels = 'aeiou';
+        const nameVowels = currentName.toLowerCase().split('').filter(c => vowels.includes(c));
+        if (nameVowels.length > 0) {
+          for (const char of nameChars) {
+            const charPinyin = globalPinyinMap[char] || '';
+            const charVowels = charPinyin.toLowerCase().split('').filter(c => vowels.includes(c));
+            if (charVowels.length > 0 && nameVowels.some(v => charVowels.includes(v))) {
+              bestPhoneticScore = Math.max(bestPhoneticScore, 20);
+              break;
+            }
+          }
         }
       }
+
+      score += bestPhoneticScore;
     }
 
     return { ...name, score };
@@ -5065,6 +5416,14 @@ function generateName(excludeName) {
   // Pick from top candidates with some randomness, excluding the last result
   const topScore = scored[0].score;
   let topCandidates = scored.filter(n => n.score >= topScore - 15);
+
+  // Prefer names with phonetic match — filter to phonetic-matched candidates when available
+  if (phoneticMatched && phoneticChars.length > 0) {
+    const withPhonetic = topCandidates.filter(n => n.name.split('').some(c => phoneticChars.includes(c)));
+    if (withPhonetic.length > 0) {
+      topCandidates = withPhonetic;
+    }
+  }
 
   // Exclude the previously shown name to ensure a different result
   if (excludeName) {
@@ -5080,17 +5439,12 @@ function generateName(excludeName) {
     }
   }
 
-  // If phonetic matching was used, prefer names with the phonetic bonus
+  // Choose from remaining candidates
   let chosen;
-  if (phoneticMatched && topCandidates.length > 1) {
-    const withBonus = topCandidates.filter(n => n.score > topScore);
-    if (withBonus.length > 0) {
-      chosen = withBonus[Math.floor(Math.random() * withBonus.length)];
-    } else {
-      chosen = topCandidates[Math.floor(Math.random() * topCandidates.length)];
-    }
-  } else {
+  if (topCandidates.length > 0) {
     chosen = topCandidates[Math.floor(Math.random() * topCandidates.length)];
+  } else {
+    chosen = scored[Math.floor(Math.random() * scored.length)];
   }
 
   // Add surname to the chosen name
@@ -6255,11 +6609,11 @@ function copyShareLink() {
 
 // ===== SOCIAL SHARE FOR UNLOCK =====
 function shareToSocial(platform) {
-  const name = document.getElementById('previewFullName')?.textContent || 'a beautiful Chinese name';
-  const text = 'I just discovered my Chinese name: ' + name + '! Find yours at';
-  const url = 'https://joed-sze.github.io/chinese-name-spirit/';
+  var name = document.getElementById('previewFullName')?.textContent || 'a beautiful Chinese name';
+  var text = 'I just discovered my Chinese name: ' + name + '! Find yours at';
+  var url = 'https://joed-sze.github.io/chinese-name-spirit/';
   
-  const shareUrls = {
+  var shareUrls = {
     tiktok: 'https://www.tiktok.com/upload?referer=' + encodeURIComponent(url),
     instagram: 'https://www.instagram.com/',
     facebook: 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url),
@@ -6268,18 +6622,38 @@ function shareToSocial(platform) {
   };
   
   if (platform === 'copy') {
-    navigator.clipboard.writeText(text + ' ' + url).then(function() {
-      alert('✅ Link copied! Share with friends to unlock bonus content!');
-    });
+    navigator.clipboard.writeText(text + ' ' + url);
   } else {
     window.open(shareUrls[platform], '_blank');
   }
   
   gtag('event', 'share_unlock', { method: platform });
   
-  // Simulate unlock after sharing
+  // Unlock compatibility score section after sharing (2s delay)
   setTimeout(function() {
-    alert('🎉 Thank you for sharing! Bonus content unlocked!');
+    var compatLocked = document.getElementById('compatScoreLocked');
+    if (compatLocked) {
+      compatLocked.classList.remove('preview-locked-section');
+      // Remove the lock overlay inside
+      var lockOverlay = compatLocked.querySelector('div[style*="position:absolute"]');
+      if (lockOverlay) lockOverlay.remove();
+    }
+    // Update Personality Match module to revealed
+    var personalityModule = document.getElementById('modulePersonalityMatch');
+    if (personalityModule) {
+      personalityModule.classList.remove('locked');
+      personalityModule.classList.add('revealed');
+      personalityModule.textContent = 'Personality Match';
+    }
+    // Show toast
+    var toast = document.getElementById('shareToast');
+    if (toast) {
+      toast.textContent = '🎉 Thank you for sharing! Your compatibility score is now unlocked!';
+      toast.classList.add('show');
+      setTimeout(function() {
+        toast.classList.remove('show');
+      }, 4000);
+    }
   }, 2000);
 }
 
