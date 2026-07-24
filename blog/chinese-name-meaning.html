@@ -6,7 +6,7 @@
 
 <!-- SEO Meta Tags -->
 <title>Chinese Name Meaning: What Each Character Actually Says About You</title>
-<meta name="description" content="Every Chinese name character carries a specific meaning — strength, nature, wisdom, grace. See what the characters in your name would reveal about you.">
+<meta name="description" content="Every Chinese name character carries a specific meaning — strength, nature, wisdom, grace. Learn how Chinese names work and discover what your personalized name could reveal.">
 <meta name="keywords" content="Chinese name meaning, what Chinese names represent, Chinese name symbolism, Chinese name culture, Chinese name personality, Chinese name nature, Chinese name generator">
 <meta name="author" content="The Spirit of Your Chinese Name">
 <meta name="robots" content="index, follow">
@@ -323,6 +323,180 @@
     color: #c9b99a;
   }
   
+  /* Report Preview */
+  .report-preview {
+    background: linear-gradient(135deg, #fff8f0, #f5f0e8);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 40px 0;
+    border: 2px solid #c9b99a;
+  }
+  
+  .report-preview h2 {
+    text-align: center;
+    margin-top: 0;
+    border-bottom: 2px solid #c9b99a;
+    padding-bottom: 15px;
+  }
+  
+  .preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+  }
+  
+  .preview-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 15px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .preview-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  }
+  
+  .preview-card .icon {
+    font-size: 2.2em;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .preview-card h4 {
+    font-size: 1em;
+    color: #2c3e50;
+    margin-bottom: 6px;
+  }
+  
+  .preview-card p {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 0;
+  }
+  
+  .preview-card .preview-tag {
+    display: inline-block;
+    font-size: 0.7em;
+    padding: 2px 10px;
+    border-radius: 99px;
+    margin-top: 8px;
+    font-weight: 600;
+  }
+  
+  .preview-tag.standard {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+  
+  .preview-tag.premium {
+    background: #fff3e0;
+    color: #e65100;
+  }
+  
+  .preview-card.premium-card {
+    border: 2px solid #ffd54f;
+    background: linear-gradient(135deg, #fffde7, #fff8e1);
+  }
+  
+  .preview-card.premium-card h4 {
+    color: #e65100;
+  }
+  
+  .preview-cta {
+    text-align: center;
+    background: linear-gradient(135deg, #c9b99a, #a89878);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 30px 0 10px;
+  }
+  
+  .preview-cta h3 {
+    color: white;
+    margin-top: 0;
+    font-size: 1.5em;
+  }
+  
+  .preview-cta p {
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 20px;
+    font-size: 1.1em;
+  }
+  
+  .preview-cta .cta-button {
+    display: inline-block;
+    padding: 16px 36px;
+    background: white;
+    color: #2c3e50;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1.1em;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .preview-cta .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  }
+  
+  .preview-cta .sub-text {
+    font-size: 0.85em;
+    color: rgba(255,255,255,0.7);
+    margin-top: 12px;
+    margin-bottom: 0;
+  }
+  
+  /* Pricing Summary */
+  .pricing-summary {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  
+  .pricing-option {
+    background: white;
+    border-radius: 12px;
+    padding: 15px 25px;
+    text-align: center;
+    min-width: 160px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+  
+  .pricing-option .amount {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #2c3e50;
+  }
+  
+  .pricing-option .label {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 4px;
+  }
+  
+  .pricing-option.recommended {
+    border: 2px solid #ffd54f;
+    background: linear-gradient(135deg, #fffde7, #fff8e1);
+  }
+  
+  .pricing-option .badge {
+    font-size: 0.7em;
+    background: #ffd54f;
+    color: #e65100;
+    padding: 2px 10px;
+    border-radius: 99px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+  
   @media (max-width: 768px) {
     article {
       padding: 30px 20px;
@@ -339,7 +513,17 @@
     .nature-grid {
       grid-template-columns: 1fr;
     }
+    
+    .preview-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .pricing-summary {
+      flex-direction: column;
+      align-items: center;
+    }
   }
+}
 </style>
 </head>
 <body>
@@ -461,11 +645,66 @@
     
     <p>It should feel like a real name used in China, not just a converted word.</p>
     
-    <div class="cta-box">
-      <h3>🚀 7. Discover Your Own Chinese Name Meaning</h3>
-      <p>Instead of guessing or translating your name, you can explore a meaningful Chinese identity based on cultural logic and symbolism.</p>
-      <p>A real Chinese name is more than a label — it reflects identity and meaning.</p>
-      <a href="../index.html" class="cta-button">👉 Generate Your Chinese Name</a>
+    <div class="report-preview">
+      <h2>📋 What Your Personalized Report Includes</h2>
+      
+      <div class="preview-grid">
+        <div class="preview-card">
+          <span class="icon">🀄</span>
+          <h4>Your Chinese Name</h4>
+          <p>Full name with characters, pinyin, and English meaning. Each character explained.</p>
+          <span class="preview-tag standard">Standard</span>
+        </div>
+        <div class="preview-card">
+          <span class="icon">📊</span>
+          <h4>Personality Match</h4>
+          <p>How your name reflects your personality traits. Score breakdown across 6 dimensions.</p>
+          <span class="preview-tag standard">Standard</span>
+        </div>
+        <div class="preview-card">
+          <span class="icon">💼</span>
+          <h4>Career Alignment</h4>
+          <p>Which career paths match your name's energy. Personality-based job recommendations.</p>
+          <span class="preview-tag standard">Standard</span>
+        </div>
+        <div class="preview-card">
+          <span class="icon">🍀</span>
+          <h4>Lucky Elements</h4>
+          <p>Your lucky color, number, direction, and element based on your name's balance.</p>
+          <span class="preview-tag standard">Standard</span>
+        </div>
+        <div class="preview-card premium-card">
+          <span class="icon">🏛️</span>
+          <h4>Ancient Identity</h4>
+          <p>Discover your past-life Chinese identity — scholar, warrior, poet, and more.</p>
+          <span class="preview-tag premium">Premium</span>
+        </div>
+        <div class="preview-card premium-card">
+          <span class="icon">📜</span>
+          <h4>Certificate + Calligraphy</h4>
+          <p>Downloadable HD name certificate with 3 calligraphy styles. Frame-ready.</p>
+          <span class="preview-tag premium">Premium</span>
+        </div>
+      </div>
+
+      <div class="pricing-summary">
+        <div class="pricing-option">
+          <div class="amount">$1.99</div>
+          <div class="label">Standard Report</div>
+        </div>
+        <div class="pricing-option recommended">
+          <div class="badge">Best Value</div>
+          <div class="amount">$3.99</div>
+          <div class="label">Premium + Certificate</div>
+        </div>
+      </div>
+
+      <div class="preview-cta">
+        <h3>✨ Ready to Discover Your Chinese Name?</h3>
+        <p>Answer 5 quick questions and get a personalized name with full meaning, personality match, and cultural story — starting at just $1.99.</p>
+        <a href="../index.html" class="cta-button">👉 Start Your Name Quiz</a>
+        <p class="sub-text">⏱ Takes 2 minutes • 100% satisfaction guarantee</p>
+      </div>
     </div>
     
     <h2>📚 Final Thought</h2>
