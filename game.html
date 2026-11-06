@@ -1,0 +1,1419 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO Meta Tags -->
+<title>Wu Xing Compass — Daily Chinese Character Game | Five Elements Quiz</title>
+<meta name="description" content="A daily Chinese character game. Read the character, point to its element on the Wu Xing compass — Wood, Fire, Earth, Metal or Water. Five questions a day, same for everyone. Learn how Chinese characters reveal the five elements.">
+<meta name="keywords" content="Chinese character game, wu xing, five elements, Chinese characters five elements, daily Chinese game, learn Chinese characters, 五行, 汉字五行, Chinese name game">
+<meta name="author" content="The Spirit of Your Chinese Name">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://joed-sze.github.io/chinese-name-spirit/game.html">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://joed-sze.github.io/chinese-name-spirit/sitemap.xml">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="https://joed-sze.github.io/chinese-name-spirit/favicon.jpg">
+<link rel="apple-touch-icon" href="https://joed-sze.github.io/chinese-name-spirit/favicon.jpg">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://joed-sze.github.io/chinese-name-spirit/game.html">
+<meta property="og:title" content="Wu Xing Compass — Daily Chinese Character Game">
+<meta property="og:description" content="Read the Chinese character, point to its element. Five questions a day, same for everyone.">
+<meta property="og:image" content="https://joed-sze.github.io/chinese-name-spirit/og-image.jpg">
+<meta property="og:site_name" content="The Spirit of Your Chinese Name">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wu Xing Compass — Daily Chinese Character Game">
+<meta name="twitter:description" content="Read the Chinese character, point to its element. Five questions a day.">
+<meta name="twitter:image" content="https://joed-sze.github.io/chinese-name-spirit/og-image.jpg">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Wu Xing Compass — Daily Chinese Character Game",
+  "url": "https://joed-sze.github.io/chinese-name-spirit/game.html",
+  "description": "A daily game about the five elements in Chinese characters. Point to Wood, Fire, Earth, Metal or Water on the compass.",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #8B4513;
+  --secondary: #D4A574;
+  --accent: #C41E3A;
+  --bg: #F5F0E8;
+  --card-bg: rgba(255, 255, 255, 0.75);
+  --text: #3E2723;
+  --text-light: #6D4C41;
+  --success: #4CAF50;
+  --gold: #FFD700;
+
+  --wood: #4E9F5B;
+  --fire: #D64541;
+  --earth: #C08A2E;
+  --metal: #8C959B;
+  --water: #3B7EA1;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(212, 165, 116, 0.18), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(196, 30, 58, 0.08), transparent 45%);
+  background-attachment: fixed;
+}
+
+.wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 22px 18px 60px;
+}
+
+/* Top bar */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26px;
+}
+
+.back-link {
+  font-size: 13px;
+  color: var(--text-light);
+  text-decoration: none;
+  border: 1px solid rgba(212, 165, 116, 0.5);
+  border-radius: 20px;
+  padding: 7px 14px;
+  transition: all 0.2s ease;
+  font-family: 'Playfair Display', serif;
+}
+.back-link:hover {
+  background: rgba(212, 165, 116, 0.2);
+  color: var(--primary);
+}
+
+.date-tag {
+  font-size: 12px;
+  color: var(--text-light);
+  letter-spacing: 0.5px;
+}
+
+/* Header */
+.hero {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(26px, 7vw, 36px);
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 8px;
+  margin-bottom: 8px;
+}
+
+.hero .sub {
+  font-size: 13px;
+  color: var(--text-light);
+  letter-spacing: 1px;
+}
+
+.hero .sub-en {
+  font-size: 13px;
+  color: var(--text-light);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+/* Round + score bar */
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 11px 16px;
+  background: var(--card-bg);
+  border: 1px solid rgba(212, 165, 116, 0.4);
+  border-radius: 14px;
+}
+
+.round-dots {
+  display: flex;
+  gap: 7px;
+}
+
+.round-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: rgba(212, 165, 116, 0.35);
+  transition: all 0.3s ease;
+}
+.round-dot.active {
+  background: var(--accent);
+  transform: scale(1.25);
+}
+.round-dot.hit { background: var(--success); }
+.round-dot.near { background: #E0A526; }
+.round-dot.miss { background: #B23A3A; }
+
+.score-tag {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.5px;
+}
+
+/* Compass */
+.compass-stage {
+  position: relative;
+  width: min(90vw, 350px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 8px;
+}
+
+.compass-ring {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  border: 1px dashed rgba(139, 69, 19, 0.28);
+}
+
+.compass-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 44%;
+  height: 44%;
+  border-radius: 50%;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(245, 240, 232, 0.9));
+  border: 1px solid rgba(212, 165, 116, 0.5);
+  box-shadow: 0 6px 22px rgba(139, 69, 19, 0.14), inset 0 0 26px rgba(212, 165, 116, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.char-display {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(58px, 19vw, 86px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+  animation: charIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes charIn {
+  0% { opacity: 0; transform: scale(0.82) rotate(-4deg); filter: blur(4px); }
+  100% { opacity: 1; transform: scale(1) rotate(0); filter: blur(0); }
+}
+
+.elem-btn {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: clamp(56px, 16vw, 66px);
+  height: clamp(56px, 16vw, 66px);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  background: var(--metal);
+  color: #fff;
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(21px, 6vw, 25px);
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 16px rgba(62, 39, 35, 0.2);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.elem-btn .elem-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 8px;
+  letter-spacing: 0.6px;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-top: 1px;
+}
+
+.elem-btn:hover:not(:disabled) {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 8px 22px rgba(62, 39, 35, 0.28);
+}
+
+.elem-btn:disabled { cursor: default; }
+
+.elem-btn.wood  { background: var(--wood); }
+.elem-btn.fire  { background: var(--fire); }
+.elem-btn.earth { background: var(--earth); }
+.elem-btn.metal { background: var(--metal); }
+.elem-btn.water { background: var(--water); }
+
+.elem-btn.correct {
+  box-shadow: 0 0 0 5px rgba(76, 175, 80, 0.35), 0 8px 22px rgba(62, 39, 35, 0.25);
+  animation: correctPulse 0.6s ease;
+  z-index: 3;
+}
+@keyframes correctPulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.35); }
+}
+
+.elem-btn.wrong {
+  animation: wrongShake 0.45s ease;
+  filter: grayscale(0.45);
+}
+@keyframes wrongShake {
+  0%, 100% { margin-left: 0; }
+  20% { margin-left: -7px; }
+  40% { margin-left: 7px; }
+  60% { margin-left: -5px; }
+  80% { margin-left: 5px; }
+}
+
+.elem-btn.faded { opacity: 0.32; }
+
+/* Round score popup */
+.score-pop {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--success);
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.95);
+  pointer-events: none;
+  z-index: 5;
+  animation: scorePop 1.1s ease forwards;
+}
+.score-pop.zero { color: var(--accent); }
+
+@keyframes scorePop {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+  30% { opacity: 1; transform: translate(-50%, -90%) scale(1.15); }
+  100% { opacity: 0; transform: translate(-50%, -160%) scale(1); }
+}
+
+/* Reveal card */
+.reveal-card {
+  margin-top: 20px;
+  padding: 20px;
+  background: var(--card-bg);
+  border: 1px solid rgba(212, 165, 116, 0.45);
+  border-radius: 16px;
+  animation: fadeUp 0.4s ease;
+}
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.reveal-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.reveal-char {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.reveal-en {
+  font-size: 14px;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.reveal-element {
+  margin-left: auto;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  color: #fff;
+  background: var(--metal);
+}
+
+.reveal-why {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.reveal-relation {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(212, 165, 116, 0.5);
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.reveal-relation strong { color: var(--primary); }
+
+/* Buttons */
+.btn {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 30px;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #8B0000);
+  color: #fff;
+  box-shadow: 0 5px 16px rgba(196, 30, 58, 0.35);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(196, 30, 58, 0.45);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--secondary);
+  color: var(--text-light);
+  font-size: 14px;
+}
+.btn-ghost:hover {
+  background: rgba(212, 165, 116, 0.2);
+  color: var(--primary);
+}
+
+/* Intro card */
+.intro-card {
+  padding: 20px;
+  background: var(--card-bg);
+  border: 1px solid rgba(212, 165, 116, 0.4);
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+}
+.intro-card h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  color: var(--primary);
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+.intro-card ul {
+  margin: 10px 0 0 18px;
+  color: var(--text-light);
+}
+.intro-card li { margin-bottom: 6px; }
+
+/* End screen */
+.end-card {
+  text-align: center;
+  padding: 28px 22px;
+  background: var(--card-bg);
+  border: 1px solid rgba(212, 165, 116, 0.45);
+  border-radius: 18px;
+  animation: fadeUp 0.5s ease;
+}
+
+.end-score {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.end-score span { font-size: 22px; color: var(--text-light); }
+
+.end-rank {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  color: var(--primary);
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+}
+.end-rank-en {
+  font-size: 13px;
+  color: var(--text-light);
+  font-style: italic;
+  margin-bottom: 22px;
+}
+
+.week-board {
+  margin: 18px 0 16px;
+  padding: 14px 14px 10px;
+  border: 1px solid rgba(212, 165, 116, 0.45);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.week-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.week-title {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-light);
+  text-transform: uppercase;
+}
+
+.week-meta {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.week-days {
+  display: flex;
+  gap: 6px;
+}
+
+.week-day {
+  flex: 1;
+  text-align: center;
+}
+
+.wd-label {
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  color: var(--text-light);
+}
+
+.wd-cell {
+  margin-top: 4px;
+  height: 38px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(212, 165, 116, 0.12);
+  color: rgba(109, 76, 65, 0.45);
+}
+
+.week-day.played .wd-cell {
+  background: linear-gradient(160deg, #8B4513, #A9642E);
+  color: #fff;
+}
+
+.week-day.today .wd-cell {
+  box-shadow: 0 0 0 2px rgba(196, 30, 58, 0.35);
+}
+
+.week-day.future .wd-cell {
+  opacity: 0.4;
+}
+
+.week-foot {
+  margin-top: 9px;
+  font-size: 10px;
+  letter-spacing: 0.3px;
+  color: rgba(109, 76, 65, 0.65);
+  text-align: center;
+}
+
+.result-chips {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.result-chip {
+  position: relative;
+  width: 54px;
+  height: 62px;
+  border-radius: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(62, 39, 35, 0.18);
+  animation: fadeUp 0.45s ease backwards;
+}
+
+.chip-char {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.chip-element {
+  font-size: 10px;
+  opacity: 0.9;
+  margin-top: 4px;
+  letter-spacing: 1px;
+}
+
+.chip-score {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.share-grid {
+  font-size: 26px;
+  letter-spacing: 5px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.share-note {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 18px;
+}
+
+.copied-msg {
+  font-size: 13px;
+  color: var(--success);
+  height: 18px;
+  margin-top: 8px;
+}
+
+/* CTA block */
+.cta-block {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 16px;
+  background: linear-gradient(150deg, rgba(212, 165, 116, 0.2), rgba(196, 30, 58, 0.08));
+  border: 1px solid rgba(212, 165, 116, 0.5);
+  text-align: center;
+}
+.cta-block .cta-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.cta-block .cta-text {
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+/* Hidden helper */
+.hidden { display: none !important; }
+
+/* Footer */
+.foot {
+  margin-top: 34px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-light);
+}
+.foot a { color: var(--text-light); }
+
+@media (max-width: 420px) {
+  .hero h1 { letter-spacing: 5px; }
+  .reveal-element { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <a class="back-link" href="index.html">← Back to Name Quiz</a>
+    <div class="date-tag" id="dateTag"></div>
+  </div>
+
+  <div class="hero">
+    <h1>五行罗盘</h1>
+    <div class="sub">WU XING COMPASS</div>
+    <div class="sub-en">Read the character. Point to its element.</div>
+  </div>
+
+  <!-- Intro -->
+  <div id="introView">
+    <div class="intro-card">
+      <h2>How it works</h2>
+      Every Chinese character carries one of the five elements — Wood, Fire, Earth, Metal, Water. Most of the time the answer is hiding in plain sight, in the radical.
+      <ul>
+        <li><strong>木</strong> Wood — trees, grass, bamboo</li>
+        <li><strong>火</strong> Fire — flame, sun, light</li>
+        <li><strong>土</strong> Earth — mountains, stone, soil</li>
+        <li><strong>金</strong> Metal — gold, blades, autumn</li>
+        <li><strong>水</strong> Water — rivers, rain, winter</li>
+      </ul>
+      <p style="margin-top:12px;color:var(--text-light);">
+        Five characters a day — the same five for everyone in the world.
+        Exact match <strong>100</strong> · a neighbouring element that generates it <strong>60</strong> · a clashing element <strong>0</strong>.
+      </p>
+      <p style="margin-top:8px;color:var(--text-light);font-size:12px;">
+        Want more? Roll a random five — never the same set twice in a row.
+      </p>
+    </div>
+    <button class="btn btn-primary" id="startBtn" onclick="startGame()">Start Today's Five →</button>
+    <button class="btn btn-ghost" onclick="startPractice()">🎲 Random Five</button>
+  </div>
+
+  <!-- Game -->
+  <div id="gameView" class="hidden">
+    <div class="status-bar">
+      <div class="round-dots" id="roundDots"></div>
+      <div class="score-tag" id="scoreTag">0 pts</div>
+    </div>
+
+    <div class="compass-stage" id="compassStage">
+      <div class="compass-ring"></div>
+      <div class="compass-center">
+        <div class="char-display" id="charDisplay">森</div>
+      </div>
+    </div>
+
+    <div class="reveal-card hidden" id="revealCard">
+      <div class="reveal-head">
+        <span class="reveal-char" id="revealChar"></span>
+        <span class="reveal-en" id="revealEn"></span>
+        <span class="reveal-element" id="revealElement"></span>
+      </div>
+      <div class="reveal-why" id="revealWhy"></div>
+      <div class="reveal-relation" id="revealRelation"></div>
+    </div>
+
+    <button class="btn btn-primary hidden" id="nextBtn" onclick="nextRound()">Next →</button>
+  </div>
+
+  <!-- End -->
+  <div id="endView" class="hidden">
+    <div class="end-card">
+      <div class="end-score" id="endScore">0<span>/500</span></div>
+      <div class="end-rank" id="endRank"></div>
+      <div class="end-rank-en" id="endRankEn"></div>
+      <div class="result-chips" id="resultChips"></div>
+      <div class="share-grid" id="shareGrid"></div>
+      <div class="share-note" id="shareNote">Same five characters for everyone today.</div>
+
+      <div class="week-board">
+        <div class="week-head">
+          <span class="week-title">本周战绩 · This Week</span>
+          <span class="week-meta" id="weekMeta"></span>
+        </div>
+        <div class="week-days" id="weekDays"></div>
+        <div class="week-foot">Your scores on this device · one set of five a day</div>
+      </div>
+      <button class="btn btn-primary" onclick="copyResult()">📋 Copy Result</button>
+      <div class="copied-msg" id="copiedMsg"></div>
+      <button class="btn btn-ghost" onclick="startPractice()">Practice Again (random 5)</button>
+    </div>
+
+    <div class="cta-block">
+      <div class="cta-title">你的名字属什么五行？</div>
+      <div class="cta-text">You just read five characters. Now read your own name: the quiz maps you to Earth 土, Fire 火 or Wood 木 — then builds a Chinese name from that element.</div>
+      <button class="btn btn-primary" onclick="window.location.href='index.html?from=game'">Find My Chinese Name →</button>
+    </div>
+  </div>
+
+  <div class="foot">
+    <a href="index.html">Chinese Name Generator</a> · <a href="blog/index.html">Blog</a> · <a href="blog/chinese-name-meaning.html">Name Meanings</a> · <a href="about/index.html">About</a>
+  </div>
+
+</div>
+
+<script>
+// ============ ELEMENT DEFINITIONS ============
+// Ring order follows the generating cycle 相生: 木 → 火 → 土 → 金 → 水 → 木
+// So a neighbouring element (±1) generates the answer, and the two opposite (±2) clash with it.
+var ELEMENTS = [
+  { key: 'wood',  cn: '木', en: 'Wood',  color: '#4E9F5B' },
+  { key: 'fire',  cn: '火', en: 'Fire',  color: '#D64541' },
+  { key: 'earth', cn: '土', en: 'Earth', color: '#C08A2E' },
+  { key: 'metal', cn: '金', en: 'Metal', color: '#8C959B' },
+  { key: 'water', cn: '水', en: 'Water', color: '#3B7EA1' }
+];
+
+var ELEMENT_INDEX = { wood: 0, fire: 1, earth: 2, metal: 3, water: 4 };
+
+// ============ CHARACTER BANK ============
+var BANK = [
+  // ---------- 木 WOOD ----------
+  { c: '森', e: 'wood', en: 'forest', why: 'Three 木 (trees) stacked on top of each other — wood energy at its densest.' },
+  { c: '林', e: 'wood', en: 'woods', why: 'Two 木 side by side. The radical is literally the tree.' },
+  { c: '柏', e: 'wood', en: 'cypress', why: 'The 木 radical on the left. An evergreen that keeps its colour through winter.' },
+  { c: '梓', e: 'wood', en: 'catalpa', why: '木 radical — the catalpa tree, once planted beside homes to mark a family line.' },
+  { c: '桐', e: 'wood', en: 'paulownia', why: '木 radical — the tree Chinese legend says phoenixes choose to perch on.' },
+  { c: '柳', e: 'wood', en: 'willow', why: '木 radical — willow branches bend without breaking.' },
+  { c: '桂', e: 'wood', en: 'osmanthus', why: '木 radical — the osmanthus, whose scent marks the mid-autumn festival.' },
+  { c: '楠', e: 'wood', en: 'cedar', why: '木 radical — nanmu, the timber reserved for imperial pillars.' },
+  { c: '棠', e: 'wood', en: 'crabapple', why: '木 radical — the flowering crabapple of classical gardens.' },
+  { c: '楷', e: 'wood', en: 'model / standard', why: '木 radical — originally the catalpa, later used for "exemplary".' },
+  { c: '兰', e: 'wood', en: 'orchid', why: 'The 艹 grass radical. Grass, flowers and herbs all belong to wood.' },
+  { c: '芷', e: 'wood', en: 'angelica', why: '艹 grass radical — a fragrant herb named in the Chu Ci poems.' },
+  { c: '萱', e: 'wood', en: 'daylily', why: '艹 grass radical — the daylily, traditionally the "forget-sorrow" plant.' },
+  { c: '荣', e: 'wood', en: 'flourish', why: '艹 grass radical — originally meant plants blooming in profusion.' },
+  { c: '竹', e: 'wood', en: 'bamboo', why: 'Bamboo is a plant — it sits with wood, not with the bamboo radical alone.' },
+  { c: '笙', e: 'wood', en: 'mouth organ', why: 'The 竹 bamboo radical. A reed instrument made of bamboo.' },
+  { c: '笛', e: 'wood', en: 'flute', why: 'The 竹 bamboo radical — a bamboo flute.' },
+  { c: '松', e: 'wood', en: 'pine', why: '木 radical — the evergreen that keeps its needles through the cold.' },
+  { c: '梅', e: 'wood', en: 'plum', why: '木 radical — plum blossom, the first flower to open in late winter.' },
+  { c: '榆', e: 'wood', en: 'elm', why: '木 radical — the elm, planted for shade and for its edible seeds.' },
+  { c: '桦', e: 'wood', en: 'birch', why: '木 radical — white-barked birch of the northern forests.' },
+  { c: '榕', e: 'wood', en: 'banyan', why: '木 radical — the banyan, whose aerial roots become new trunks.' },
+  { c: '栋', e: 'wood', en: 'ridgepole', why: '木 radical — the beam that holds a whole roof up.' },
+  { c: '芸', e: 'wood', en: 'rue / herb', why: '艹 grass radical — a fragrant herb, and by extension "diligent".' },
+  { c: '苗', e: 'wood', en: 'sprout', why: '艹 over 田 — young plants rising out of the field.' },
+  { c: '茉', e: 'wood', en: 'jasmine', why: '艹 grass radical — the jasmine flower.' },
+  { c: '蕊', e: 'wood', en: 'flower heart', why: '艹 radical — the stamen at the centre of a blossom.' },
+  { c: '苏', e: 'wood', en: 'to revive', why: '艹 grass radical — a plant coming back to life.' },
+  { c: '芊', e: 'wood', en: 'lush', why: '艹 grass radical — grass growing thick and green.' },
+  { c: '篁', e: 'wood', en: 'bamboo grove', why: 'The 竹 bamboo radical — a stand of bamboo.' },
+  { c: '箫', e: 'wood', en: 'xiao flute', why: '竹 radical — the end-blown bamboo flute.' },
+  { c: '笋', e: 'wood', en: 'bamboo shoot', why: '竹 radical — the shoot that pushes up through the soil in spring.' },
+
+  // ---------- 火 FIRE ----------
+  { c: '炎', e: 'fire', en: 'flame', why: 'Two 火 stacked. The doubling makes "blazing".' },
+  { c: '焱', e: 'fire', en: 'blaze', why: 'Three 火 — the character with the most literal fire in it.' },
+  { c: '煜', e: 'fire', en: 'radiant', why: 'The 火 radical — shining, blazing brightly.' },
+  { c: '烨', e: 'fire', en: 'splendid', why: '火 radical — brilliant, as a fire that lights a whole room.' },
+  { c: '炜', e: 'fire', en: 'glowing', why: '火 radical — the glow of embers.' },
+  { c: '焕', e: 'fire', en: 'renewed', why: '火 radical — to glow with new life.' },
+  { c: '灿', e: 'fire', en: 'brilliant', why: '火 radical — dazzling, glittering.' },
+  { c: '熙', e: 'fire', en: 'prosperous', why: 'The four dots 灬 at the bottom are the fire radical — fire written underneath.' },
+  { c: '熹', e: 'fire', en: 'first light', why: 'Four dots 灬 — fire at the base of the character.' },
+  { c: '明', e: 'fire', en: 'bright', why: '日 + 月. The sun is fire; together they mean brightness that never goes out.' },
+  { c: '昕', e: 'fire', en: 'dawn', why: 'The 日 sun radical — the moment light appears.' },
+  { c: '晨', e: 'fire', en: 'morning', why: '日 radical — the sun coming up.' },
+  { c: '曦', e: 'fire', en: 'sunlight', why: '日 radical — the first rays of the morning sun.' },
+  { c: '昭', e: 'fire', en: 'clear / manifest', why: '日 radical — light that makes everything visible.' },
+  { c: '夏', e: 'fire', en: 'summer', why: 'Summer is the season of fire in the five-element calendar.' },
+  { c: '丹', e: 'fire', en: 'cinnabar', why: 'Cinnabar red — red is the colour assigned to fire.' },
+  { c: '焰', e: 'fire', en: 'flame', why: '火 radical — the leaping tongue of a fire.' },
+  { c: '炬', e: 'fire', en: 'torch', why: '火 radical — a fire carried by hand.' },
+  { c: '燃', e: 'fire', en: 'to burn', why: '火 radical — to set alight.' },
+  { c: '烁', e: 'fire', en: 'to sparkle', why: '火 radical — light flickering off a hot surface.' },
+  { c: '煌', e: 'fire', en: 'brilliant', why: '火 radical — the glare of a great fire.' },
+  { c: '煦', e: 'fire', en: 'warmth', why: 'The four dots 灬 are fire written at the base — gentle warmth.' },
+  { c: '耀', e: 'fire', en: 'to shine', why: 'The 光 light radical — light radiating outward.' },
+  { c: '晖', e: 'fire', en: 'sunshine', why: '日 radical — the glow the sun leaves on everything.' },
+  { c: '晗', e: 'fire', en: 'dawn', why: '日 radical — the light just before sunrise.' },
+  { c: '昱', e: 'fire', en: 'sunlight', why: '日 over 立 — the sun standing up over the horizon.' },
+  { c: '晟', e: 'fire', en: 'brightness', why: '日 radical — light at its fullest.' },
+  { c: '晴', e: 'fire', en: 'clear sky', why: '日 radical — a sky with nothing between you and the sun.' },
+  { c: '暖', e: 'fire', en: 'warm', why: '日 radical — the warmth of sunlight on skin.' },
+  { c: '赤', e: 'fire', en: 'crimson', why: 'Red is the colour of fire in the five-element system.' },
+  { c: '昇', e: 'fire', en: 'to rise', why: '日 over 升 — the sun climbing.' },
+
+  // ---------- 土 EARTH ----------
+  { c: '坤', e: 'earth', en: 'the earth', why: 'The 土 radical, and one of the eight trigrams — 坤 is earth itself.' },
+  { c: '培', e: 'earth', en: 'cultivate', why: '土 radical — to bank up soil around a plant.' },
+  { c: '城', e: 'earth', en: 'city wall', why: '土 radical — rammed earth walls built the first cities.' },
+  { c: '境', e: 'earth', en: 'realm', why: '土 radical — a bounded land.' },
+  { c: '基', e: 'earth', en: 'foundation', why: '土 radical — the stone base of a building.' },
+  { c: '峰', e: 'earth', en: 'peak', why: 'The 山 mountain radical. Mountains are earth.' },
+  { c: '岚', e: 'earth', en: 'mountain mist', why: '山 radical — mist on a mountainside.' },
+  { c: '岳', e: 'earth', en: 'high mountain', why: '山 sits at the bottom, with hills stacked above.' },
+  { c: '峻', e: 'earth', en: 'steep', why: '山 radical — a ridgeline too steep to walk.' },
+  { c: '岩', e: 'earth', en: 'rock', why: '山 over 石 — mountain plus stone. Rock is earth.' },
+  { c: '硕', e: 'earth', en: 'large / learned', why: 'The 石 stone radical. Stone belongs to earth.' },
+  { c: '磊', e: 'earth', en: 'open-hearted', why: 'Three 石 stones — piled rocks, meaning upright and unafraid.' },
+  { c: '田', e: 'earth', en: 'field', why: 'Farmland — where earth is worked and turned over.' },
+  { c: '辰', e: 'earth', en: 'celestial dragon', why: 'As an earthly branch, 辰 is assigned to earth.' },
+  { c: '坪', e: 'earth', en: 'flat ground', why: '土 radical — level, open land.' },
+  { c: '垚', e: 'earth', en: 'high mound', why: 'Three 土 stacked — the tallest heap of earth a character can hold.' },
+  { c: '堃', e: 'earth', en: 'earth (variant)', why: '土 at the base — an old variant of 坤, the earth.' },
+  { c: '堡', e: 'earth', en: 'fort', why: '土 radical — rammed-earth walls raised for defence.' },
+  { c: '疆', e: 'earth', en: 'territory', why: 'Built on 田 field and 土 earth — a bounded stretch of land.' },
+  { c: '垠', e: 'earth', en: 'boundary', why: '土 radical — the edge of the land.' },
+  { c: '屿', e: 'earth', en: 'islet', why: '山 radical — a small island, rock rising out of water.' },
+  { c: '岗', e: 'earth', en: 'ridge', why: '山 radical — a crest of hill.' },
+  { c: '崧', e: 'earth', en: 'lofty peak', why: '山 over 松 — a tall mountain.' },
+  { c: '岐', e: 'earth', en: 'forked path', why: '山 radical — where a mountain path splits.' },
+  { c: '砚', e: 'earth', en: 'inkstone', why: 'The 石 stone radical — the stone slab a brush grinds ink on.' },
+  { c: '砂', e: 'earth', en: 'sand', why: '石 radical — stone ground down to grains.' },
+  { c: '砾', e: 'earth', en: 'gravel', why: '石 radical — small broken stones.' },
+  { c: '圃', e: 'earth', en: 'garden plot', why: '田 radical — enclosed ground under cultivation.' },
+  { c: '甸', e: 'earth', en: 'field', why: '田 radical — open land worked for crops.' },
+
+  // ---------- 金 METAL ----------
+  { c: '钰', e: 'metal', en: 'treasure', why: 'The 钅 metal radical — the character for a precious hard treasure.' },
+  { c: '铭', e: 'metal', en: 'inscription', why: '钅 radical — to engrave a record into metal so it lasts.' },
+  { c: '锋', e: 'metal', en: 'blade edge', why: '钅 radical — the sharp point.' },
+  { c: '钧', e: 'metal', en: 'balance / weight', why: '钅 radical — an ancient unit of weight for bronze.' },
+  { c: '锦', e: 'metal', en: 'brocade', why: '钅 radical — silk that glitters like metal thread.' },
+  { c: '锐', e: 'metal', en: 'sharp', why: '钅 radical — keen, precision-cut.' },
+  { c: '鑫', e: 'metal', en: 'prosperity', why: 'Three 金 stacked — the character literally built from metal.' },
+  { c: '银', e: 'metal', en: 'silver', why: '钅 radical — the metal itself.' },
+  { c: '利', e: 'metal', en: 'sharp / profit', why: 'The 刂 knife radical. Blades are forged metal.' },
+  { c: '刚', e: 'metal', en: 'firm', why: '刂 knife radical — hard, unyielding.' },
+  { c: '剑', e: 'metal', en: 'sword', why: '刂 knife radical — a double-edged blade.' },
+  { c: '秋', e: 'metal', en: 'autumn', why: 'Autumn is the metal season — the time of harvest and cutting.' },
+  { c: '西', e: 'metal', en: 'west', why: 'West is metal\'s direction on the five-element compass.' },
+  { c: '白', e: 'metal', en: 'white', why: 'White is the colour assigned to metal.' },
+  { c: '钢', e: 'metal', en: 'steel', why: '钅 radical — iron reforged strong.' },
+  { c: '铜', e: 'metal', en: 'bronze', why: '钅 radical — the alloy of bells and ancient vessels.' },
+  { c: '铁', e: 'metal', en: 'iron', why: '钅 radical — the metal itself.' },
+  { c: '鉴', e: 'metal', en: 'mirror / to reflect', why: '金 at the base — a bronze mirror used to examine oneself.' },
+  { c: '钟', e: 'metal', en: 'bell', why: '钅 radical — a cast bronze bell.' },
+  { c: '镇', e: 'metal', en: 'to hold down', why: '钅 radical — a metal weight that keeps things steady.' },
+  { c: '铄', e: 'metal', en: 'molten shine', why: '钅 radical — metal so bright it looks melted.' },
+  { c: '铠', e: 'metal', en: 'armour', why: '钅 radical — plates of metal worn into battle.' },
+  { c: '铖', e: 'metal', en: 'pure metal', why: '钅 radical — a name for fine, unalloyed metal.' },
+  { c: '铮', e: 'metal', en: 'clang', why: '钅 radical — the ring of struck metal.' },
+  { c: '铎', e: 'metal', en: 'hand bell', why: '钅 radical — a bronze bell with a wooden handle.' },
+  { c: '钿', e: 'metal', en: 'inlay', why: '钅 radical — gold or silver pressed into a surface.' },
+  { c: '刃', e: 'metal', en: 'blade', why: 'The 刀 knife radical with the stroke marking the edge.' },
+  { c: '戈', e: 'metal', en: 'halberd', why: 'A bronze-bladed weapon — steel in the field.' },
+  { c: '钺', e: 'metal', en: 'battle-axe', why: '钅 radical — a heavy ceremonial axe.' },
+
+  // ---------- 水 WATER ----------
+  { c: '沐', e: 'water', en: 'to bathe', why: 'The 氵 water radical — washing in a stream.' },
+  { c: '汐', e: 'water', en: 'evening tide', why: '氵 radical — the tide that comes in at night.' },
+  { c: '涵', e: 'water', en: 'to contain', why: '氵 radical — water soaking into something until it holds.' },
+  { c: '清', e: 'water', en: 'clear', why: '氵 radical — water so clean you can see the bottom.' },
+  { c: '澜', e: 'water', en: 'great waves', why: '氵 radical — the swell of a wide river.' },
+  { c: '泽', e: 'water', en: 'marsh / grace', why: '氵 radical — water gathering and nourishing everything around it.' },
+  { c: '溪', e: 'water', en: 'stream', why: '氵 radical — a brook between rocks.' },
+  { c: '润', e: 'water', en: 'to moisten', why: '氵 radical — water softening dry ground.' },
+  { c: '浩', e: 'water', en: 'vast', why: '氵 radical — the measureless spread of water.' },
+  { c: '淼', e: 'water', en: 'expanse of water', why: 'Three 水 stacked — the character literally built from water.' },
+  { c: '冰', e: 'water', en: 'ice', why: 'The two dots 冫 are the ice radical — frozen water, still water.' },
+  { c: '雪', e: 'water', en: 'snow', why: 'The 雨 rain radical. Rain and snow both belong to water.' },
+  { c: '霖', e: 'water', en: 'long rain', why: '雨 radical — rain that keeps falling, a blessing on dry fields.' },
+  { c: '泉', e: 'water', en: 'spring', why: '水 at the base — water rising out of the ground.' },
+  { c: '冬', e: 'water', en: 'winter', why: 'Winter is the water season in the five-element cycle.' },
+  { c: '北', e: 'water', en: 'north', why: 'North is water\'s direction on the five-element compass.' },
+  { c: '江', e: 'water', en: 'great river', why: '氵 radical — the long river.' },
+  { c: '河', e: 'water', en: 'river', why: '氵 radical — water on the move.' },
+  { c: '洋', e: 'water', en: 'ocean', why: '氵 radical — the widest water there is.' },
+  { c: '波', e: 'water', en: 'wave', why: '氵 radical — water lifted by wind.' },
+  { c: '沛', e: 'water', en: 'abundant', why: '氵 radical — rain so heavy it soaks everything.' },
+  { c: '泓', e: 'water', en: 'deep pool', why: '氵 radical — clear water pooled deep.' },
+  { c: '洁', e: 'water', en: 'clean', why: '氵 radical — washed pure.' },
+  { c: '淳', e: 'water', en: 'pure / honest', why: '氵 radical — water clear to the bottom.' },
+  { c: '深', e: 'water', en: 'deep', why: '氵 radical — depth you cannot see the end of.' },
+  { c: '湛', e: 'water', en: 'clear and deep', why: '氵 radical — still water, deep and transparent.' },
+  { c: '潼', e: 'water', en: 'surging water', why: '氵 radical — a river running high.' },
+  { c: '潇', e: 'water', en: 'clear and free', why: '氵 radical — deep water running unobstructed.' },
+  { c: '露', e: 'water', en: 'dew', why: '雨 radical — moisture condensing out of the night air.' },
+  { c: '雾', e: 'water', en: 'mist', why: '雨 radical — water suspended in the air.' },
+  { c: '寒', e: 'water', en: 'cold', why: 'Winter is water\'s season — the character for cold carries it.' },
+];
+
+// ============ STATE ============
+var rounds = [];
+var roundIndex = 0;
+var totalScore = 0;
+var roundScores = [];
+var locked = false;
+var isPractice = false;
+var todayKey = '';
+
+// ============ DAILY SEED ============
+function getTodayKey() {
+  var d = new Date();
+  var m = String(d.getUTCMonth() + 1).padStart(2, '0');
+  var day = String(d.getUTCDate()).padStart(2, '0');
+  return d.getUTCFullYear() + '-' + m + '-' + day;
+}
+
+function hashString(str) {
+  var h = 2166136261;
+  for (var i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+function mulberry32(seed) {
+  return function () {
+    seed |= 0;
+    seed = (seed + 0x6D2B79F5) | 0;
+    var t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function pickDaily(count) {
+  // Group the bank by element
+  var byElement = {};
+  ELEMENTS.forEach(function (el) { byElement[el.key] = []; });
+  BANK.forEach(function (r) {
+    if (byElement[r.e]) byElement[r.e].push(r);
+  });
+
+  // One integer per UTC day, taken from todayKey so the pick always matches
+  // the date the page believes it is
+  var keyParts = (todayKey || getTodayKey()).split('-');
+  var dayNumber = Math.floor(Date.UTC(+keyParts[0], +keyParts[1] - 1, +keyParts[2]) / 86400000);
+
+  // Rotate each element's list by one slot per day: every day brings five new
+  // characters, one from each element, and none repeats until that list wraps.
+  var picks = ELEMENTS.map(function (el) {
+    var list = byElement[el.key];
+    var offset = hashString('offset|' + el.key) % list.length;
+    return list[(dayNumber + offset) % list.length];
+  });
+
+  // Shuffle the order of the five so the sequence differs each day
+  var rand = mulberry32(hashString(todayKey + '|order'));
+  for (var i = picks.length - 1; i > 0; i--) {
+    var j = Math.floor(rand() * (i + 1));
+    var tmp = picks[i];
+    picks[i] = picks[j];
+    picks[j] = tmp;
+  }
+
+  return picks.slice(0, count);
+}
+
+var lastPracticeChars = [];
+
+function pickRandom(count) {
+  var blocked = {};
+  // Skip today's daily five so a practice round never repeats the paid set
+  if (todayKey) {
+    pickDaily(5).forEach(function (r) { blocked[r.c] = true; });
+  }
+  // Skip the previous practice set so consecutive rounds always differ
+  lastPracticeChars.forEach(function (c) { blocked[c] = true; });
+
+  var pool = BANK.filter(function (r) { return !blocked[r.c]; });
+  if (pool.length < count) pool = BANK.slice();
+
+  for (var i = pool.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = pool[i];
+    pool[i] = pool[j];
+    pool[j] = tmp;
+  }
+
+  var picked = pool.slice(0, count);
+  lastPracticeChars = picked.map(function (r) { return r.c; });
+  return picked;
+}
+
+// ============ BUILD COMPASS ============
+function buildCompass() {
+  var stage = document.getElementById('compassStage');
+  if (stage.querySelector('.elem-btn')) return;
+
+  var R = 35; // percent radius
+  ELEMENTS.forEach(function (el, i) {
+    var angle = (-90 + i * 72) * Math.PI / 180;
+    var btn = document.createElement('button');
+    btn.className = 'elem-btn ' + el.key;
+    btn.setAttribute('data-element', el.key);
+    btn.innerHTML = el.cn + '<span class="elem-label">' + el.en.toUpperCase() + '</span>';
+    btn.style.left = (50 + R * Math.cos(angle)) + '%';
+    btn.style.top = (50 + R * Math.sin(angle)) + '%';
+    btn.onclick = function () { answer(el.key); };
+    stage.appendChild(btn);
+  });
+}
+
+// ============ GAME FLOW ============
+function startGame() {
+  todayKey = getTodayKey();
+  document.getElementById('dateTag').textContent = todayKey;
+
+  var saved = null;
+  try { saved = JSON.parse(localStorage.getItem('wuxing_daily') || 'null'); } catch (e) { saved = null; }
+
+  if (saved && saved.date === todayKey) {
+    // Already played today — show the result straight away
+    rounds = pickDaily(5);
+    roundScores = saved.scores;
+    totalScore = saved.scores.reduce(function (a, b) { return a + b; }, 0);
+    showEnd(true);
+    return;
+  }
+
+  beginRound(pickDaily(5), false);
+}
+
+function startPractice() {
+  todayKey = getTodayKey();
+  beginRound(pickRandom(5), true);
+}
+
+function beginRound(list, practice) {
+  rounds = list;
+  isPractice = practice;
+  roundIndex = 0;
+  totalScore = 0;
+  roundScores = [];
+  locked = false;
+
+  document.getElementById('introView').classList.add('hidden');
+  document.getElementById('endView').classList.add('hidden');
+  document.getElementById('gameView').classList.remove('hidden');
+
+  buildCompass();
+  renderRound();
+}
+
+function renderRound() {
+  var q = rounds[roundIndex];
+
+  document.getElementById('charDisplay').textContent = q.c;
+  var charEl = document.getElementById('charDisplay');
+  charEl.style.animation = 'none';
+  void charEl.offsetWidth;
+  charEl.style.animation = '';
+
+  document.getElementById('scoreTag').textContent = totalScore + ' pts';
+  document.getElementById('revealCard').classList.add('hidden');
+  document.getElementById('nextBtn').classList.add('hidden');
+  document.getElementById('nextBtn').textContent = (roundIndex === rounds.length - 1) ? 'See My Result →' : 'Next →';
+
+  // Reset buttons
+  document.querySelectorAll('.elem-btn').forEach(function (btn) {
+    btn.disabled = false;
+    btn.classList.remove('correct', 'wrong', 'faded');
+    btn.style.display = '';
+  });
+
+  renderDots();
+  locked = false;
+}
+
+function renderDots() {
+  var dots = document.getElementById('roundDots');
+  dots.innerHTML = '';
+  for (var i = 0; i < rounds.length; i++) {
+    var d = document.createElement('div');
+    d.className = 'round-dot';
+    if (i < roundScores.length) {
+      var s = roundScores[i];
+      d.classList.add(s === 100 ? 'hit' : (s === 60 ? 'near' : 'miss'));
+    } else if (i === roundIndex) {
+      d.classList.add('active');
+    }
+    dots.appendChild(d);
+  }
+}
+
+function ringDistance(a, b) {
+  var d = Math.abs(ELEMENT_INDEX[a] - ELEMENT_INDEX[b]);
+  return Math.min(d, 5 - d);
+}
+
+function answer(pickedKey) {
+  if (locked) return;
+  locked = true;
+
+  var q = rounds[roundIndex];
+  var dist = ringDistance(q.e, pickedKey);
+  var score = dist === 0 ? 100 : (dist === 1 ? 60 : 0);
+
+  totalScore += score;
+  roundScores.push(score);
+
+  // Button feedback
+  document.querySelectorAll('.elem-btn').forEach(function (btn) {
+    btn.disabled = true;
+    var key = btn.getAttribute('data-element');
+    if (key === q.e) {
+      btn.classList.add('correct');
+    } else if (key === pickedKey && dist !== 0) {
+      btn.classList.add('wrong');
+    } else {
+      btn.classList.add('faded');
+    }
+  });
+
+  // Score popup
+  var pop = document.createElement('div');
+  pop.className = 'score-pop' + (score === 0 ? ' zero' : '');
+  pop.textContent = '+' + score;
+  document.getElementById('compassStage').appendChild(pop);
+  setTimeout(function () { pop.remove(); }, 1100);
+
+  // Reveal
+  var correctEl = ELEMENTS[ELEMENT_INDEX[q.e]];
+  var pickedEl = ELEMENTS[ELEMENT_INDEX[pickedKey]];
+
+  document.getElementById('revealChar').textContent = q.c;
+  document.getElementById('revealEn').textContent = q.en;
+  var tag = document.getElementById('revealElement');
+  tag.textContent = correctEl.cn + ' · ' + correctEl.en;
+  tag.style.background = correctEl.color;
+
+  document.getElementById('revealWhy').textContent = q.why;
+
+  var relation;
+  if (dist === 0) {
+    relation = 'Correct. <strong>' + correctEl.cn + '</strong> is the element of this character.';
+  } else if (dist === 1) {
+    relation = 'You chose <strong>' + pickedEl.cn + '</strong>. In the generating cycle a neighbouring element feeds the answer, so this is close — but the character itself is <strong>' + correctEl.cn + '</strong>.';
+  } else {
+    relation = 'You chose <strong>' + pickedEl.cn + '</strong>. That element is two steps away and clashes with the answer — the character is <strong>' + correctEl.cn + '</strong>.';
+  }
+  document.getElementById('revealRelation').innerHTML = relation;
+
+  document.getElementById('revealCard').classList.remove('hidden');
+  document.getElementById('scoreTag').textContent = totalScore + ' pts';
+  document.getElementById('nextBtn').classList.remove('hidden');
+  renderDots();
+}
+
+function nextRound() {
+  roundIndex++;
+  if (roundIndex >= rounds.length) {
+    showEnd(false);
+  } else {
+    renderRound();
+  }
+}
+
+function rankFor(score) {
+  if (score >= 500) return { cn: '五行圆满', en: 'Perfect harmony' };
+  if (score >= 400) return { cn: '通晓五行', en: 'Elemental scholar' };
+  if (score >= 300) return { cn: '渐入佳境', en: 'Finding the pattern' };
+  if (score >= 200) return { cn: '尚需修炼', en: 'Still warming up' };
+  return { cn: '初识五行', en: 'A first encounter' };
+}
+
+// ============ WEEKLY BOARD (device-local) ============
+function weekDateKey(d) {
+  var m = String(d.getUTCMonth() + 1).padStart(2, '0');
+  var day = String(d.getUTCDate()).padStart(2, '0');
+  return d.getUTCFullYear() + '-' + m + '-' + day;
+}
+
+function getWeekKeys() {
+  var now = new Date();
+  var start = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+  start.setUTCDate(start.getUTCDate() - ((start.getUTCDay() + 6) % 7)); // Monday
+  var keys = [];
+  for (var i = 0; i < 7; i++) {
+    var d = new Date(start);
+    d.setUTCDate(start.getUTCDate() + i);
+    keys.push(weekDateKey(d));
+  }
+  return keys;
+}
+
+function loadWeekScores() {
+  try {
+    return JSON.parse(localStorage.getItem('wuxing_week') || '{}') || {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveWeekScore(date, score) {
+  var db = loadWeekScores();
+  db[date] = score;
+  var keys = Object.keys(db).sort();
+  while (keys.length > 21) delete db[keys.shift()];
+  try {
+    localStorage.setItem('wuxing_week', JSON.stringify(db));
+  } catch (e) {}
+}
+
+function computeStreak(db) {
+  var d = new Date();
+  var key = weekDateKey(d);
+  if (!Object.prototype.hasOwnProperty.call(db, key)) {
+    d.setUTCDate(d.getUTCDate() - 1);
+    key = weekDateKey(d);
+    if (!Object.prototype.hasOwnProperty.call(db, key)) return 0;
+  }
+  var streak = 0;
+  while (Object.prototype.hasOwnProperty.call(db, key)) {
+    streak++;
+    d.setUTCDate(d.getUTCDate() - 1);
+    key = weekDateKey(d);
+  }
+  return streak;
+}
+
+function renderWeekBoard() {
+  var db = loadWeekScores();
+  var keys = getWeekKeys();
+  var labels = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+  var today = getTodayKey();
+  var best = 0, played = 0, total = 0, html = '';
+
+  keys.forEach(function (key, i) {
+    var has = Object.prototype.hasOwnProperty.call(db, key);
+    if (has) {
+      played++;
+      total += db[key];
+      if (db[key] > best) best = db[key];
+    }
+    var cls = 'week-day'
+      + (has ? ' played' : '')
+      + (key === today ? ' today' : '')
+      + (key > today && !has ? ' future' : '');
+
+    html += '<div class="' + cls + '">'
+      + '<div class="wd-label">' + labels[i] + '</div>'
+      + '<div class="wd-cell">' + (has ? db[key] : '–') + '</div>'
+      + '</div>';
+  });
+
+  var meta;
+  if (!played) {
+    meta = 'No rounds yet';
+  } else {
+    var avg = Math.round(total / played);
+    var streak = computeStreak(db);
+    meta = played + '/7 · avg ' + avg + (streak > 1 ? ' · 🔥 ' + streak + 'd streak' : '');
+  }
+
+  document.getElementById('weekDays').innerHTML = html;
+  document.getElementById('weekMeta').textContent = meta;
+}
+
+function showEnd(replayed) {
+  document.getElementById('gameView').classList.add('hidden');
+  document.getElementById('introView').classList.add('hidden');
+  document.getElementById('endView').classList.remove('hidden');
+
+  document.getElementById('endScore').innerHTML = totalScore + '<span>/500</span>';
+  var rank = rankFor(totalScore);
+  document.getElementById('endRank').textContent = rank.cn;
+  document.getElementById('endRankEn').textContent = rank.en;
+
+  // Visual recap: today's five characters, coloured by their element
+  var chips = document.getElementById('resultChips');
+  chips.innerHTML = '';
+  rounds.forEach(function (r, i) {
+    var el = ELEMENTS[ELEMENT_INDEX[r.e]];
+    var s = roundScores[i];
+    var state = s === 100
+      ? { mark: '✓', color: '#4CAF50' }
+      : (s === 60 ? { mark: '±', color: '#E0A526' } : { mark: '×', color: '#B23A3A' });
+
+    var chip = document.createElement('div');
+    chip.className = 'result-chip';
+    chip.style.background = el.color;
+    chip.style.animationDelay = (i * 0.06) + 's';
+    chip.innerHTML =
+      '<span class="chip-char">' + r.c + '</span>' +
+      '<span class="chip-element">' + el.cn + '</span>' +
+      '<span class="chip-score" style="color:' + state.color + ';">' + state.mark + '</span>';
+    chips.appendChild(chip);
+  });
+
+  var squares = roundScores.map(function (s) {
+    return s === 100 ? '🟩' : (s === 60 ? '🟨' : '🟥');
+  }).join('');
+
+  document.getElementById('shareGrid').textContent = squares;
+  document.getElementById('shareNote').textContent = isPractice
+    ? 'Practice round — not today\'s daily five.'
+    : 'Same five characters for everyone today.';
+
+  // Save the daily result
+  if (!isPractice && !replayed) {
+    try {
+      localStorage.setItem('wuxing_daily', JSON.stringify({ date: todayKey, scores: roundScores }));
+    } catch (e) {}
+    saveWeekScore(todayKey, totalScore);
+  }
+  renderWeekBoard();
+}
+
+// ============ SHARE ============
+function copyResult() {
+  var squares = roundScores.map(function (s) {
+    return s === 100 ? '🟩' : (s === 60 ? '🟨' : '🟥');
+  }).join('');
+
+  var text = '五行罗盘 Wu Xing Compass ' + (todayKey || getTodayKey()) + '\n' +
+    squares + '  ' + totalScore + '/500\n' +
+    'https://joed-sze.github.io/chinese-name-spirit/game.html';
+
+  var msg = document.getElementById('copiedMsg');
+
+  function done() {
+    msg.textContent = 'Copied — paste it anywhere.';
+    setTimeout(function () { msg.textContent = ''; }, 2600);
+  }
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(function () { fallbackCopy(text, done); });
+  } else {
+    fallbackCopy(text, done);
+  }
+}
+
+function fallbackCopy(text, done) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); done(); } catch (e) {}
+  ta.remove();
+}
+
+// ============ INIT ============
+document.getElementById('dateTag').textContent = getTodayKey();
+</script>
+
+</body>
+</html>

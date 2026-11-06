@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -14,15 +14,15 @@
 <link rel="sitemap" type="application/xml" title="Sitemap" href="https://joed-sze.github.io/chinese-name-spirit/sitemap.xml">
 
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="https://joed-sze.github.io/chinese-name-spirit/favicon.png">
-<link rel="apple-touch-icon" href="https://joed-sze.github.io/chinese-name-spirit/favicon.png">
+<link rel="icon" type="image/png" href="https://joed-sze.github.io/chinese-name-spirit/favicon.jpg">
+<link rel="apple-touch-icon" href="https://joed-sze.github.io/chinese-name-spirit/favicon.jpg">
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://joed-sze.github.io/chinese-name-spirit/">
 <meta property="og:title" content="What Is My Chinese Name? | Chinese Name Generator & Meaning">
 <meta property="og:description" content="What is my Chinese name? Use our Chinese name generator to discover your personalized Chinese name based on personality, meaning, and culture.">
-<meta property="og:image" content="https://joed-sze.github.io/chinese-name-spirit/og-image.png">
+<meta property="og:image" content="https://joed-sze.github.io/chinese-name-spirit/og-image.jpg">
 <meta property="og:site_name" content="The Spirit of Your Chinese Name">
 <meta property="og:locale" content="en_US">
 
@@ -31,7 +31,7 @@
 <meta name="twitter:url" content="https://joed-sze.github.io/chinese-name-spirit/">
 <meta name="twitter:title" content="What Is My Chinese Name? | Chinese Name Generator & Meaning">
 <meta name="twitter:description" content="What is my Chinese name? Use our Chinese name generator to discover your personalized Chinese name based on personality, meaning, and culture.">
-<meta name="twitter:image" content="https://joed-sze.github.io/chinese-name-spirit/og-image.png">
+<meta name="twitter:image" content="https://joed-sze.github.io/chinese-name-spirit/og-image.jpg">
 
 <!-- Structured Data / JSON-LD -->
 <script type="application/ld+json">
@@ -93,10 +93,12 @@
   ]
 }
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-<!-- PDF Generation Libraries -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- PDF Generation Libraries (deferred: only needed when the user downloads) -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -300,6 +302,93 @@ body {
   color: white !important;
   text-decoration: none;
   font-weight: 600;
+}
+
+/* Daily Five Elements Game strip */
+.daily-game-strip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  margin-top: 18px;
+  padding: 15px 18px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #8B4513 0%, #A9642E 100%);
+  color: #F5F0E8;
+  text-decoration: none;
+  box-shadow: 0 8px 22px rgba(139, 69, 19, 0.22);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.daily-game-strip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(139, 69, 19, 0.3);
+}
+
+.daily-game-icon {
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+.daily-game-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+}
+
+.daily-game-title {
+  font-family: 'Noto Serif SC', 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.daily-game-sub {
+  font-size: 12px;
+  color: rgba(245, 240, 232, 0.82);
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
+.daily-game-arrow {
+  font-size: 18px;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+/* Result page cross-link to the game */
+.result-game-link {
+  display: block;
+  margin-top: 18px;
+  padding: 13px 18px;
+  border-radius: 14px;
+  border: 1px dashed rgba(139, 69, 19, 0.35);
+  background: rgba(212, 165, 116, 0.12);
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.result-game-link:hover {
+  background: rgba(212, 165, 116, 0.24);
+}
+
+/* Note shown when arriving from the daily game */
+.from-game-note {
+  display: none;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(139, 69, 19, 0.25);
+  background: rgba(212, 165, 116, 0.16);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.55;
+  text-align: left;
 }
 
 /* Value Proposition Highlights */
@@ -640,6 +729,133 @@ body {
 
 @keyframes fadeIn {
   to { opacity: 1; }
+}
+
+/* ===== GAMIFIED LEVEL HEADER ===== */
+.level-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.14), rgba(196, 30, 58, 0.08));
+  border: 1px solid rgba(212, 165, 116, 0.35);
+  border-radius: 14px;
+  animation: fadeIn 0.4s ease;
+}
+
+.level-badge {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(139, 69, 19, 0.35);
+}
+
+.level-badge.pulse {
+  animation: badgePulse 0.6s ease;
+}
+
+@keyframes badgePulse {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.22); box-shadow: 0 0 0 10px rgba(196, 30, 58, 0.15); }
+  100% { transform: scale(1); }
+}
+
+.level-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.level-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.level-track {
+  height: 7px;
+  background: rgba(212, 165, 116, 0.28);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.level-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--secondary), var(--accent), var(--gold));
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 0 8px rgba(196, 30, 58, 0.45);
+}
+
+.xp-pill {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(212, 165, 116, 0.5);
+  border-radius: 20px;
+  padding: 6px 11px;
+  white-space: nowrap;
+}
+
+.xp-pill.bump {
+  animation: xpBump 0.5s ease;
+}
+
+@keyframes xpBump {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.18); background: rgba(255, 215, 0, 0.35); }
+  100% { transform: scale(1); }
+}
+
+/* Floating +XP reward */
+.xp-float {
+  position: fixed;
+  z-index: 2000;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.9);
+  pointer-events: none;
+  animation: xpFloat 1s ease forwards;
+}
+
+@keyframes xpFloat {
+  0% { opacity: 0; transform: translateY(0) scale(0.8); }
+  25% { opacity: 1; transform: translateY(-12px) scale(1.1); }
+  100% { opacity: 0; transform: translateY(-52px) scale(1); }
+}
+
+/* Option picked celebration */
+.option-btn.just-picked {
+  animation: optionPop 0.45s ease;
+  border-color: var(--accent) !important;
+  background: rgba(196, 30, 58, 0.09) !important;
+  box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.12);
+}
+
+@keyframes optionPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.025); }
+  100% { transform: scale(1); }
 }
 
 /* Question */
@@ -1697,10 +1913,10 @@ body {
   animation: stepAppear 0.6s ease forwards;
 }
 
-.generation-step:nth-child(1) { animation-delay: 0.3s; }
-.generation-step:nth-child(2) { animation-delay: 1.2s; }
-.generation-step:nth-child(3) { animation-delay: 2.1s; }
-.generation-step:nth-child(4) { animation-delay: 3.0s; }
+.generation-step:nth-child(1) { animation-delay: 0.15s; }
+.generation-step:nth-child(2) { animation-delay: 0.65s; }
+.generation-step:nth-child(3) { animation-delay: 1.15s; }
+.generation-step:nth-child(4) { animation-delay: 1.65s; }
 
 .generation-step-icon {
   width: 48px;
@@ -1740,21 +1956,52 @@ body {
   background: linear-gradient(90deg, #C41E3A, #D4A574);
   border-radius: 2px;
   width: 0%;
-  animation: progressFill 3.5s ease forwards;
+  animation: progressFill 2.2s ease forwards;
 }
 
 .generation-reveal {
   opacity: 0;
-  transform: scale(0.8);
-  animation: revealName 0.8s ease 3.8s forwards;
+  animation: revealName 0.5s ease 2.2s forwards;
 }
 
 .generation-reveal-name {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
   font-family: 'Noto Serif SC', serif;
   font-size: 64px;
   color: #D4A574;
   margin-bottom: 16px;
   text-shadow: 0 0 30px rgba(212, 165, 116, 0.3);
+  min-height: 84px;
+}
+
+/* Calligraphy stroke-by-stroke ink writing */
+.ink-char {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(7px);
+  clip-path: inset(0 100% 0 0);
+  animation: inkWrite 1s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+@keyframes inkWrite {
+  0% { opacity: 0; filter: blur(7px); clip-path: inset(0 100% 0 0); }
+  12% { opacity: 1; }
+  100% { opacity: 1; filter: blur(0); clip-path: inset(0 0 0 0); }
+}
+
+/* Ink drop splash under the name */
+.ink-splash {
+  width: 0;
+  height: 2px;
+  margin: 0 auto 18px;
+  background: linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.85), transparent);
+  animation: inkSplash 0.9s ease 3.1s forwards;
+}
+
+@keyframes inkSplash {
+  to { width: 220px; }
 }
 
 .generation-reveal-pinyin {
@@ -2855,6 +3102,292 @@ body {
 .popularity-bar:nth-child(4) { height: 85%; }
 .popularity-bar:nth-child(5) { height: 40%; }
 
+/* ===== FORTUNE STICKS (运势抽签) ===== */
+.fortune-section {
+  background: linear-gradient(160deg, rgba(139, 69, 19, 0.06), rgba(196, 30, 58, 0.06));
+  border: 1px solid rgba(212, 165, 116, 0.4);
+  border-radius: 16px;
+  padding: 28px 22px;
+  margin: 24px 0;
+  text-align: center;
+}
+
+.fortune-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: 'Noto Serif SC', 'Playfair Display', serif;
+  margin-bottom: 6px;
+}
+
+.fortune-subtitle {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.fortune-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Bamboo tube */
+.fortune-tube {
+  position: relative;
+  width: 110px;
+  height: 170px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.fortune-tube:hover {
+  transform: scale(1.04);
+}
+
+.fortune-tube.shaking {
+  animation: tubeShake 0.5s ease-in-out infinite;
+}
+
+@keyframes tubeShake {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  20% { transform: rotate(-8deg) translateX(-4px); }
+  40% { transform: rotate(8deg) translateX(4px); }
+  60% { transform: rotate(-6deg) translateX(-3px); }
+  80% { transform: rotate(6deg) translateX(3px); }
+}
+
+.fortune-tube-body {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 150px;
+  background: linear-gradient(90deg, #6B3410 0%, #A0522D 30%, #8B4513 50%, #A0522D 70%, #6B3410 100%);
+  border-radius: 6px 6px 8px 8px;
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.4), 0 6px 14px rgba(0,0,0,0.25);
+  overflow: hidden;
+}
+
+.fortune-tube-rim {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(90deg, #4A2208, #7B3F15, #4A2208);
+}
+.fortune-tube-rim.top { top: 0; border-radius: 6px 6px 0 0; }
+.fortune-tube-rim.bottom { bottom: 0; border-radius: 0 0 8px 8px; }
+
+/* Sticks inside the tube */
+.fortune-sticks {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.stick {
+  width: 7px;
+  height: 90px;
+  background: linear-gradient(180deg, #F5DEB3, #DEB887 40%, #D2B48C);
+  border-radius: 3px 3px 1px 1px;
+  box-shadow: 1px 0 2px rgba(0,0,0,0.2);
+  position: relative;
+}
+.stick::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.s1 { transform: rotate(-6deg); margin-top: 4px; }
+.s2 { transform: rotate(3deg); height: 95px; }
+.s3 { transform: rotate(-2deg); margin-top: -2px; height: 92px; }
+.s4 { transform: rotate(7deg); margin-top: 6px; }
+.s5 { transform: rotate(-4deg); height: 88px; }
+
+.fortune-tube.shaking .stick {
+  animation: stickWiggle 0.4s ease-in-out infinite alternate;
+}
+@keyframes stickWiggle {
+  0% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  100% { transform: translateY(-6px) rotate(calc(var(--r, 0deg) + 4deg)); }
+}
+
+.fortune-tube-base {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96px;
+  height: 12px;
+  background: linear-gradient(180deg, #5C2E0A, #3E1F06);
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Shake button */
+.fortune-shake-btn {
+  background: linear-gradient(135deg, var(--accent), #8B0000);
+  color: white;
+  border: none;
+  padding: 14px 34px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  box-shadow: 0 4px 14px rgba(196, 30, 58, 0.4);
+  transition: all 0.25s ease;
+}
+.fortune-shake-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(196, 30, 58, 0.55);
+}
+.fortune-shake-btn:active { transform: translateY(0); }
+.fortune-shake-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Result reveal */
+.fortune-result {
+  animation: fortuneFadeIn 0.6s ease;
+}
+@keyframes fortuneFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fortune-stick-reveal {
+  display: inline-block;
+  background: linear-gradient(135deg, #FFF8E7, #F5DEB3);
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  padding: 16px 28px;
+  margin: 10px 0 18px;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.fortune-stick-level {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: 'Noto Serif SC', serif;
+  letter-spacing: 4px;
+}
+
+.fortune-stick-number {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-top: 4px;
+  font-family: 'Noto Serif SC', serif;
+}
+
+.fortune-poem-title {
+  font-size: 14px;
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-family: 'Noto Serif SC', serif;
+}
+
+.fortune-poem {
+  font-size: 18px;
+  color: var(--text);
+  line-height: 2;
+  font-family: 'Noto Serif SC', 'Playfair Display', serif;
+  background: rgba(255, 248, 231, 0.6);
+  border-left: 3px solid var(--secondary);
+  padding: 14px 18px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 18px;
+}
+
+.fortune-meaning {
+  text-align: left;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(212, 165, 116, 0.4);
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.fortune-meaning-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.fortune-meaning-text {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.fortune-locked {
+  border-top: 1px dashed rgba(212, 165, 116, 0.5);
+  padding-top: 14px;
+}
+
+.fortune-blur-text {
+  display: block;
+  font-size: 13px;
+  color: var(--text-light);
+  filter: blur(3px);
+  user-select: none;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.fortune-unlock-cta {
+  text-align: center;
+}
+
+.fortune-unlock-cta a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.fortune-redo-btn {
+  margin-top: 18px;
+  background: transparent;
+  color: var(--text-light);
+  border: 1px solid var(--secondary);
+  padding: 10px 24px;
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.fortune-redo-btn:hover {
+  background: var(--secondary);
+  color: white;
+}
+
+/* Level color variations */
+.fortune-stick-level.daji { color: #DAA520; }
+.fortune-stick-level.shang { color: var(--accent); }
+.fortune-stick-level.zhong { color: var(--text-light); }
+
 /* ===== #8 SHARE TO UNLOCK ===== */
 .share-unlock-section {
   background: linear-gradient(135deg, rgba(196, 30, 58, 0.08), rgba(139, 69, 19, 0.08));
@@ -3240,8 +3773,28 @@ body {
       })();
       </script>
 
+      <div class="from-game-note" id="fromGameNote">🎮 You just played the Five Elements game — now find which element your own name carries. Step 3 of the quiz asks exactly that.</div>
+
       <button class="btn-primary" onclick="KPI.trackClick('startQuiz'); KPI.update({startClicks:1, quizStarts:1}); gtag('event','quiz_start'); startQuiz()">Discover My Name Meaning</button>
-      
+
+      <script>
+      (function () {
+        if (new URLSearchParams(window.location.search).get('from') === 'game') {
+          document.getElementById('fromGameNote').style.display = 'block';
+        }
+      })();
+      </script>
+
+      <!-- Daily Five Elements Game entry -->
+      <a href="game.html" class="daily-game-strip" onclick="gtag('event','game_click',{source:'home'})">
+        <span class="daily-game-icon">🎮</span>
+        <span class="daily-game-copy">
+          <span class="daily-game-title">今日五行 · Daily Wu Xing Game</span>
+          <span class="daily-game-sub">5 characters a day — same for everyone. Free, no sign-up.</span>
+        </span>
+        <span class="daily-game-arrow">→</span>
+      </a>
+
       <div class="chinese-watermark">你 的 中 文 名 之 灵</div>
     </div>
 
@@ -3317,23 +3870,23 @@ body {
       </div>
       <p class="progress-text">Step 3 of 7</p>
       <div class="encouragement-msg">Halfway there! Keep going! 🎯</div>
-      <h2 class="question-text">Which natural element do you love most?</h2>
-      <div class="question-tooltip">Elements in Chinese names carry deep symbolic meanings</div>
+      <h2 class="question-text">Which of the Five Elements speaks to you?</h2>
+      <div class="question-tooltip">Your answer maps to one of the Five Elements (五行) — Earth 土, Fire 火, or Wood 木</div>
       <div class="options">
         <button class="option-btn" onclick="selectOption(3, 'A', this)">
-          <span class="option-label">A.</span> Mountains and water
+          <span class="option-label">A.</span> Mountains and earth — Earth 土
           <span class="option-example">e.g., 森桦 (Sēn Huà), 枫眠 (Fēng Mián)</span>
-          <div class="option-feedback">Mountains & water represent stability and wisdom</div>
+          <div class="option-feedback">Earth 土 — stability, patience, trust</div>
         </button>
         <button class="option-btn" onclick="selectOption(3, 'B', this)">
-          <span class="option-label">B.</span> Sun and moon
+          <span class="option-label">B.</span> Sun and fire — Fire 火
           <span class="option-example">e.g., 炙阳 (Zhì Yáng), 煜晨 (Yù Chén)</span>
-          <div class="option-feedback">Celestial elements symbolize brightness and clarity</div>
+          <div class="option-feedback">Fire 火 — passion, visibility, transformation</div>
         </button>
         <button class="option-btn" onclick="selectOption(3, 'C', this)">
-          <span class="option-label">C.</span> Wind and clouds
+          <span class="option-label">C.</span> Wind and wood — Wood 木
           <span class="option-example">e.g., 凌风 (Líng Fēng), 云舒 (Yún Shū)</span>
-          <div class="option-feedback">Wind & clouds represent freedom and aspiration</div>
+          <div class="option-feedback">Wood 木 — growth, flexibility, new beginnings</div>
         </button>
       </div>
     </div>
@@ -3490,6 +4043,53 @@ body {
           <div class="pinyin-display" id="previewFullPinyin">Míng Yuǎn</div>
           <div class="meaning-display" id="previewFullMeaning">
             Meaning: <span class="meaning-highlight">Bright and far-reaching</span> — Symbolizing wisdom that illuminates the path ahead
+          </div>
+        </div>
+
+        <!-- Fortune Sticks (运势抽签) -->
+        <div class="fortune-section">
+          <div class="fortune-title">🎋 今日运势 · Your Daily Fortune</div>
+          <div class="fortune-subtitle">Shake the bamboo tube to draw a fortune stick — see what your Chinese name brings today</div>
+
+          <div class="fortune-container" id="fortuneContainer">
+            <div class="fortune-tube" id="fortuneTube">
+              <div class="fortune-tube-body">
+                <div class="fortune-tube-rim top"></div>
+                <div class="fortune-sticks">
+                  <div class="stick s1"></div>
+                  <div class="stick s2"></div>
+                  <div class="stick s3"></div>
+                  <div class="stick s4"></div>
+                  <div class="stick s5"></div>
+                </div>
+                <div class="fortune-tube-rim bottom"></div>
+              </div>
+              <div class="fortune-tube-base"></div>
+            </div>
+            <button class="fortune-shake-btn" id="fortuneShakeBtn" onclick="shakeFortune()">
+              🎲 Shake the Tube
+            </button>
+          </div>
+
+          <!-- Fortune Result (hidden by default) -->
+          <div class="fortune-result" id="fortuneResult" style="display:none;">
+            <div class="fortune-stick-reveal" id="fortuneStickReveal">
+              <div class="fortune-stick-level" id="fortuneLevel">上上签</div>
+              <div class="fortune-stick-number" id="fortuneNumber">第 壹 签</div>
+            </div>
+            <div class="fortune-poem-title">签 诗</div>
+            <div class="fortune-poem" id="fortunePoem"></div>
+            <div class="fortune-meaning">
+              <div class="fortune-meaning-title">📜 Interpretation</div>
+              <div class="fortune-meaning-text" id="fortuneMeaning"></div>
+              <div class="fortune-locked">
+                <span class="fortune-blur-text">Your complete fortune reading — career, wealth, love, and lucky timing based on your name's element — is ready...</span>
+                <div class="fortune-unlock-cta">
+                  🔒 <a href="#" onclick="showPage('page-payment'); return false;">Unlock Full Fortune Reading →</a>
+                </div>
+              </div>
+            </div>
+            <button class="fortune-redo-btn" onclick="resetFortune()">🔄 Draw Again</button>
           </div>
         </div>
 
@@ -3815,6 +4415,8 @@ body {
           <div class="generation-progress-bar"></div>
         </div>
         <div class="generation-reveal">
+          <div class="generation-reveal-name" id="genRevealName"></div>
+          <div class="ink-splash"></div>
           <div class="generation-reveal-pinyin" id="genRevealPinyin"></div>
           <div class="generation-reveal-meaning" id="genRevealMeaning"></div>
         </div>
@@ -3949,6 +4551,9 @@ body {
         </div>
         
         <button class="btn-secondary restart-btn" onclick="showPage('page-fullreport')">📋 View Complete Identity Report</button>
+
+        <!-- Cross-link: daily five elements game -->
+        <a href="game.html" class="result-game-link" onclick="gtag('event','game_click',{source:'result'})">🎮 Play today's Five Elements game — 5 characters, free →</a>
       </div>
     </div>
 
@@ -4003,6 +4608,12 @@ body {
           <div class="report-section">
             <div class="section-label">ancient chinese identity</div>
             <div style="display:flex;align-items:flex-start;gap:18px;" id="reportAncient"></div>
+          </div>
+
+          <!-- Five Elements position -->
+          <div class="report-section">
+            <div class="section-label">your position in the five elements</div>
+            <div id="reportWuXing"></div>
           </div>
 
           <!-- Lucky Elements -->
@@ -4884,6 +5495,90 @@ let answers = {};
 let currentQuestion = 0;
 let currentResult = null;
 
+// ============ GAMIFICATION (闯关模式) ============
+let xpTotal = 0;
+let autoAdvanceTimer = null;
+
+const LEVEL_TITLES = [
+  'The Beginning',
+  'Sound & Rhythm',
+  'Elemental Harmony',
+  'Your Path',
+  'Inner Nature',
+  'Life Values',
+  'The Final Seal'
+];
+
+function decorateQuizPage(qNum) {
+  const page = document.getElementById('page-q' + qNum);
+  if (!page) return;
+
+  // Hide the legacy dots + "Step X of 7" text
+  const oldBar = page.querySelector('.progress-bar');
+  const oldText = page.querySelector('.progress-text');
+  if (oldBar) oldBar.style.display = 'none';
+  if (oldText) oldText.style.display = 'none';
+
+  let header = page.querySelector('.level-header');
+  if (!header) {
+    header = document.createElement('div');
+    header.className = 'level-header';
+    header.innerHTML =
+      '<div class="level-badge"></div>' +
+      '<div class="level-meta">' +
+        '<div class="level-name"></div>' +
+        '<div class="level-track"><div class="level-fill"></div></div>' +
+      '</div>' +
+      '<div class="xp-pill"></div>';
+    const anchor = page.querySelector('.encouragement-msg') || page.firstElementChild;
+    page.insertBefore(header, anchor);
+  }
+
+  header.querySelector('.level-badge').textContent = 'Lv.' + qNum;
+  header.querySelector('.level-name').textContent =
+    'Level ' + qNum + ' of 7 · ' + LEVEL_TITLES[qNum - 1];
+  header.querySelector('.xp-pill').textContent = '⭐ ' + xpTotal + ' XP';
+
+  // Animate the progress fill from 0 to the current level
+  const fill = header.querySelector('.level-fill');
+  fill.style.width = '0%';
+  setTimeout(function () {
+    fill.style.width = Math.round((qNum / 7) * 100) + '%';
+  }, 60);
+}
+
+function awardXP(amount, sourceBtn) {
+  xpTotal += amount;
+
+  const activePage = document.querySelector('.page.active');
+  if (activePage) {
+    const pill = activePage.querySelector('.xp-pill');
+    if (pill) {
+      pill.textContent = '⭐ ' + xpTotal + ' XP';
+      pill.classList.remove('bump');
+      void pill.offsetWidth;
+      pill.classList.add('bump');
+    }
+    const badge = activePage.querySelector('.level-badge');
+    if (badge) {
+      badge.classList.remove('pulse');
+      void badge.offsetWidth;
+      badge.classList.add('pulse');
+    }
+  }
+
+  if (sourceBtn && sourceBtn.getBoundingClientRect) {
+    const rect = sourceBtn.getBoundingClientRect();
+    const float = document.createElement('div');
+    float.className = 'xp-float';
+    float.textContent = '+' + amount + ' XP';
+    float.style.left = (rect.right - 70) + 'px';
+    float.style.top = (rect.top + rect.height / 2 - 10) + 'px';
+    document.body.appendChild(float);
+    setTimeout(function () { float.remove(); }, 1000);
+  }
+}
+
 // ============ PARTICLES ============
 function createParticles() {
   const container = document.getElementById('particles');
@@ -4918,11 +5613,22 @@ function showPage(pageId) {
       nextBtnWrap.style.display = 'none';
     }
   }
+
+  // Gamified level header for quiz steps
+  if (pageId.startsWith('page-q')) {
+    decorateQuizPage(parseInt(pageId.replace('page-q', ''), 10));
+  }
+
+  // Five elements row is rendered when the full report is opened
+  if (pageId === 'page-fullreport') {
+    renderWuXing();
+  }
 }
 
 function startQuiz() {
   currentQuestion = 1;
   answers = {}; // Reset answers (object, not array)
+  xpTotal = 0;
   showPage('page-q1');
   updatePrevButton();
 }
@@ -4932,14 +5638,33 @@ function selectOption(questionNum, value, btn) {
 
   // Highlight selected option
   const page = document.getElementById(`page-q${questionNum}`);
-  page.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-  if (btn) btn.classList.add('selected');
+  page.querySelectorAll('.option-btn').forEach(b => {
+    b.classList.remove('selected');
+    b.classList.remove('just-picked');
+  });
+  if (btn) {
+    btn.classList.add('selected');
+    btn.classList.add('just-picked');
+    setTimeout(function () { btn.classList.remove('just-picked'); }, 700);
+  }
+
+  // Reward + feedback
+  if (btn) awardXP(10, btn);
 
   // Enable next button
   document.getElementById('nextBtn').disabled = false;
+
+  // Auto-advance to the next level for a game-like flow
+  if (questionNum < 7) {
+    clearTimeout(autoAdvanceTimer);
+    autoAdvanceTimer = setTimeout(function () {
+      nextStep();
+    }, 760);
+  }
 }
 
 function nextStep() {
+  clearTimeout(autoAdvanceTimer);
   const currentQ = currentQuestion || 1;
 
   // If we're on Q7 and click the button, submit the quiz
@@ -4966,6 +5691,7 @@ function nextStep() {
 }
 
 function prevStep() {
+  clearTimeout(autoAdvanceTimer);
   const currentQ = currentQuestion || 1;
   
   // Go back to previous question
@@ -5053,16 +5779,23 @@ function showGenerationAnimation(result, callback) {
     return;
   }
   
-  // Set content
-  revealName.textContent = result.name.name;
+  // Set content — render the name as brush-written characters
+  revealName.innerHTML = '';
+  result.name.name.split('').forEach(function (ch, i) {
+    const span = document.createElement('span');
+    span.className = 'ink-char';
+    span.textContent = ch;
+    span.style.animationDelay = (2.35 + i * 0.34) + 's';
+    revealName.appendChild(span);
+  });
   revealPinyin.textContent = result.name.pinyin || getPinyin(result.name.name);
   revealMeaning.textContent = result.name.meaning.split('，')[0];
   
   // Show overlay
   overlay.style.display = 'flex';
   
-  // Fixed delay: 4 seconds
-  const totalDelay = 4000;
+  // Let the calligraphy finish writing before revealing the profile
+  const totalDelay = 4600;
   
   // Hide after animation completes
   setTimeout(function() {
@@ -5230,8 +5963,190 @@ function updatePreview(result) {
   document.getElementById('previewFullMeaning').innerHTML = 
     'Meaning: <span class="meaning-highlight">' + name.meaning.split('，')[0] + '</span> — ' + name.blessing;
   
+  // Reset fortune section for a fresh draw
+  resetFortune();
+  
   // Update all new preview content
   updatePreviewContent(result);
+}
+
+// ============ FORTUNE STICKS (运势抽签) ============
+const fortuneDatabase = {
+  // Earth element (土) — stability, career, wealth
+  mountain: [
+    {
+      level: '上上签', levelEn: 'Grand Fortune', class: 'daji',
+      number: '壹',
+      poem: '山高水长福自来，厚德载物运亨通。',
+      meaning: 'Your Earth-element name carries the steady energy of the mountain. Like a peak that has stood firm through centuries, your grounded and reliable nature will attract lasting prosperity. People trust you, and that trust translates into opportunity.',
+      locked: 'Career: A long-awaited promotion or partnership will arrive within the next three months. Wealth: Unexpected income from a steady source. Love: A stable, dependable person will enter your life. Lucky timing: late mornings, and the 8th of each month.'
+    },
+    {
+      level: '上上签', levelEn: 'Grand Fortune', class: 'daji',
+      number: '叁',
+      poem: '土生金来财入库，稳重前行步步升。',
+      meaning: 'The Earth element nourishes metal (wealth) in the Five Elements cycle. Your name\'s energy naturally attracts financial stability through patience and consistency. Slow and steady wins — your discipline today creates abundance tomorrow.',
+      locked: 'Career: Trust your established network — an old connection brings a lucrative offer. Wealth: Invest in tangible, long-term assets rather than quick schemes. Love: Deepen an existing bond rather than seeking something new. Lucky direction: Center and Southwest.'
+    },
+    {
+      level: '上签', levelEn: 'Good Fortune', class: 'shang',
+      number: '陆',
+      poem: '磐石无转移，守得云开见月明。',
+      meaning: 'Your name embodies the unshakable spirit of stone. There may be delays, but your perseverance will be rewarded. Do not chase quick wins — the mountain does not hurry, yet it conquers all.',
+      locked: 'Career: Stay the course in your current role; change is coming but timing matters. Wealth: Avoid impulsive spending this period. Love: Patience in a relationship will deepen trust. Lucky color: Yellow and earthy browns.'
+    },
+    {
+      level: '中签', levelEn: 'Moderate Fortune', class: 'zhong',
+      number: '玖',
+      poem: '山路虽遥终有至，厚积薄发自有期。',
+      meaning: 'The path ahead feels long, but every step on the mountain brings you closer to the summit. Your Earth element asks you to focus on building foundations now — the harvest will come, but not before its season.',
+      locked: 'Career: A learning phase precedes a breakthrough; invest in skills. Wealth: A modest but stable inflow. Love: A slow-developing connection is worth nurturing. Lucky number: 2, 5, and 8.'
+    }
+  ],
+  // Fire element (火) — passion, fame, love
+  sun: [
+    {
+      level: '上上签', levelEn: 'Grand Fortune', class: 'daji',
+      number: '贰',
+      poem: '日照前程金光道，热情似火万事兴。',
+      meaning: 'Your Fire-element name radiates the energy of the sun. Like sunlight that illuminates everything it touches, your passion and charisma will draw success, admiration, and warmth toward you. This is a time to shine boldly.',
+      locked: 'Career: A high-visibility opportunity will showcase your talents to the right people. Wealth: Income rises through recognition and performance bonuses. Love: A passionate, magnetic connection is forming. Lucky timing: noon and the 9th of each month.'
+    },
+    {
+      level: '上上签', levelEn: 'Grand Fortune', class: 'daji',
+      number: '肆',
+      poem: '烈焰腾空照四方，声名远播福满堂。',
+      meaning: 'The Fire element brings visibility and recognition. Your name carries a radiant energy that makes you memorable. Do not hide your light — when you speak, people listen, and that influence will open doors you never expected.',
+      locked: 'Career: Leadership is calling you; step into the spotlight. Wealth: Earnings tied to your personal brand or public presence. Love: You will be pursued by someone who admires your fire. Lucky direction: South.'
+    },
+    {
+      level: '上签', levelEn: 'Good Fortune', class: 'shang',
+      number: '柒',
+      poem: '星火可燎原，一念动乾坤。',
+      meaning: 'Even a small spark from your Fire-element name can ignite something great. Your enthusiasm is contagious — when you commit fully to an idea, it spreads and gains momentum beyond what you imagined.',
+      locked: 'Career: A small project you start now will grow unexpectedly large. Wealth: A creative idea has profit potential. Love: A brief encounter could ignite a meaningful romance. Lucky color: Red, orange, and purple.'
+    },
+    {
+      level: '中签', levelEn: 'Moderate Fortune', class: 'zhong',
+      number: '拾',
+      poem: '火需有制方成器，收敛锋芒路更宽。',
+      meaning: 'Your fiery energy is powerful, but a controlled flame burns brightest and longest. Your name\'s Fire element asks you to channel passion with intention rather than scattering it. Temper your intensity and your path will broaden.',
+      locked: 'Career: Avoid conflicts with authority this period; diplomacy serves you. Wealth: Guard against overspending driven by impulse. Love: Slow down to let a connection deepen. Lucky number: 3 and 9.'
+    }
+  ],
+  // Wood element (木) — growth, creativity, travel
+  wind: [
+    {
+      level: '上上签', levelEn: 'Grand Fortune', class: 'daji',
+      number: '壹',
+      poem: '春风化雨万物生，木秀于林势如虹。',
+      meaning: 'Your Wood-element name carries the energy of wind and bamboo. Like a young tree reaching toward the sky, you are entering a season of rapid growth and new beginnings. The wind is at your back — move forward with confidence.',
+      locked: 'Career: A new opportunity for growth or a career shift arrives; seize it. Wealth: Income expands through a fresh venture. Love: A new relationship or a renewal of an existing one brings joy. Lucky timing: early mornings and the 3rd of each month.'
+    },
+    {
+      level: '上上签', levelEn: 'Grand Fortune', class: 'daji',
+      number: '伍',
+      poem: '风起云涌展宏图，翠竹拔节步步高。',
+      meaning: 'The Wood element fuels creativity and expansion. Like bamboo that grows several inches in a single night, your flexible and innovative spirit will open doors to exciting new paths. Adaptability is your superpower this season.',
+      locked: 'Career: A creative project or unconventional approach will succeed brilliantly. Wealth: Money comes through innovation and networking. Love: An unexpected meeting while traveling or learning. Lucky direction: East and Southeast.'
+    },
+    {
+      level: '上签', levelEn: 'Good Fortune', class: 'shang',
+      number: '捌',
+      poem: '草木逢春皆得意，一枝一叶总关情。',
+      meaning: 'Your Wood-element name thrives when you nurture connections and ideas. Spring energy surrounds you — every small effort to grow, learn, or care for others will bloom into something meaningful.',
+      locked: 'Career: Collaboration brings better results than working alone. Wealth: A gift or help from someone you supported returns to you. Love: Tenderness and attentiveness strengthen your bond. Lucky color: Green and teal.'
+    },
+    {
+      level: '中签', levelEn: 'Moderate Fortune', class: 'zhong',
+      number: '拾',
+      poem: '木欲参天需固本，根深叶茂自有时。',
+      meaning: 'Growth takes time. Your Wood-element name reminds you that the tallest trees spent years growing roots unseen. Focus on building strong foundations in your skills and relationships — the canopy will follow in its season.',
+      locked: 'Career: A period of study or preparation precedes a major leap. Wealth: Plant seeds now; harvest later. Love: A relationship needs patience to grow deeper. Lucky number: 3 and 8.'
+    }
+  ]
+};
+
+let fortuneDrawn = false;
+
+function shakeFortune() {
+  if (fortuneDrawn) return;
+
+  const tube = document.getElementById('fortuneTube');
+  const btn = document.getElementById('fortuneShakeBtn');
+  const result = document.getElementById('fortuneResult');
+  const container = document.getElementById('fortuneContainer');
+
+  tube.classList.add('shaking');
+  btn.disabled = true;
+  btn.textContent = 'Drawing your fortune...';
+
+  // Determine the name's element
+  const element = (currentResult && currentResult.name && currentResult.name.element) || 'mountain';
+  const pool = fortuneDatabase[element] || fortuneDatabase.mountain;
+
+  // Weighted random: favor higher fortunes
+  const r = Math.random();
+  let fortune;
+  const daji = pool.filter(f => f.class === 'daji');
+  const shang = pool.filter(f => f.class === 'shang');
+  const zhong = pool.filter(f => f.class === 'zhong');
+
+  if (r < 0.5) {
+    fortune = daji[Math.floor(Math.random() * daji.length)];
+  } else if (r < 0.85) {
+    fortune = shang[Math.floor(Math.random() * shang.length)];
+  } else {
+    fortune = zhong[Math.floor(Math.random() * zhong.length)];
+  }
+
+  // After shaking animation, reveal the result
+  setTimeout(function() {
+    tube.classList.remove('shaking');
+    container.style.display = 'none';
+
+    // Populate result
+    const levelEl = document.getElementById('fortuneLevel');
+    levelEl.textContent = fortune.level;
+    levelEl.className = 'fortune-stick-level ' + fortune.class;
+    document.getElementById('fortuneNumber').textContent = '第 ' + fortune.number + ' 签 · ' + fortune.levelEn;
+    document.getElementById('fortunePoem').textContent = fortune.poem;
+    document.getElementById('fortuneMeaning').textContent = fortune.meaning;
+
+    // Set the locked/blurred hint text to match the fortune
+    const blurText = document.querySelector('.fortune-blur-text');
+    if (blurText) {
+      blurText.textContent = fortune.locked;
+    }
+
+    result.style.display = 'block';
+    result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    fortuneDrawn = true;
+
+    // Track KPI
+    if (typeof KPI !== 'undefined') {
+      KPI.update({ fortuneDraws: 1 });
+    }
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'fortune_draw');
+    }
+  }, 2200);
+}
+
+function resetFortune() {
+  fortuneDrawn = false;
+  const result = document.getElementById('fortuneResult');
+  const container = document.getElementById('fortuneContainer');
+  const btn = document.getElementById('fortuneShakeBtn');
+
+  if (result) result.style.display = 'none';
+  if (container) container.style.display = 'flex';
+  if (btn) {
+    btn.disabled = false;
+    btn.textContent = '🎲 Shake the Tube';
+  }
+  const tube = document.getElementById('fortuneTube');
+  if (tube) tube.classList.remove('shaking');
 }
 
 function refreshName() {
@@ -5257,7 +6172,10 @@ function satisfiedAction() {
 function restartQuiz() {
   Object.keys(answers).forEach(k => delete answers[k]);
   document.getElementById('currentNameInput').value = '';
-  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.option-btn').forEach(b => {
+    b.classList.remove('selected');
+    b.classList.remove('just-picked');
+  });
   document.getElementById('nextBtn').disabled = true;
   document.getElementById('nextBtn').textContent = 'Next Step';
   currentQuestion = 1;
@@ -5627,6 +6545,37 @@ function getPinyin(str) {
 }
 
 // ============ SHOW RESULT ============
+function renderWuXing() {
+  const box = document.getElementById('reportWuXing');
+  if (!box) return;
+
+  const elementKey = answers[3] === 'A' ? 'mountain' : answers[3] === 'B' ? 'sun' : 'wind';
+  const wuXing = [
+    { key: 'wood', cn: '木', en: 'Wood', color: '#4E9F5B' },
+    { key: 'fire', cn: '火', en: 'Fire', color: '#D64541' },
+    { key: 'earth', cn: '土', en: 'Earth', color: '#C08A2E' },
+    { key: 'metal', cn: '金', en: 'Metal', color: '#8C959B' },
+    { key: 'water', cn: '水', en: 'Water', color: '#3B7EA1' }
+  ];
+  const userWuXing = { mountain: 'earth', sun: 'fire', wind: 'wood' }[elementKey] || 'earth';
+  const userEl = wuXing.filter(el => el.key === userWuXing)[0];
+
+  box.innerHTML = `
+    <div style="display:flex;align-items:center;gap:4px;margin-bottom:12px;">
+      ${wuXing.map((el, i) => `
+        <div style="flex:1;text-align:center;padding:10px 2px;border-radius:12px;background:${el.key === userWuXing ? el.color : 'rgba(212,165,116,0.14)'};color:${el.key === userWuXing ? '#fff' : 'var(--text-light)'};box-shadow:${el.key === userWuXing ? '0 6px 16px rgba(62,39,35,0.2)' : 'none'};">
+          <div style="font-family:'Noto Serif SC',serif;font-size:20px;font-weight:700;line-height:1;">${el.cn}</div>
+          <div style="font-size:9px;letter-spacing:.5px;margin-top:3px;text-transform:uppercase;">${el.en}</div>
+        </div>
+        ${i < 4 ? '<span style="color:rgba(139,69,19,0.35);font-size:12px;flex-shrink:0;">›</span>' : ''}
+      `).join('')}
+    </div>
+    <div style="font-size:13px;color:var(--text-light);line-height:1.7;">
+      The five elements generate one another in this order — Wood feeds Fire, Fire makes Earth, Earth bears Metal, Metal carries Water, Water grows Wood. Your name sits at <strong style="color:${userEl.color};">${userEl.en} ${userEl.cn}</strong>.
+    </div>
+  `;
+}
+
 function showResult(result) {
   const { name, phoneticMatched, matchedName } = result;
   
@@ -5714,6 +6663,9 @@ function showResult(result) {
       <div style="font-size:13px;color:var(--text-light);">${elementNames[elementKey]} · ${genderKey === 'F' ? 'Feminine' : 'Masculine'} Archetype</div>
     </div>
   `;
+
+  // Five Elements position
+  renderWuXing();
 
   // Lucky elements
   const lucky = personalized.lucky;
