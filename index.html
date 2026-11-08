@@ -308,25 +308,27 @@ body {
 .daily-game-strip {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   width: 100%;
-  margin-top: 18px;
-  padding: 15px 18px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #8B4513 0%, #A9642E 100%);
-  color: #F5F0E8;
+  margin: 0 0 26px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(245, 236, 222, 0.92) 100%);
+  border: 1px solid rgba(212, 165, 116, 0.65);
+  color: var(--text);
   text-decoration: none;
-  box-shadow: 0 8px 22px rgba(139, 69, 19, 0.22);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 14px rgba(139, 69, 19, 0.09);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .daily-game-strip:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(139, 69, 19, 0.3);
+  border-color: rgba(139, 69, 19, 0.45);
+  box-shadow: 0 8px 20px rgba(139, 69, 19, 0.16);
 }
 
 .daily-game-icon {
-  font-size: 26px;
+  font-size: 24px;
   flex-shrink: 0;
 }
 
@@ -342,19 +344,41 @@ body {
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 1px;
+  color: var(--primary);
 }
 
 .daily-game-sub {
   font-size: 12px;
-  color: rgba(245, 240, 232, 0.82);
+  color: var(--text-light);
   margin-top: 3px;
   line-height: 1.4;
 }
 
+.daily-game-tag {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 20px;
+  padding: 3px 9px;
+}
+
 .daily-game-arrow {
   font-size: 18px;
-  opacity: 0.9;
+  color: var(--accent);
   flex-shrink: 0;
+}
+
+@media (max-width: 430px) {
+  .daily-game-strip {
+    gap: 9px;
+    padding: 11px 13px;
+  }
+  .daily-game-title { font-size: 14px; letter-spacing: 0.5px; }
+  .daily-game-sub { font-size: 11px; }
+  .daily-game-arrow { display: none; }
 }
 
 /* Result page cross-link to the game */
@@ -3681,8 +3705,19 @@ body {
     <!-- Welcome Page - Enhanced -->
     <div class="page active" id="page-welcome">
       <div class="welcome-icon">&#127757;</div>
-      <h1 class="welcome-title">What Is My Chinese Name?<br>Discover Your Name Meaning<br>&amp; Generator</h1>
+      <h1 class="welcome-title">What Is My Chinese Name?<br>Discover Your Chinese Name<br>&amp; Generator</h1>
       <p class="welcome-subtitle">What is my Chinese name? Our Chinese name generator creates a personalized name based on your personality, sound preferences, and career goals. Beyond translation — discover the real Chinese name meaning that reflects who you are.</p>
+
+      <!-- Daily Five Elements Game entry -->
+      <a href="game.html" class="daily-game-strip" onclick="gtag('event','game_click',{source:'home_hero'})">
+        <span class="daily-game-icon">🎮</span>
+        <span class="daily-game-copy">
+          <span class="daily-game-title">今日五行 · Daily <span style="white-space:nowrap">Wu Xing Game</span></span>
+          <span class="daily-game-sub">5 new characters daily · no sign-up</span>
+        </span>
+        <span class="daily-game-tag">FREE</span>
+        <span class="daily-game-arrow">→</span>
+      </a>
       
       <!-- Trust Badges -->
       <div class="trust-badges">
@@ -3773,9 +3808,9 @@ body {
       })();
       </script>
 
-      <div class="from-game-note" id="fromGameNote">🎮 You just played the Five Elements game — now find which element your own name carries. Step 3 of the quiz asks exactly that.</div>
+      <div class="from-game-note" id="fromGameNote">🎮 You just played the Five Elements game — now find which element your own Chinese name carries. Step 3 of the quiz asks exactly that.</div>
 
-      <button class="btn-primary" onclick="KPI.trackClick('startQuiz'); KPI.update({startClicks:1, quizStarts:1}); gtag('event','quiz_start'); startQuiz()">Discover My Name Meaning</button>
+      <button class="btn-primary" onclick="KPI.trackClick('startQuiz'); KPI.update({startClicks:1, quizStarts:1}); gtag('event','quiz_start'); startQuiz()">Discover My Chinese Name</button>
 
       <script>
       (function () {
@@ -3784,16 +3819,6 @@ body {
         }
       })();
       </script>
-
-      <!-- Daily Five Elements Game entry -->
-      <a href="game.html" class="daily-game-strip" onclick="gtag('event','game_click',{source:'home'})">
-        <span class="daily-game-icon">🎮</span>
-        <span class="daily-game-copy">
-          <span class="daily-game-title">今日五行 · Daily Wu Xing Game</span>
-          <span class="daily-game-sub">5 characters a day — same for everyone. Free, no sign-up.</span>
-        </span>
-        <span class="daily-game-arrow">→</span>
-      </a>
 
       <div class="chinese-watermark">你 的 中 文 名 之 灵</div>
     </div>
@@ -3837,7 +3862,7 @@ body {
       </div>
       <p class="progress-text">Step 2 of 7</p>
       <div class="encouragement-msg">You're doing great! ✨</div>
-      <h2 class="question-text">How would you like your name to sound?</h2>
+      <h2 class="question-text">How would you like your Chinese name to sound?</h2>
       <div class="question-tooltip">Choose the tone that resonates with your personality</div>
       <div class="options">
         <button class="option-btn" onclick="selectOption(2, 'A', this)">
@@ -4020,7 +4045,7 @@ body {
       <h2 class="question-text">What is your current name?</h2>
       <div class="question-tooltip">We'll match the sound of your name to find the best Chinese name</div>
       <div class="text-input-group">
-        <input type="text" class="text-input" id="currentNameInput" placeholder="Your name" autocomplete="off" style="width: 200px; font-size: 20px; text-transform: none;" oninput="document.getElementById('nextBtn').disabled = this.value.trim().length < 1;" />
+        <input type="text" class="text-input" id="currentNameInput" placeholder="Your English name" autocomplete="off" style="width: 200px; font-size: 20px; text-transform: none;" oninput="document.getElementById('nextBtn').disabled = this.value.trim().length < 1;" />
         <p class="input-hint">Enter your English or Chinese name for phonetic matching (required)</p>
       </div>
     </div>
@@ -4111,7 +4136,7 @@ body {
 
         <!-- Teaser Content Section -->
         <div class="preview-teaser-section">
-          <div class="preview-teaser-title">What Your Name Reveals About You</div>
+          <div class="preview-teaser-title">What Your Chinese Name Reveals About You</div>
           <div class="preview-teaser-content">
             <p><span class="teaser-highlight">🎯 Personality Match:</span> You value wisdom and long-term thinking. Your name reflects your <span class="teaser-blur">deep insight and strategic nature...</span></p>
             <p style="margin-top: 12px;"><span class="teaser-highlight">🏔️ Career Energy:</span> Ideal for roles requiring <span class="teaser-blur">vision, leadership, and creative problem-solving...</span></p>
@@ -4152,10 +4177,10 @@ body {
         </div>
 
         <!-- Certificate Preview (LOCKED) -->
-        <div class="preview-locked-label"><span class="label-icon">📜</span> Your Name Certificate <span class="label-lock">🔒 Locked</span></div>
+        <div class="preview-locked-label"><span class="label-icon">📜</span> Your Chinese Name Certificate <span class="label-lock">🔒 Locked</span></div>
         <div class="preview-locked-section">
           <div class="certificate-preview-section">
-            <div class="certificate-preview-title">📜 Your Name Certificate</div>
+            <div class="certificate-preview-title">📜 Your Chinese Name Certificate</div>
             <div class="certificate-preview-card">
               <div class="certificate-preview-seal">印</div>
               <div class="certificate-preview-header">Chinese Name Certificate</div>
@@ -4176,8 +4201,8 @@ body {
           <div class="preview-report-module locked" id="modulePersonalityMatch">🔒 Personality Match</div>
           <div class="preview-report-module locked">🔒 Career Alignment</div>
           <div class="preview-report-module locked">🔒 Lucky Elements</div>
-          <div class="preview-report-module locked">🔒 Name Certificate</div>
-          <div class="preview-report-module locked">🔒 Name Story</div>
+          <div class="preview-report-module locked">🔒 Chinese Name Certificate</div>
+          <div class="preview-report-module locked">🔒 Chinese Name Story</div>
           <div class="preview-report-module locked">🔒 Cultural Significance</div>
           <div class="preview-report-module locked">🔒 Phonetic Analysis</div>
           <div class="preview-report-module locked">🔒 Name Blessing</div>
@@ -4189,10 +4214,10 @@ body {
         </div>
 
         <!-- Name Story (LOCKED) -->
-        <div class="preview-locked-label"><span class="label-icon">📖</span> Your Name's Story <span class="label-lock">🔒 Locked</span></div>
+        <div class="preview-locked-label"><span class="label-icon">📖</span> Your Chinese Name's Story <span class="label-lock">🔒 Locked</span></div>
         <div class="preview-locked-section">
           <div class="story-preview-section">
-            <div class="story-preview-title">📖 Your Name's Story</div>
+            <div class="story-preview-title">📖 Your Chinese Name's Story</div>
             <div class="story-preview-content" id="storyPreviewContent">
               <span class="story-visible" id="storyVisibleText">In ancient China, a scholar named <strong id="storyName">浩然</strong> was known for his unwavering integrity and vast knowledge. He believed that true wisdom comes from understanding both oneself and the world...</span>
               <span class="story-blur" id="storyBlurText"> His name became a symbol of moral courage and intellectual depth, passed down through generations as an inspiration for those who seek to make a meaningful impact on the world...</span>
@@ -4214,10 +4239,10 @@ body {
         </div>
 
         <!-- Calligraphy (LOCKED) -->
-        <div class="preview-locked-label"><span class="label-icon">✍️</span> Your Name in Calligraphy <span class="label-lock">🔒 Locked</span></div>
+        <div class="preview-locked-label"><span class="label-icon">✍️</span> Your Chinese Name in Calligraphy <span class="label-lock">🔒 Locked</span></div>
         <div class="preview-locked-section">
           <div class="calligraphy-section">
-            <div class="calligraphy-title">✍️ Your Name in Calligraphy</div>
+            <div class="calligraphy-title">✍️ Your Chinese Name in Calligraphy</div>
             <div class="calligraphy-styles">
               <div class="calligraphy-style">
                 <div class="calligraphy-style-name">Regular Script</div>
@@ -4372,8 +4397,8 @@ body {
         <div style="text-align:center;margin-bottom:16px;">
           <a href="sample-report.html" target="_blank" style="display:inline-block;color:#8B4513;text-decoration:none;font-size:14px;font-weight:600;background:#f5f0e8;border:2px solid #c9b99a;border-radius:10px;padding:10px 20px;transition:all 0.3s ease;" onmouseover="this.style.background='#c9b99a';this.style.color='white';" onmouseout="this.style.background='#f5f0e8';this.style.color='#8B4513';">📄 See a sample report first →</a>
         </div>
-        <button class="btn-primary" onclick="showPage('page-payment')" style="font-size:14px;padding:12px 28px;">Get Your Full Report →</button>
-        <p style="font-size: 12px; color: var(--text-light); margin-top: 12px;">Includes name story, cultural impression, personality match & certificate</p>
+        <button class="btn-primary" onclick="showPage('page-payment')" style="font-size:14px;padding:12px 28px;">Get Your Full Chinese Name Report →</button>
+        <p style="font-size: 12px; color: var(--text-light); margin-top: 12px;">Includes Chinese name story, cultural impression, personality match &amp; certificate</p>
       </div>
     </div>
 
@@ -4406,7 +4431,7 @@ body {
           <div class="generation-step">
             <div class="generation-step-icon">✨</div>
             <div class="generation-step-text">
-              <div>Creating Your Name</div>
+              <div>Creating Your Chinese Name</div>
               <div class="generation-step-sub">Crafting a name that's uniquely yours</div>
             </div>
           </div>
@@ -4440,12 +4465,12 @@ body {
             <div class="pricing-price">$1.99</div>
             <ul class="pricing-features">
               <li>✓ Complete Chinese Identity Report</li>
-              <li>✓ Name meaning & cultural story</li>
+              <li>✓ Chinese name meaning &amp; cultural story</li>
               <li>✓ Personality match analysis</li>
               <li>✓ Chinese people's impression of you</li>
               <li>✓ Ancient identity & background story</li>
-              <li>✓ Name popularity ranking</li>
-              <li class="disabled">✗ Name certificate (PNG)</li>
+              <li>✓ Chinese name popularity ranking</li>
+              <li class="disabled">✗ Chinese name certificate (PNG)</li>
               <li class="disabled">✗ Bilingual report</li>
             </ul>
             <button class="pricing-btn" id="btn-standard">Select Standard</button>
@@ -4594,7 +4619,7 @@ body {
             <div class="section-label">personality match</div>
             <div id="reportScoreBars"></div>
             <hr style="border:none;border-top:0.5px solid rgba(212,165,116,0.3);margin:16px 0;">
-            <div class="section-label" style="margin-bottom:10px;">traits your name carries</div>
+            <div class="section-label" style="margin-bottom:10px;">traits your Chinese name carries</div>
             <div style="display:flex;flex-wrap:wrap;gap:10px;" id="reportTraits"></div>
           </div>
 
@@ -4670,20 +4695,20 @@ body {
           <div class="explore-options">
             <div class="explore-option" onclick="exploreOption('calligraphy')">
               <div class="explore-option-title">🖌️ Custom Calligraphy</div>
-              <div class="explore-option-desc">Get your name written by a master calligrapher in traditional styles</div>
+              <div class="explore-option-desc">Get your Chinese name written by a master calligrapher in traditional styles</div>
             </div>
             <div class="explore-option" onclick="exploreOption('compatibility')">
-              <div class="explore-option-title">💑 Name Compatibility</div>
+              <div class="explore-option-title">💑 Chinese Name Compatibility</div>
               <div class="explore-option-desc">See how your Chinese name pairs with friends or partners</div>
             </div>
             <div class="explore-option" onclick="exploreOption('history')">
-              <div class="explore-option-title">📚 Name History Report</div>
+              <div class="explore-option-title">📚 Chinese Name History Report</div>
               <div class="explore-option-desc">Discover famous historical figures who shared similar names</div>
             </div>
           </div>
         </div>
 
-        <button class="btn-secondary restart-btn" onclick="restartQuiz()" style="margin-top: 32px;">Discover Another Name</button>
+        <button class="btn-secondary restart-btn" onclick="restartQuiz()" style="margin-top: 32px;">Discover Another Chinese Name</button>
       </div>
     </div>
 
@@ -7375,7 +7400,7 @@ async function downloadPDF() {
     if (traits) {
       pdfHTML += `
         <div style="margin-bottom: 30px;">
-          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 12px;">Traits Your Name Carries</div>
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 12px;">Traits Your Chinese Name Carries</div>
           <div style="display: flex; flex-wrap: wrap; gap: 10px;">${traits.innerHTML}</div>
         </div>
       `;
@@ -7439,7 +7464,7 @@ async function downloadPDF() {
       pdfHTML += `
         <div style="margin-bottom: 30px; background: rgba(212,165,116,0.08); border-left: 4px solid #C9A876; padding: 18px 20px; border-radius: 8px;">
           <div style="display:inline-block; background:#8B4513; color:#fff; font-size:10px; font-weight:700; letter-spacing:0.08em; padding:3px 10px; border-radius:99px; margin-bottom:10px;">★ PREMIUM</div>
-          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 12px;">Your Name's Professional Blueprint</div>
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 12px;">Your Chinese Name's Professional Blueprint</div>
           <div style="font-size: 13px; color: #333; line-height: 1.7;">${deepDive.innerHTML}</div>
         </div>
       `;
